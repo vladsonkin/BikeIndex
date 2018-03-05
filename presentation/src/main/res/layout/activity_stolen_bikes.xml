@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.vladsonkin.stolenbikesnl.presentation.MainActivity">
+    tools:context="com.vladsonkin.stolenbikesnl.presentation.stolenbikes.StolenBikesActivity">
 
     <TextView
         android:layout_width="wrap_content"

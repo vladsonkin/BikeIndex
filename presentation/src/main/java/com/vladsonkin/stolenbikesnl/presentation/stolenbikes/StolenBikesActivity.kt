@@ -1,13 +1,13 @@
-package com.vladsonkin.stolenbikesnl.presentation
+package com.vladsonkin.stolenbikesnl.presentation.stolenbikes
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.vladsonkin.stolenbikesnl.R
 
-class MainActivity : AppCompatActivity() {
+class StolenBikesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_stolen_bikes)
     }
 }
