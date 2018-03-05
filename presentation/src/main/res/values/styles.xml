@@ -1,11 +1,22 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- Base toolbar theme. -->
+    <style name="ThemeToolbar" parent="AppTheme">
+        <!-- navigation icon color -->
+        <item name="colorControlNormal">@color/white</item>
+
+        <!-- color of the menu overflow icon -->
+        <item name="android:textColorSecondary">@color/white</item>
+
+        <!-- toolbar title color -->
+        <item name="titleTextColor">@color/white</item>
     </style>
 
 </resources>
