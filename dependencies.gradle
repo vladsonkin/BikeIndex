@@ -5,13 +5,17 @@ ext {
     androidTargetSdkVersion = 27
     androidCompileSdkVersion = 27
 
-    supportLibraryVersion = '27.0.0'
+    supportLibraryVersion = '27.0.2'
+    rxKotlinVersion = '2.1.0'
 
     dataDependencies = []
     dataTestDependencies = []
-    domainDependencies = []
+    domainDependencies = [
+            rxKotlin           : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+    ]
     domainTestDependencies = []
     presentationDependencies = [
+            rxKotlin           : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
             supportDesign      : "com.android.support:design:${supportLibraryVersion}",
     ]
     presentationTestDependencies = []
