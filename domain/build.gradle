@@ -1,8 +1,37 @@
-apply plugin: 'java-library'
-
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-}
+apply plugin: 'kotlin'
 
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
+
+buildscript {
+    ext.kotlin_version = '1.2.30'
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+repositories {
+    mavenCentral()
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    def domainDependencies = rootProject.ext.domainDependencies
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation domainDependencies.rxKotlin
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+}
+
+
