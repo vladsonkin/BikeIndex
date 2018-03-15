@@ -29,8 +29,8 @@ compileTestKotlin {
 dependencies {
     def domainDependencies = rootProject.ext.domainDependencies
 
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation domainDependencies.rxKotlin
+    implementation domainDependencies.gson
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
 }
 
