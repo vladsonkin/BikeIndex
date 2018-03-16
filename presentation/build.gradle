@@ -28,8 +28,8 @@ dependencies {
     api project(':data')
 
     implementation domainDependencies.rxKotlin
-    implementation dataDependencies.dagger
-    implementation dataDependencies.daggerSupport
+    implementation domainDependencies.dagger
+    implementation domainDependencies.daggerSupport
     implementation dataDependencies.retrofit
     implementation dataDependencies.retrofitConverter
     implementation dataDependencies.retrofitAdapter
@@ -39,6 +39,8 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.0.2'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation presentationDependencies.supportDesign
+    implementation presentationDependencies.rxAndroid
+    implementation presentationDependencies.timber
     kapt presentationDependencies.daggerCompiler
     kapt presentationDependencies.daggerProcessor
     testImplementation 'junit:junit:4.12'
