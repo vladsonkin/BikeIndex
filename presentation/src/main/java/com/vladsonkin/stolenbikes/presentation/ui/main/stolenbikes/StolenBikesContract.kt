@@ -1,4 +1,4 @@
-package com.vladsonkin.stolenbikes.presentation.ui.stolenbikes
+package com.vladsonkin.stolenbikes.presentation.ui.main.stolenbikes
 
 import com.vladsonkin.stolenbikes.domain.model.Bike
 

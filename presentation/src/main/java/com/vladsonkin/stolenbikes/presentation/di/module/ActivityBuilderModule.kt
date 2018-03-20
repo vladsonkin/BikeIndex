@@ -1,8 +1,8 @@
 package com.vladsonkin.stolenbikes.presentation.di.module
 
 import com.vladsonkin.stolenbikes.presentation.di.PerActivity
-import com.vladsonkin.stolenbikes.presentation.ui.stolenbikes.StolenBikesActivity
-import com.vladsonkin.stolenbikes.presentation.ui.stolenbikes.di.StolenBikesFragmentBuilderModule
+import com.vladsonkin.stolenbikes.presentation.ui.main.MainActivity
+import com.vladsonkin.stolenbikes.presentation.ui.main.stolenbikes.di.StolenBikesFragmentBuilderModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -15,6 +15,6 @@ abstract class ActivityBuilderModule {
 
     @PerActivity
     @ContributesAndroidInjector(modules = arrayOf(StolenBikesFragmentBuilderModule::class))
-    abstract fun bindStolenBikesActivity(): StolenBikesActivity
+    abstract fun bindMainActivity(): MainActivity
 
 }

@@ -1,6 +1,6 @@
-package com.vladsonkin.stolenbikes.presentation.ui.stolenbikes.di
+package com.vladsonkin.stolenbikes.presentation.ui.main.stolenbikes.di
 
-import com.vladsonkin.stolenbikes.presentation.ui.stolenbikes.StolenBikesFragment
+import com.vladsonkin.stolenbikes.presentation.ui.main.stolenbikes.StolenBikesFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
