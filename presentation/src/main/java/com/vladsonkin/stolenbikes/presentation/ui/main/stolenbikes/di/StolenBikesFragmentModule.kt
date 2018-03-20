@@ -1,4 +1,4 @@
-package com.vladsonkin.stolenbikes.presentation.ui.stolenbikes.di
+package com.vladsonkin.stolenbikes.presentation.ui.main.stolenbikes.di
 
 import dagger.Module
 
