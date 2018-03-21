@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stolen Bikes"
+        android:text="Info"
         android:layout_centerInParent="true"/>
 
 </RelativeLayout>
