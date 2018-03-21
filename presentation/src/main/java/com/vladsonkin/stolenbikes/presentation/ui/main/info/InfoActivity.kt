@@ -13,8 +13,6 @@ open class InfoActivity : BaseNavigationActivity() {
 
     override fun getNavigationMenuItemId() = R.id.navigation_info
 
-    override fun getContentViewId() = R.layout.activity_navigation_single_fragment
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

@@ -5,13 +5,12 @@ import com.vladsonkin.stolenbikes.presentation.R
 import com.vladsonkin.stolenbikes.presentation.ui.base.BaseNavigationActivity
 import kotlinx.android.synthetic.main.activity_navigation_single_fragment.*
 
+
 /**
  * Created by Vlad Sonkin
  * on 15 March 2018.
  */
 open class StolenBikesActivity : BaseNavigationActivity() {
-
-    override fun getContentViewId() = R.layout.activity_navigation_single_fragment
 
     override fun getNavigationMenuItemId() = R.id.navigation_stolen_bikes
 
