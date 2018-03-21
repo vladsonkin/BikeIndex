@@ -13,8 +13,6 @@ open class SearchActivity : BaseNavigationActivity() {
 
     override fun getNavigationMenuItemId() = R.id.navigation_search
 
-    override fun getContentViewId() = R.layout.activity_navigation_single_fragment
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
