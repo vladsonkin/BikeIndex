@@ -13,9 +13,9 @@ import dagger.android.support.DaggerAppCompatActivity
  */
 abstract class BaseActivity : DaggerAppCompatActivity() {
 
-    protected fun addFragment(@IdRes containerViewId: Int, fragment: Fragment) {
+    protected fun replaceFragment(@IdRes containerViewId: Int, fragment: Fragment) {
         this.supportFragmentManager.beginTransaction()
-                .add(containerViewId, fragment)
+                .replace(containerViewId, fragment)
                 .commit()
     }
 
