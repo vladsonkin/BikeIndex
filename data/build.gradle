@@ -35,6 +35,7 @@ dependencies {
     implementation dataDependencies.retrofit
     implementation domainDependencies.dagger
     implementation domainDependencies.rxKotlin
+    implementation domainDependencies.gson
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

@@ -18,13 +18,13 @@ open class SearchStolenBikes @Inject constructor(val bikeRepository: BikeReposit
         UseCase<List<Bike>, SearchStolenBikes.Params>(threadExecutor, postExecutionThread) {
 
     override fun buildUseCaseObservable(params: Params): Observable<List<Bike>> {
-        return bikeRepository.searchStolenBikes(params.page, params.perPage, params.location, params.distance)
+        return bikeRepository.getStolenBikes(params.page, params.perPage, params.location, "100", "proximity")
     }
 
-    class Params private constructor(val page: Int, val perPage: Int, val location: String, val distance: String) {
+    class Params private constructor(val page: Int, val perPage: Int, val location: String) {
         companion object {
-            fun forData(page: Int, perPage: Int, location: String, distance: String) =
-                    Params(page, perPage, location, distance)
+            fun forData(page: Int, perPage: Int, location: String) =
+                    Params(page, perPage, location)
         }
     }
 }

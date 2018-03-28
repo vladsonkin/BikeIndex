@@ -13,6 +13,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 
 /**
  * Created by Vlad Sonkin
@@ -23,7 +24,8 @@ open class ApiServiceModule {
 
     @Provides
     @PerApplication
-    fun provideBikeService(okHttpClient: OkHttpClient, gson: Gson): BikeApiService {
+    @Named("client")
+    fun provideBikeService(okHttpClient: OkHttpClient, @Named("client") gson: Gson): BikeApiService {
         val retrofit = Retrofit.Builder()
                 .baseUrl("https://bikeindex.org:443/api/v3/")
                 .client(okHttpClient)
@@ -35,6 +37,7 @@ open class ApiServiceModule {
 
     @Provides
     @PerApplication
+    @Named("client")
     fun provideGson(): Gson = GsonBuilder()
             .setLenient()
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")

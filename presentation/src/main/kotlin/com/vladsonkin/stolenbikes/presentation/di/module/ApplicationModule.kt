@@ -1,5 +1,6 @@
 package com.vladsonkin.stolenbikes.presentation.di.module
 
+import com.google.gson.Gson
 import com.vladsonkin.stolenbikes.data.api.BikeApiService
 import com.vladsonkin.stolenbikes.data.executor.JobExecutor
 import com.vladsonkin.stolenbikes.data.repository.BikeDataRepository
@@ -10,6 +11,7 @@ import com.vladsonkin.stolenbikes.presentation.UiThread
 import com.vladsonkin.stolenbikes.presentation.di.PerApplication
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
 
 /**
 * Created by Vlad Sonkin
@@ -20,8 +22,7 @@ open class ApplicationModule {
 
     @Provides
     @PerApplication
-    internal fun provideBikeRepository(bikeDataRepository: BikeDataRepository): BikeRepository =
-            bikeDataRepository
+    fun provideGson(): Gson = Gson()
 
     @Provides
     @PerApplication
@@ -33,7 +34,12 @@ open class ApplicationModule {
 
     @Provides
     @PerApplication
-    internal fun provideMainApiService(bikeApiService: BikeApiService): BikeApiService =
+    internal fun provideBikeRepository(bikeDataRepository: BikeDataRepository): BikeRepository =
+            bikeDataRepository
+
+    @Provides
+    @PerApplication
+    internal fun provideBikeApiService(@Named("client") bikeApiService: BikeApiService): BikeApiService =
             bikeApiService
 
 }

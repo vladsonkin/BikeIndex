@@ -38,7 +38,7 @@ class StolenBikesFragment : BaseFragment() {
     }
 
     private fun searchBikes() {
-        searchStolenBikes.execute(SearchStolenBikes.Params.forData(1, 1, "Test", "Test"))
+        searchStolenBikes.execute(SearchStolenBikes.Params.forData(1, 25, "52.379189,4.899431"))
                 .subscribe(this::getBikesSuccess, this::showError)
     }
 
