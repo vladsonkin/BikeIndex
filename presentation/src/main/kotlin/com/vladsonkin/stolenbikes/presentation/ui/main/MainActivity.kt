@@ -24,7 +24,7 @@ open class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
 
         bottomNavigation.setOnNavigationItemSelectedListener(this)
 
-        setSupportActionBar(toolbar)
+//        setSupportActionBar(toolbar)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
