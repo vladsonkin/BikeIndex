@@ -1,6 +1,8 @@
 package com.vladsonkin.stolenbikes.presentation.ui.main.stolenbikes
 
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +22,13 @@ class StolenBikesFragment : BaseFragment() {
     @Inject lateinit var searchStolenBikes: SearchStolenBikes
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_stolen_bikes, container, false)
+        val view = inflater.inflate(R.layout.fragment_stolen_bikes, container, false)
+
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        toolbar.setTitle(R.string.title_stolen_bikes)
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
