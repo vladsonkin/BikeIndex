@@ -20,20 +20,23 @@ open class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        replaceFragment(R.id.fragmentContainer, StolenBikesFragment())
+        addOrShowExistingFragment(R.id.fragmentContainer, StolenBikesFragment())
 
         bottomNavigation.setOnNavigationItemSelectedListener(this)
-
-//        setSupportActionBar(toolbar)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.navigation_stolen_bikes -> replaceFragment(R.id.fragmentContainer, StolenBikesFragment())
-            R.id.navigation_search -> replaceFragment(R.id.fragmentContainer, SearchFragment())
-            R.id.navigation_info -> replaceFragment(R.id.fragmentContainer, InfoFragment())
+            R.id.navigation_stolen_bikes -> addOrShowExistingFragment(R.id.fragmentContainer, StolenBikesFragment())
+            R.id.navigation_search -> addOrShowExistingFragment(R.id.fragmentContainer, SearchFragment())
+            R.id.navigation_info -> addOrShowExistingFragment(R.id.fragmentContainer, InfoFragment())
         }
 
         return true
+    }
+
+    // TODO handle back from fragments?
+    override fun onBackPressed() {
+        finish()
     }
 }

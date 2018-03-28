@@ -10,10 +10,19 @@ import dagger.android.support.DaggerAppCompatActivity
  */
 abstract class BaseActivity : DaggerAppCompatActivity() {
 
-    protected fun replaceFragment(@IdRes containerViewId: Int, fragment: Fragment) {
-        this.supportFragmentManager.beginTransaction()
-                .replace(containerViewId, fragment)
-                .commit()
+    // TODO use FragNav library ?
+    protected fun addOrShowExistingFragment(@IdRes containerViewId: Int, fragment: Fragment) {
+        val fragmentTag = fragment.javaClass.simpleName
+
+        val fragmentPopped = this.supportFragmentManager.popBackStackImmediate(fragmentTag, 0)
+
+        if (!fragmentPopped) {
+            this.supportFragmentManager.beginTransaction()
+                    .add(containerViewId, fragment, fragmentTag)
+                    .addToBackStack(fragmentTag)
+                    .commit()
+        }
+
     }
 
 }
