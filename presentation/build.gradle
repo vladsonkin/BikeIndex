@@ -44,6 +44,8 @@ dependencies {
     implementation presentationDependencies.supportDesign
     implementation presentationDependencies.rxAndroid
     implementation presentationDependencies.timber
+    implementation presentationDependencies.cardView
+    implementation presentationDependencies.glide
     kapt presentationDependencies.daggerCompiler
     kapt presentationDependencies.daggerProcessor
     testImplementation 'junit:junit:4.12'

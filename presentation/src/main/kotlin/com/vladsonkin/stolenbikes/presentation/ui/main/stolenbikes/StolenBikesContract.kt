@@ -1,6 +1,8 @@
 package com.vladsonkin.stolenbikes.presentation.ui.main.stolenbikes
 
 import com.vladsonkin.stolenbikes.domain.model.Bike
+import com.vladsonkin.stolenbikes.presentation.ui.base.MvpPresenter
+import com.vladsonkin.stolenbikes.presentation.ui.base.MvpView
 
 /**
  * Created by Vlad Sonkin
@@ -8,14 +10,12 @@ import com.vladsonkin.stolenbikes.domain.model.Bike
  */
 interface StolenBikesContract {
 
-    interface View {
+    interface View : MvpView {
         fun showStolenBikes(bikes: List<Bike>)
-
-        fun showError(message: String)
     }
 
-    interface Presenter {
-        fun searchStolenBikes(page: Int, perPage: Int, location: String, distance: String)
+    interface Presenter : MvpPresenter {
+        fun getStolenBikes(page: Int, perPage: Int, location: String)
     }
 
 }

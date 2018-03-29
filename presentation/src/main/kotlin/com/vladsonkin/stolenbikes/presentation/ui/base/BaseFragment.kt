@@ -6,6 +6,6 @@ import dagger.android.support.DaggerFragment
  * Created by Vlad Sonkin
  * on 17 March 2018.
  */
-abstract class BaseFragment : DaggerFragment() {
+abstract class BaseFragment : DaggerFragment(), MvpView {
 
 }
