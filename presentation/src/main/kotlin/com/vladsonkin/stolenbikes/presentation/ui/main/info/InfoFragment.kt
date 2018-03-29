@@ -15,6 +15,18 @@ import com.vladsonkin.stolenbikes.presentation.ui.base.BaseFragment
  */
 class InfoFragment : BaseFragment() {
 
+    override fun showLoading() {
+        TODO("not implemented")
+    }
+
+    override fun hideLoading() {
+        TODO("not implemented")
+    }
+
+    override fun showError(message: String) {
+        TODO("not implemented")
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_info, container, false)
 
