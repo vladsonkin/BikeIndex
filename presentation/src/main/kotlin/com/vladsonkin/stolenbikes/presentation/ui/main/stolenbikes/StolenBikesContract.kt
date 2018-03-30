@@ -11,7 +11,7 @@ import com.vladsonkin.stolenbikes.presentation.ui.base.MvpView
 interface StolenBikesContract {
 
     interface View : MvpView {
-        fun showStolenBikes(bikes: List<Bike>)
+        fun showStolenBikes(bikes: List<Bike>, nextPage: Boolean)
     }
 
     interface Presenter : MvpPresenter {

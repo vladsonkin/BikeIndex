@@ -2,16 +2,16 @@ package com.vladsonkin.stolenbikes.presentation.ui.main.stolenbikes
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import com.vladsonkin.stolenbikes.domain.model.Bike
 import com.vladsonkin.stolenbikes.presentation.R
 import com.vladsonkin.stolenbikes.presentation.ui.base.BaseFragment
+import com.vladsonkin.stolenbikes.presentation.util.ui.EndlessRecyclerOnScrollListener
 import kotlinx.android.synthetic.main.fragment_stolen_bikes.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -25,8 +25,17 @@ class StolenBikesFragment : BaseFragment(), StolenBikesContract.View {
     @Inject lateinit var stolenBikesPresenter: StolenBikesPresenter
     private lateinit var bikesAdapter: StolenBikesAdapter
 
-    override fun showStolenBikes(bikes: List<Bike>) {
-        bikesAdapter.setData(bikes)
+    private lateinit var endlessRecyclerOnScrollListener: EndlessRecyclerOnScrollListener
+
+    override fun showStolenBikes(bikes: List<Bike>, nextPage: Boolean) {
+
+        if (nextPage) {
+            bikesAdapter.addNextPage(bikes)
+        } else {
+            bikesAdapter.updateData(bikes)
+            endlessRecyclerOnScrollListener.resetState()
+        }
+
         Timber.i("success %s", bikes.toString())
     }
 
@@ -61,6 +70,17 @@ class StolenBikesFragment : BaseFragment(), StolenBikesContract.View {
 
         recyclerViewStolenBikes.adapter = bikesAdapter
 
-        stolenBikesPresenter.getStolenBikes(1, 25, "52.379189,4.899431")
+
+        endlessRecyclerOnScrollListener = object: EndlessRecyclerOnScrollListener(recyclerViewStolenBikes.layoutManager as LinearLayoutManager) {
+
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+                stolenBikesPresenter.getStolenBikes(page, 10, "52.379189,4.899431")
+            }
+
+        }
+
+        recyclerViewStolenBikes.addOnScrollListener(endlessRecyclerOnScrollListener)
+
+        stolenBikesPresenter.getStolenBikes(1, 10, "52.379189,4.899431")
     }
 }

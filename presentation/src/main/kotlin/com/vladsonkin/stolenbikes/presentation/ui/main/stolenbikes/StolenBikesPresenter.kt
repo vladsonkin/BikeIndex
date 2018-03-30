@@ -15,17 +15,19 @@ open class StolenBikesPresenter @Inject constructor(
     : BasePresenter<StolenBikesContract.View>(view), StolenBikesContract.Presenter {
 
     override fun getStolenBikes(page: Int, perPage: Int, location: String) {
-        val getStolenBikesDisposable = getStolenBikesUseCase.execute(
+        val nextPage = page > 1
+
+        val getStolenBikes = getStolenBikesUseCase.execute(
                 GetStolenBikes.Params.forData(page, perPage, location))
                 .doOnSubscribe { showLoading() }
                 .doFinally { hideLoading() }
-                .subscribe(this::showStolenBikes, this::showError)
+                .subscribe({ stolenBikes -> showStolenBikes(stolenBikes, nextPage) }, this::showError)
 
-        unsubscribeOnDestroy(getStolenBikesDisposable)
+        unsubscribeOnDestroy(getStolenBikes)
     }
 
-    private fun showStolenBikes(stolenBikes: List<Bike>) {
-        view.showStolenBikes(stolenBikes)
+    private fun showStolenBikes(stolenBikes: List<Bike>, nextPage: Boolean) {
+        view.showStolenBikes(stolenBikes, nextPage)
     }
 
 }
