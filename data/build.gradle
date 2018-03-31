@@ -2,12 +2,12 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion androidCompileSdkVersion
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 27
-        versionCode 1
+        minSdkVersion androidMinSdkVersion
+        targetSdkVersion androidTargetSdkVersion
+        versionCode androidVersionCode
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -28,20 +28,16 @@ android {
 }
 
 dependencies {
-    def dataDependencies = rootProject.ext.dataDependencies
-
     api project(':domain')
 
-    implementation dataDependencies.retrofit
-    implementation domainDependencies.dagger
-    implementation domainDependencies.rxKotlin
-    implementation domainDependencies.gson
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'javax.inject:javax.inject:1'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jre8:1.2.31'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-}
-repositories {
-    mavenCentral()
 }
