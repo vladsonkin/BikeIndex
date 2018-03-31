@@ -74,13 +74,13 @@ class StolenBikesFragment : BaseFragment(), StolenBikesContract.View {
         endlessRecyclerOnScrollListener = object: EndlessRecyclerOnScrollListener(recyclerViewStolenBikes.layoutManager as LinearLayoutManager) {
 
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-                stolenBikesPresenter.getStolenBikes(page, 10, "52.379189,4.899431")
+                stolenBikesPresenter.getStolenBikes(page, 20, "52.379189,4.899431")
             }
 
         }
 
         recyclerViewStolenBikes.addOnScrollListener(endlessRecyclerOnScrollListener)
 
-        stolenBikesPresenter.getStolenBikes(1, 10, "52.379189,4.899431")
+        stolenBikesPresenter.getStolenBikes(1, 20, "52.379189,4.899431")
     }
 }

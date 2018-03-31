@@ -4,12 +4,8 @@ sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
 
 buildscript {
-    ext.kotlin_version = '1.2.30'
     repositories {
         mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 repositories {
@@ -32,7 +28,7 @@ dependencies {
     implementation domainDependencies.dagger
     implementation domainDependencies.rxKotlin
     implementation domainDependencies.gson
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
 
 

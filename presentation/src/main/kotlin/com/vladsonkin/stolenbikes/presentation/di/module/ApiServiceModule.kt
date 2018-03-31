@@ -56,5 +56,5 @@ open class ApiServiceModule {
     @Provides
     @PerApplication
     fun provideLoggingInterceptor() : HttpLoggingInterceptor =
-            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
 }
