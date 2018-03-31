@@ -11,7 +11,7 @@ import io.reactivex.disposables.Disposable
  * Created by Vlad Sonkin
  * on 29 March 2018.
  */
-open abstract class BasePresenter<out T : MvpView>(open val view: T)
+abstract class BasePresenter<out T : MvpView>(open val view: T)
     : MvpPresenter, LifecycleObserver {
 
     private val disposables = CompositeDisposable()
