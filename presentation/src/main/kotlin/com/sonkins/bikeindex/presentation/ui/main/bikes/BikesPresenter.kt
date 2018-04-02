@@ -19,8 +19,8 @@ open class BikesPresenter @Inject constructor(
 
         val getStolenBikes = getBikesUseCase.execute(
                 GetBikes.Params.forData(page))
-                .doOnSubscribe { showLoading() }
-                .doFinally { hideLoading() }
+                .doOnSubscribe { if (!nextPage) showLoading() }
+                .doFinally { if (!nextPage) hideLoading() }
                 .subscribe(
                         { stolenBikes -> showStolenBikes(stolenBikes, nextPage) },
                         this::showError

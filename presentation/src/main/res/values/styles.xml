@@ -19,4 +19,9 @@
         <item name="titleTextColor">@color/white</item>
     </style>
 
+    <style name="splashScreenTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/bg_splashscreen</item>
+        <item name="colorPrimaryDark">@color/black</item>
+    </style>
+
 </resources>

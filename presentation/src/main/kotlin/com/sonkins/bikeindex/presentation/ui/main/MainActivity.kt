@@ -5,9 +5,9 @@ import android.support.design.widget.BottomNavigationView
 import android.view.MenuItem
 import com.sonkins.bikeindex.presentation.R
 import com.sonkins.bikeindex.presentation.ui.base.BaseActivity
+import com.sonkins.bikeindex.presentation.ui.main.bikes.BikesFragment
 import com.sonkins.bikeindex.presentation.ui.main.info.InfoFragment
 import com.sonkins.bikeindex.presentation.ui.main.search.SearchFragment
-import com.sonkins.bikeindex.presentation.ui.main.bikes.BikesFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 open class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         addOrShowExistingFragment(R.id.fragmentContainer, BikesFragment())
