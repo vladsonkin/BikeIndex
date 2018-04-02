@@ -15,12 +15,12 @@ class BikeDataRepository @Inject constructor(
         private val bikeApiDataStore: BikeApiDataStore,
         private val bikesMapper: BikesMapper) : BikeRepository {
 
-    override fun getStolenBikes(page: Int,
-                                perPage: Int,
-                                location: String,
-                                distance: String,
-                                stolenness: String): Observable<List<Bike>> {
-        return bikeApiDataStore.getStolenBikes(page, perPage, location, distance, stolenness)
+    override fun getBikes(page: Int,
+                          perPage: Int,
+                          location: String,
+                          distance: String,
+                          stolenness: String): Observable<List<Bike>> {
+        return bikeApiDataStore.getBikes(page, perPage, location, distance, stolenness)
                 .map(bikesMapper::transform)
     }
 }

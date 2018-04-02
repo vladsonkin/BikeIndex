@@ -4,7 +4,7 @@
     <item
         android:id="@+id/navigation_stolen_bikes"
         android:icon="@drawable/ic_bike_black_24dp"
-        android:title="@string/title_stolen_bikes" />
+        android:title="@string/title_bikes" />
 
     <item
         android:id="@+id/navigation_search"

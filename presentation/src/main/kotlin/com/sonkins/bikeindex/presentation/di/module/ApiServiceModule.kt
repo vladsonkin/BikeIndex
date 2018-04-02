@@ -3,7 +3,7 @@ package com.sonkins.bikeindex.presentation.di.module
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.sonkins.bikeindex.data.api.BikeApiService
+import com.sonkins.bikeindex.data.api.BikeIndexApiService
 import com.sonkins.bikeindex.presentation.di.PerApplication
 import dagger.Module
 import dagger.Provides
@@ -25,14 +25,14 @@ open class ApiServiceModule {
     @Provides
     @PerApplication
     @Named("client")
-    fun provideBikeService(okHttpClient: OkHttpClient, @Named("client") gson: Gson): BikeApiService {
+    fun provideBikeService(okHttpClient: OkHttpClient, @Named("client") gson: Gson): BikeIndexApiService {
         val retrofit = Retrofit.Builder()
                 .baseUrl("https://bikeindex.org:443/api/v3/")
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
-        return retrofit.create(BikeApiService::class.java)
+        return retrofit.create(BikeIndexApiService::class.java)
     }
 
     @Provides

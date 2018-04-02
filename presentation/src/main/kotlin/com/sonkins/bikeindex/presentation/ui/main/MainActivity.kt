@@ -7,7 +7,7 @@ import com.sonkins.bikeindex.presentation.R
 import com.sonkins.bikeindex.presentation.ui.base.BaseActivity
 import com.sonkins.bikeindex.presentation.ui.main.info.InfoFragment
 import com.sonkins.bikeindex.presentation.ui.main.search.SearchFragment
-import com.sonkins.bikeindex.presentation.ui.main.bikeindex.StolenBikesFragment
+import com.sonkins.bikeindex.presentation.ui.main.bikes.BikesFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -20,14 +20,14 @@ open class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        addOrShowExistingFragment(R.id.fragmentContainer, StolenBikesFragment())
+        addOrShowExistingFragment(R.id.fragmentContainer, BikesFragment())
 
         bottomNavigation.setOnNavigationItemSelectedListener(this)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.navigation_stolen_bikes -> addOrShowExistingFragment(R.id.fragmentContainer, StolenBikesFragment())
+            R.id.navigation_stolen_bikes -> addOrShowExistingFragment(R.id.fragmentContainer, BikesFragment())
             R.id.navigation_search -> addOrShowExistingFragment(R.id.fragmentContainer, SearchFragment())
             R.id.navigation_info -> addOrShowExistingFragment(R.id.fragmentContainer, InfoFragment())
         }

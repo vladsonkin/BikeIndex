@@ -10,10 +10,10 @@ import retrofit2.http.Query
  * Created by Vlad Sonkin
  * on 15 March 2018.
  */
-interface BikeApiService {
+interface BikeIndexApiService {
 
     @GET("search")
-    fun getStolenBikes(
+    fun getBikes(
             @Query("page") page: Int,
             @Query("per_page") perPage: Int,
             @Query("location") location: String,
