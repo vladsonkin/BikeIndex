@@ -7,7 +7,7 @@ android {
     compileSdkVersion androidCompileSdkVersion
 
     defaultConfig {
-        applicationId "com.vladsonkin.stolenbikes"
+        applicationId "com.sonkins.bikeindex"
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
         versionCode androidVersionCode
