@@ -4,7 +4,7 @@ import com.sonkins.bikeindex.presentation.di.PerActivity
 import com.sonkins.bikeindex.presentation.ui.main.info.di.InfoFragmentBuilderModule
 import com.sonkins.bikeindex.presentation.ui.main.search.di.SearchFragmentBuilderModule
 import com.sonkins.bikeindex.presentation.ui.main.MainActivity
-import com.sonkins.bikeindex.presentation.ui.main.bikeindex.di.StolenBikesFragmentBuilderModule
+import com.sonkins.bikeindex.presentation.ui.main.bikes.di.BikesFragmentBuilderModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -17,7 +17,7 @@ abstract class ActivityBuilderModule {
 
     @PerActivity
     @ContributesAndroidInjector(modules = arrayOf(
-            StolenBikesFragmentBuilderModule::class,
+            BikesFragmentBuilderModule::class,
             SearchFragmentBuilderModule::class,
             InfoFragmentBuilderModule::class))
     abstract fun bindMainActivity(): MainActivity

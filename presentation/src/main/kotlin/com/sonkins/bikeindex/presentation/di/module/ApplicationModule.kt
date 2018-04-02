@@ -1,7 +1,7 @@
 package com.sonkins.bikeindex.presentation.di.module
 
 import com.google.gson.Gson
-import com.sonkins.bikeindex.data.api.BikeApiService
+import com.sonkins.bikeindex.data.api.BikeIndexApiService
 import com.sonkins.bikeindex.data.executor.JobExecutor
 import com.sonkins.bikeindex.data.repository.BikeDataRepository
 import com.sonkins.bikeindex.domain.executor.PostExecutionThread
@@ -39,7 +39,7 @@ open class ApplicationModule {
 
     @Provides
     @PerApplication
-    internal fun provideBikeApiService(@Named("client") bikeApiService: BikeApiService): BikeApiService =
-            bikeApiService
+    internal fun provideBikeApiService(@Named("client") bikeIndexApiService: BikeIndexApiService): BikeIndexApiService =
+            bikeIndexApiService
 
 }

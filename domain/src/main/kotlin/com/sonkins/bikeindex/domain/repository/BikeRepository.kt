@@ -8,6 +8,6 @@ import io.reactivex.Observable
 * on 15 March 2018.
 */
 interface BikeRepository {
-    fun getStolenBikes(page: Int, perPage: Int, location: String, distance: String, stolenness: String)
+    fun getBikes(page: Int, perPage: Int, location: String, distance: String, stolenness: String)
             : Observable<List<Bike>>
 }

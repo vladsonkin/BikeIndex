@@ -1,4 +1,4 @@
-package com.sonkins.bikeindex.presentation.ui.main.bikeindex
+package com.sonkins.bikeindex.presentation.ui.main.bikes
 
 import android.os.Handler
 import android.support.v7.widget.RecyclerView
@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_bike.view.*
  * Created by Vlad Sonkin
  * on 29 March 2018.
  */
-class StolenBikesAdapter(private val loadMoreListener: LoadMoreListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class BikesAdapter(private val loadMoreListener: LoadMoreListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val VIEW_TYPE_ITEM = 1
     private val VIEW_TYPE_PROGRESSBAR = 0

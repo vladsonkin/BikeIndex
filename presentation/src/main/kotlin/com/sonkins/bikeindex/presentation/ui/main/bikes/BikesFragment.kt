@@ -1,4 +1,4 @@
-package com.sonkins.bikeindex.presentation.ui.main.bikeindex
+package com.sonkins.bikeindex.presentation.ui.main.bikes
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -20,28 +20,22 @@ import javax.inject.Inject
  * Created by Vlad Sonkin
  * on 17 March 2018.
  */
-class StolenBikesFragment : BaseFragment(), StolenBikesContract.View, StolenBikesAdapter.LoadMoreListener {
+class BikesFragment : BaseFragment(), BikesContract.View, BikesAdapter.LoadMoreListener {
 
-    @Inject lateinit var stolenBikesPresenter: StolenBikesPresenter
-    private lateinit var bikesAdapter: StolenBikesAdapter
+    @Inject lateinit var bikesPresenter: BikesPresenter
+    private lateinit var bikesAdapter: BikesAdapter
 
     private lateinit var endlessRecyclerOnScrollListener: EndlessRecyclerOnScrollListener
 
     override fun showStolenBikes(bikes: List<Bike>, nextPage: Boolean) {
 
         if (nextPage) {
-//            bikesAdapter.addNextPage(bikes)
-
             bikesAdapter.dismissLoading()
             bikesAdapter.addNextPage(bikes)
             bikesAdapter.setMore(true)
-
         } else {
             bikesAdapter.updateData(bikes)
             endlessRecyclerOnScrollListener.resetState()
-
-
-
         }
 
         Timber.i("success %s", bikes.toString())
@@ -59,11 +53,12 @@ class StolenBikesFragment : BaseFragment(), StolenBikesContract.View, StolenBike
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_stolen_bikes, container, false)
 
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-        toolbar.setTitle(R.string.title_stolen_bikes)
+        toolbar.setTitle(R.string.title_bikes)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
         return view
@@ -74,15 +69,15 @@ class StolenBikesFragment : BaseFragment(), StolenBikesContract.View, StolenBike
 
         recyclerViewStolenBikes.layoutManager = LinearLayoutManager(context)
 
-        bikesAdapter = StolenBikesAdapter(this)
+        bikesAdapter = BikesAdapter(this)
 
         recyclerViewStolenBikes.adapter = bikesAdapter
 
 
-        endlessRecyclerOnScrollListener = object: EndlessRecyclerOnScrollListener(recyclerViewStolenBikes.layoutManager as LinearLayoutManager) {
+        endlessRecyclerOnScrollListener = object: EndlessRecyclerOnScrollListener(
+                recyclerViewStolenBikes.layoutManager as LinearLayoutManager) {
 
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-//                stolenBikesPresenter.getStolenBikes(page, 20, "52.379189,4.899431")
                 bikesAdapter.showLoading(page)
             }
 
@@ -90,11 +85,11 @@ class StolenBikesFragment : BaseFragment(), StolenBikesContract.View, StolenBike
 
         recyclerViewStolenBikes.addOnScrollListener(endlessRecyclerOnScrollListener)
 
-        stolenBikesPresenter.getStolenBikes(1, 10, "52.379189,4.899431")
+        bikesPresenter.getStolenBikes(1)
     }
 
 
     override fun loadMore(page: Int) {
-        stolenBikesPresenter.getStolenBikes(page, 10, "52.379189,4.899431")
+        bikesPresenter.getStolenBikes(page)
     }
 }
