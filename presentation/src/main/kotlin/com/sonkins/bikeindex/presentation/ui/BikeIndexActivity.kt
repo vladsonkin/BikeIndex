@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.view.MenuItem
 import com.sonkins.bikeindex.presentation.R
+import com.sonkins.bikeindex.presentation.router.Router
 import com.sonkins.bikeindex.presentation.ui.base.BaseActivity
-import com.sonkins.bikeindex.presentation.ui.bikes.BikesFragment
-import com.sonkins.bikeindex.presentation.ui.info.InfoFragment
-import com.sonkins.bikeindex.presentation.ui.search.SearchFragment
 import kotlinx.android.synthetic.main.activity_bike_index.*
+import javax.inject.Inject
 
 
 /**
@@ -17,20 +16,25 @@ import kotlinx.android.synthetic.main.activity_bike_index.*
  */
 open class BikeIndexActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
+    @Inject lateinit var router: Router
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bike_index)
-        addOrShowExistingFragment(R.id.fragmentContainer, BikesFragment())
+
+        if (savedInstanceState == null) {
+            router.goToBikes()
+        }
 
         bottomNavigation.setOnNavigationItemSelectedListener(this)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.navigation_stolen_bikes -> addOrShowExistingFragment(R.id.fragmentContainer, BikesFragment())
-            R.id.navigation_search -> addOrShowExistingFragment(R.id.fragmentContainer, SearchFragment())
-            R.id.navigation_info -> addOrShowExistingFragment(R.id.fragmentContainer, InfoFragment())
+            R.id.navigation_bikes -> router.goToBikes()
+            R.id.navigation_search -> router.goToSearch()
+            R.id.navigation_info -> router.goToInfo()
         }
 
         return true
