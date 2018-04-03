@@ -1,4 +1,4 @@
-package com.sonkins.bikeindex.presentation.ui.main.bikes
+package com.sonkins.bikeindex.presentation.ui.bikes
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -10,9 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.sonkins.bikeindex.domain.model.Bike
 import com.sonkins.bikeindex.presentation.R
+import com.sonkins.bikeindex.presentation.ui.base.BaseActivity
 import com.sonkins.bikeindex.presentation.ui.base.BaseFragment
+import com.sonkins.bikeindex.presentation.ui.filter.FilterFragment
 import com.sonkins.bikeindex.presentation.util.ui.EndlessRecyclerOnScrollListener
-import kotlinx.android.synthetic.main.fragment_stolen_bikes.*
+import kotlinx.android.synthetic.main.fragment_bikes.*
 import kotlinx.android.synthetic.main.view_progress.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -47,16 +49,16 @@ class BikesFragment : BaseFragment(), BikesContract.View, BikesAdapter.LoadMoreL
     }
 
     override fun showLoading() {
-        progressBarGlobal.visibility = View.VISIBLE
+        progressBarGlobal?.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        progressBarGlobal.visibility = View.GONE
+        progressBarGlobal?.visibility = View.GONE
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_stolen_bikes, container, false)
+        val view = inflater.inflate(R.layout.fragment_bikes, container, false)
 
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         toolbar.setTitle(R.string.title_bikes)
@@ -67,6 +69,10 @@ class BikesFragment : BaseFragment(), BikesContract.View, BikesAdapter.LoadMoreL
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        buttonFilter.setOnClickListener {
+            (activity as BaseActivity).addFragment(R.id.fragmentContainer, FilterFragment())
+        }
 
         recyclerViewStolenBikes.layoutManager = LinearLayoutManager(context)
 

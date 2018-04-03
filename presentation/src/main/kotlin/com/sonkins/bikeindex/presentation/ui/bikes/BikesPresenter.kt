@@ -1,4 +1,4 @@
-package com.sonkins.bikeindex.presentation.ui.main.bikes
+package com.sonkins.bikeindex.presentation.ui.bikes
 
 import com.sonkins.bikeindex.domain.interactor.bike.GetBikes
 import com.sonkins.bikeindex.domain.model.Bike
@@ -9,9 +9,8 @@ import javax.inject.Inject
  * Created by Vlad Sonkin
  * on 17 March 2018.
  */
-open class BikesPresenter @Inject constructor(
-        override val view: BikesContract.View,
-        private val getBikesUseCase: GetBikes)
+open class BikesPresenter @Inject constructor(override val view: BikesContract.View,
+                                              private val getBikesUseCase: GetBikes)
     : BasePresenter<BikesContract.View>(view), BikesContract.Presenter {
 
     override fun getStolenBikes(page: Int) {

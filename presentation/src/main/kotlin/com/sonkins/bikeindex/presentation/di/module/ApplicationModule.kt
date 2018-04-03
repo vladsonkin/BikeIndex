@@ -8,7 +8,7 @@ import com.sonkins.bikeindex.domain.executor.PostExecutionThread
 import com.sonkins.bikeindex.domain.executor.ThreadExecutor
 import com.sonkins.bikeindex.domain.repository.BikeRepository
 import com.sonkins.bikeindex.presentation.UiThread
-import com.sonkins.bikeindex.presentation.di.PerApplication
+import com.sonkins.bikeindex.presentation.di.ApplicationScope
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -21,25 +21,26 @@ import javax.inject.Named
 open class ApplicationModule {
 
     @Provides
-    @PerApplication
+    @ApplicationScope
     fun provideGson(): Gson = Gson()
 
     @Provides
-    @PerApplication
+    @ApplicationScope
     internal fun provideThreadExecutor(jobExecutor: JobExecutor): ThreadExecutor = jobExecutor
 
     @Provides
-    @PerApplication
+    @ApplicationScope
     internal fun providePostExecutionThread(uiThread: UiThread): PostExecutionThread = uiThread
 
     @Provides
-    @PerApplication
-    internal fun provideBikeRepository(bikeDataRepository: BikeDataRepository): BikeRepository =
-            bikeDataRepository
+    @ApplicationScope
+    internal fun provideBikeRepository(bikeDataRepository: BikeDataRepository): BikeRepository
+            = bikeDataRepository
 
     @Provides
-    @PerApplication
-    internal fun provideBikeApiService(@Named("client") bikeIndexApiService: BikeIndexApiService): BikeIndexApiService =
-            bikeIndexApiService
+    @ApplicationScope
+    internal fun provideBikeApiService(
+            @Named("client") bikeIndexApiService: BikeIndexApiService): BikeIndexApiService
+            = bikeIndexApiService
 
 }

@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.BikeIndexActivity"
             android:theme="@style/splashScreenTheme">
 
             <intent-filter>

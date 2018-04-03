@@ -1,4 +1,4 @@
-package com.sonkins.bikeindex.presentation.ui.main.bikes
+package com.sonkins.bikeindex.presentation.ui.bikes
 
 import android.os.Handler
 import android.support.v7.widget.RecyclerView
