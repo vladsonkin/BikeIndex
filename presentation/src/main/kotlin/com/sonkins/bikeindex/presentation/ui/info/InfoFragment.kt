@@ -1,4 +1,4 @@
-package com.sonkins.bikeindex.presentation.ui.main.search
+package com.sonkins.bikeindex.presentation.ui.info
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -13,7 +13,7 @@ import com.sonkins.bikeindex.presentation.ui.base.BaseFragment
  * Created by Vlad Sonkin
  * on 21 March 2018.
  */
-class SearchFragment : BaseFragment() {
+class InfoFragment : BaseFragment() {
 
     override fun showLoading() {
         TODO("not implemented")
@@ -28,10 +28,10 @@ class SearchFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_search, container, false)
+        val view = inflater.inflate(R.layout.fragment_info, container, false)
 
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-        toolbar.setTitle(R.string.title_search)
+        toolbar.setTitle(R.string.title_info)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
         return view

@@ -1,26 +1,26 @@
-package com.sonkins.bikeindex.presentation.ui.main
+package com.sonkins.bikeindex.presentation.ui
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.view.MenuItem
 import com.sonkins.bikeindex.presentation.R
 import com.sonkins.bikeindex.presentation.ui.base.BaseActivity
-import com.sonkins.bikeindex.presentation.ui.main.bikes.BikesFragment
-import com.sonkins.bikeindex.presentation.ui.main.info.InfoFragment
-import com.sonkins.bikeindex.presentation.ui.main.search.SearchFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import com.sonkins.bikeindex.presentation.ui.bikes.BikesFragment
+import com.sonkins.bikeindex.presentation.ui.info.InfoFragment
+import com.sonkins.bikeindex.presentation.ui.search.SearchFragment
+import kotlinx.android.synthetic.main.activity_bike_index.*
 
 
 /**
  * Created by Vlad Sonkin
  * on 15 March 2018.
  */
-open class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+open class BikeIndexActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_bike_index)
         addOrShowExistingFragment(R.id.fragmentContainer, BikesFragment())
 
         bottomNavigation.setOnNavigationItemSelectedListener(this)
@@ -36,8 +36,4 @@ open class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         return true
     }
 
-    // TODO handle back from fragments?
-    override fun onBackPressed() {
-        finish()
-    }
 }

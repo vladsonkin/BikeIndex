@@ -4,7 +4,7 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.sonkins.bikeindex.data.api.BikeIndexApiService
-import com.sonkins.bikeindex.presentation.di.PerApplication
+import com.sonkins.bikeindex.presentation.di.ApplicationScope
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -23,7 +23,7 @@ import javax.inject.Named
 open class ApiServiceModule {
 
     @Provides
-    @PerApplication
+    @ApplicationScope
     @Named("client")
     fun provideBikeService(okHttpClient: OkHttpClient, @Named("client") gson: Gson): BikeIndexApiService {
         val retrofit = Retrofit.Builder()
@@ -36,7 +36,7 @@ open class ApiServiceModule {
     }
 
     @Provides
-    @PerApplication
+    @ApplicationScope
     @Named("client")
     fun provideGson(): Gson = GsonBuilder()
             .setLenient()
@@ -45,7 +45,7 @@ open class ApiServiceModule {
             .create()
 
     @Provides
-    @PerApplication
+    @ApplicationScope
     fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
             OkHttpClient.Builder()
                     .addInterceptor(httpLoggingInterceptor)
@@ -54,7 +54,7 @@ open class ApiServiceModule {
                     .build()
 
     @Provides
-    @PerApplication
+    @ApplicationScope
     fun provideLoggingInterceptor() : HttpLoggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
 }

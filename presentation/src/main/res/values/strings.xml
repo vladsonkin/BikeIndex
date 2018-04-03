@@ -3,4 +3,6 @@
     <string name="title_bikes">Bikes</string>
     <string name="title_search">Search</string>
     <string name="title_info">Info</string>
+
+    <string name="filter">Filter</string>
 </resources>

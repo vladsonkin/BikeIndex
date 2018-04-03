@@ -25,4 +25,26 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
 
     }
 
+    protected fun replaceFragment(@IdRes containerViewId: Int, fragment: Fragment) {
+        val fragmentTag = fragment.javaClass.simpleName
+
+        this.supportFragmentManager.beginTransaction()
+                .replace(containerViewId, fragment, fragmentTag)
+                .addToBackStack(fragmentTag)
+                .commit()
+    }
+
+    fun addFragment(@IdRes containerViewId: Int, fragment: Fragment) {
+        val fragmentTag = fragment.javaClass.simpleName
+
+        this.supportFragmentManager.beginTransaction()
+                .add(containerViewId, fragment, fragmentTag)
+                .addToBackStack(fragmentTag)
+                .commit()
+    }
+
+    // TODO handle back from fragments?
+    override fun onBackPressed() {
+        finish()
+    }
 }

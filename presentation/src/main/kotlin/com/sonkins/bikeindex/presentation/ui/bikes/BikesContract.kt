@@ -1,4 +1,4 @@
-package com.sonkins.bikeindex.presentation.ui.main.bikes
+package com.sonkins.bikeindex.presentation.ui.bikes
 
 import com.sonkins.bikeindex.domain.model.Bike
 import com.sonkins.bikeindex.presentation.ui.base.MvpPresenter
