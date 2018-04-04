@@ -1,6 +1,7 @@
 package com.sonkins.bikeindex.presentation.ui.bikes
 
 import com.sonkins.bikeindex.domain.model.Bike
+import com.sonkins.bikeindex.presentation.model.BikeModel
 import com.sonkins.bikeindex.presentation.ui.base.MvpPresenter
 import com.sonkins.bikeindex.presentation.ui.base.MvpView
 
@@ -11,11 +12,11 @@ import com.sonkins.bikeindex.presentation.ui.base.MvpView
 interface BikesContract {
 
     interface View : MvpView {
-        fun showStolenBikes(bikes: List<Bike>, nextPage: Boolean)
+        fun showBikes(bikes: List<BikeModel>, nextPage: Boolean)
     }
 
     interface Presenter : MvpPresenter {
-        fun getStolenBikes(page: Int)
+        fun getBikes(page: Int)
     }
 
 }

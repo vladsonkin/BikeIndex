@@ -8,31 +8,39 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.sonkins.bikeindex.domain.model.Bike
 import com.sonkins.bikeindex.presentation.R
+import com.sonkins.bikeindex.presentation.model.BikeModel
 import kotlinx.android.synthetic.main.item_bike.view.*
+import javax.inject.Inject
 
 /**
  * Created by Vlad Sonkin
  * on 29 March 2018.
  */
-class BikesAdapter(private val loadMoreListener: LoadMoreListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class BikesAdapter @Inject constructor () : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val VIEW_TYPE_ITEM = 1
     private val VIEW_TYPE_PROGRESSBAR = 0
 
-    private var stolenBikes : ArrayList<Bike?> = ArrayList()
+    private var bikes : ArrayList<BikeModel?> = ArrayList()
 
     private var isMoreLoading = true
 
-    fun updateData(stolenBikes: List<Bike>) {
-        this.stolenBikes.clear()
-        this.stolenBikes.addAll(stolenBikes)
+    private lateinit var loadMoreListener: LoadMoreListener
+
+    fun setListener(loadMoreListener: LoadMoreListener) {
+        this.loadMoreListener = loadMoreListener
+    }
+
+    fun updateData(bikes: List<BikeModel>) {
+        this.bikes.clear()
+        this.bikes.addAll(bikes)
         notifyDataSetChanged()
     }
 
-    fun addNextPage(stolenBikes: List<Bike>) {
-        val sizeInit = stolenBikes.size
-        this.stolenBikes.addAll(stolenBikes)
-        notifyItemRangeChanged(sizeInit, stolenBikes.size)
+    fun addNextPage(bikes: List<BikeModel>) {
+        val sizeInit = bikes.size
+        this.bikes.addAll(bikes)
+        notifyItemRangeChanged(sizeInit, bikes.size)
     }
 
     fun showLoading(page: Int) {
@@ -41,8 +49,8 @@ class BikesAdapter(private val loadMoreListener: LoadMoreListener) : RecyclerVie
 
             isMoreLoading = false
             Handler().post {
-                stolenBikes.add(null)
-                notifyItemInserted(stolenBikes.size - 1)
+                bikes.add(null)
+                notifyItemInserted(bikes.size - 1)
                 loadMoreListener.loadMore(page)
             }
 
@@ -55,9 +63,9 @@ class BikesAdapter(private val loadMoreListener: LoadMoreListener) : RecyclerVie
     }
 
     fun dismissLoading() {
-        if (stolenBikes.isNotEmpty()) {
-            stolenBikes.removeAt(stolenBikes.size - 1)
-            notifyItemRemoved(stolenBikes.size)
+        if (bikes.isNotEmpty()) {
+            bikes.removeAt(bikes.size - 1)
+            notifyItemRemoved(bikes.size)
         }
     }
 
@@ -74,24 +82,24 @@ class BikesAdapter(private val loadMoreListener: LoadMoreListener) : RecyclerVie
     }
 
     override fun getItemCount(): Int {
-        return stolenBikes.size
+        return bikes.size
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (stolenBikes.get(position) != null) VIEW_TYPE_ITEM else VIEW_TYPE_PROGRESSBAR
+        return if (bikes.get(position) != null) VIEW_TYPE_ITEM else VIEW_TYPE_PROGRESSBAR
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         if (holder is BikeViewHolder) {
-            holder.bindItem(stolenBikes.get(position))
+            holder.bindItem(bikes.get(position))
         }
 
     }
 
     class BikeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindItem(bike: Bike?) {
+        fun bindItem(bike: BikeModel?) {
             itemView.textViewBikeName.text = bike?.title
             Glide.with(itemView).load(bike?.thumb).into(itemView.imageViewBike)
         }
