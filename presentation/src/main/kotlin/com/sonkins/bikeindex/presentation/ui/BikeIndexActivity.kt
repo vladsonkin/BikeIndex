@@ -1,5 +1,6 @@
 package com.sonkins.bikeindex.presentation.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.view.MenuItem
@@ -38,6 +39,14 @@ open class BikeIndexActivity : BaseActivity(), BottomNavigationView.OnNavigation
         }
 
         return true
+    }
+
+    override fun supportNavigateUpTo(upIntent: Intent) {
+        onBackPressed()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 
 }

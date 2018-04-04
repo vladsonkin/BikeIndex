@@ -2,6 +2,7 @@ package com.sonkins.bikeindex.presentation.ui.bikes
 
 import com.sonkins.bikeindex.domain.interactor.bike.GetBikes
 import com.sonkins.bikeindex.domain.model.Bike
+import com.sonkins.bikeindex.presentation.mapper.BikeModelDataMapper
 import com.sonkins.bikeindex.presentation.ui.base.BasePresenter
 import javax.inject.Inject
 
@@ -10,10 +11,11 @@ import javax.inject.Inject
  * on 17 March 2018.
  */
 open class BikesPresenter @Inject constructor(override val view: BikesContract.View,
-                                              private val getBikesUseCase: GetBikes)
+                                              private val getBikesUseCase: GetBikes,
+                                              private val bikeModelDataMapper: BikeModelDataMapper)
     : BasePresenter<BikesContract.View>(view), BikesContract.Presenter {
 
-    override fun getStolenBikes(page: Int) {
+    override fun getBikes(page: Int) {
         val nextPage = page > 1
 
         val getStolenBikes = getBikesUseCase.execute(
@@ -21,15 +23,15 @@ open class BikesPresenter @Inject constructor(override val view: BikesContract.V
                 .doOnSubscribe { if (!nextPage) showLoading() }
                 .doFinally { if (!nextPage) hideLoading() }
                 .subscribe(
-                        { stolenBikes -> showStolenBikes(stolenBikes, nextPage) },
+                        { bikes -> showBikes(bikes, nextPage) },
                         this::showError
                 )
 
         unsubscribeOnDestroy(getStolenBikes)
     }
 
-    private fun showStolenBikes(stolenBikes: List<Bike>, nextPage: Boolean) {
-        view.showStolenBikes(stolenBikes, nextPage)
+    private fun showBikes(bikes: List<Bike>, nextPage: Boolean) {
+        view.showBikes(bikeModelDataMapper.transform(bikes), nextPage)
     }
 
 }

@@ -1,6 +1,7 @@
 package com.sonkins.bikeindex.presentation.ui.bikes
 
 import com.sonkins.bikeindex.domain.interactor.bike.GetBikes
+import com.sonkins.bikeindex.presentation.mapper.BikeModelDataMapper
 import dagger.Module
 import dagger.Provides
 
@@ -16,8 +17,9 @@ open class BikesFragmentModule {
     fun provideBikesView(bikesFragment: BikesFragment): BikesContract.View = bikesFragment
 
     @Provides
-    fun provideBikesPresenter(
-            view: BikesContract.View,
-            getBikes: GetBikes): BikesContract.Presenter = BikesPresenter(view, getBikes)
+    fun provideBikesPresenter(view: BikesContract.View,
+                              getBikes: GetBikes,
+                              bikeModelDataMapper: BikeModelDataMapper): BikesContract.Presenter
+            = BikesPresenter(view, getBikes, bikeModelDataMapper)
 
 }

@@ -8,8 +8,9 @@ import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.sonkins.bikeindex.domain.model.Bike
 import com.sonkins.bikeindex.presentation.R
+import com.sonkins.bikeindex.presentation.model.BikeModel
+import com.sonkins.bikeindex.presentation.router.Router
 import com.sonkins.bikeindex.presentation.ui.base.BaseActivity
 import com.sonkins.bikeindex.presentation.ui.base.BaseFragment
 import com.sonkins.bikeindex.presentation.ui.filter.FilterFragment
@@ -26,11 +27,12 @@ import javax.inject.Inject
 class BikesFragment : BaseFragment(), BikesContract.View, BikesAdapter.LoadMoreListener {
 
     @Inject lateinit var bikesPresenter: BikesPresenter
-    private lateinit var bikesAdapter: BikesAdapter
+    @Inject lateinit var bikesAdapter: BikesAdapter
+    @Inject lateinit var router: Router
 
     private lateinit var endlessRecyclerOnScrollListener: EndlessRecyclerOnScrollListener
 
-    override fun showStolenBikes(bikes: List<Bike>, nextPage: Boolean) {
+    override fun showBikes(bikes: List<BikeModel>, nextPage: Boolean) {
 
         if (nextPage) {
             bikesAdapter.dismissLoading()
@@ -58,6 +60,7 @@ class BikesFragment : BaseFragment(), BikesContract.View, BikesAdapter.LoadMoreL
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        retainInstance = true
         val view = inflater.inflate(R.layout.fragment_bikes, container, false)
 
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
@@ -70,13 +73,11 @@ class BikesFragment : BaseFragment(), BikesContract.View, BikesAdapter.LoadMoreL
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        buttonFilter.setOnClickListener {
-            (activity as BaseActivity).addFragment(R.id.fragmentContainer, FilterFragment())
-        }
+        buttonFilter.setOnClickListener { router.goToFilter() }
 
         recyclerViewStolenBikes.layoutManager = LinearLayoutManager(context)
 
-        bikesAdapter = BikesAdapter(this)
+        bikesAdapter.setListener(this)
 
         recyclerViewStolenBikes.adapter = bikesAdapter
 
@@ -92,11 +93,13 @@ class BikesFragment : BaseFragment(), BikesContract.View, BikesAdapter.LoadMoreL
 
         recyclerViewStolenBikes.addOnScrollListener(endlessRecyclerOnScrollListener)
 
-        bikesPresenter.getStolenBikes(1)
+        if (bikesAdapter.itemCount == 0) {
+            bikesPresenter.getBikes(1)
+        }
+
     }
 
-
     override fun loadMore(page: Int) {
-        bikesPresenter.getStolenBikes(page)
+        bikesPresenter.getBikes(page)
     }
 }
