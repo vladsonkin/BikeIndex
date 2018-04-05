@@ -8,8 +8,4 @@ import dagger.android.support.DaggerAppCompatActivity
  */
 abstract class BaseActivity : DaggerAppCompatActivity() {
 
-    // TODO handle back from fragments?
-    override fun onBackPressed() {
-        finish()
-    }
 }
