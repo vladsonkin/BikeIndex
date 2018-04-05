@@ -1,10 +1,8 @@
 package com.sonkins.bikeindex.presentation.util
 
 import android.os.Bundle
-import android.support.annotation.NonNull
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 import android.view.View
 import com.sonkins.bikeindex.presentation.R
 import javax.inject.Inject
@@ -36,61 +34,6 @@ import javax.inject.Inject
 class FragmentController @Inject constructor() {
 
     private val states: MutableMap<String, Bundle> = mutableMapOf()
-
-    private var mCurrentFrag: Fragment? = null
-
-    fun setFragment(fragmentManager: FragmentManager,
-                    fragment: Fragment) {
-
-        val transaction = fragmentManager.beginTransaction()
-        val tag = fragment.tag ?: fragment.javaClass.canonicalName
-
-        val index = fragmentManager.backStackEntryCount - 1
-        if (index >= 0) {
-            val backEntry = fragmentManager.getBackStackEntryAt(index)
-            val oldFrag = fragmentManager.findFragmentByTag(backEntry.name)
-
-            if (oldFrag != null) {
-                transaction.detach(oldFrag)
-            }
-        }
-
-        transaction.add(R.id.fragmentContainer, fragment, tag)
-        transaction.addToBackStack(tag)
-        transaction.commit()
-
-
-    }
-
-    fun switchTab(fragmentManager: FragmentManager,
-                  fragment: Fragment) {
-
-        val transaction = fragmentManager.beginTransaction()
-        val tag = fragment.tag ?: fragment.javaClass.canonicalName
-
-        // detach previous fragment
-        val index = fragmentManager.backStackEntryCount - 1
-        if (index >= 0) {
-            val backEntry = fragmentManager.getBackStackEntryAt(index)
-            val oldFrag = fragmentManager.findFragmentByTag(backEntry.name)
-
-            if (oldFrag != null) {
-                transaction.detach(oldFrag)
-            }
-        }
-
-        // attach existed fragment or add new
-        val reuseFragment = fragmentManager.findFragmentByTag(tag)
-        if (reuseFragment != null) {
-            transaction.attach(reuseFragment)
-            transaction.commit()
-        } else {
-            transaction.add(R.id.fragmentContainer, fragment, tag)
-            transaction.addToBackStack(tag)
-            transaction.commit()
-        }
-
-    }
 
     /**
      * Will set a fragment to a fragment container

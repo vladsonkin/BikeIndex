@@ -6,7 +6,6 @@ import com.sonkins.bikeindex.presentation.ui.filter.FilterFragment
 import com.sonkins.bikeindex.presentation.ui.info.InfoFragment
 import com.sonkins.bikeindex.presentation.ui.search.SearchFragment
 import com.sonkins.bikeindex.presentation.util.FragmentController
-import java.util.logging.Filter
 import javax.inject.Inject
 
 class Router @Inject constructor(
@@ -14,30 +13,41 @@ class Router @Inject constructor(
         private val fragmentManager: FragmentManager) {
 
     fun goToBikes() {
-        fragmentController.switchTab(
+        fragmentController.setFragment(
                 fragmentManager = fragmentManager,
-                fragment = BikesFragment()
+                fragment = BikesFragment(),
+                withBackStack = true,
+                saveState = false,
+                existed = true
         )
     }
 
     fun goToSearch() {
-        fragmentController.switchTab(
+        fragmentController.setFragment(
                 fragmentManager = fragmentManager,
-                fragment = SearchFragment()
+                fragment = SearchFragment(),
+                withBackStack = true,
+                saveState = false,
+                existed = true
         )
     }
 
     fun goToInfo() {
-        fragmentController.switchTab(
+        fragmentController.setFragment(
                 fragmentManager = fragmentManager,
-                fragment = InfoFragment()
+                fragment = InfoFragment(),
+                withBackStack = true,
+                saveState = false,
+                existed = true
         )
     }
 
     fun goToFilter() {
         fragmentController.setFragment(
                 fragmentManager = fragmentManager,
-                fragment = FilterFragment()
+                fragment = FilterFragment(),
+                withBackStack = true,
+                saveState = false
         )
     }
 
