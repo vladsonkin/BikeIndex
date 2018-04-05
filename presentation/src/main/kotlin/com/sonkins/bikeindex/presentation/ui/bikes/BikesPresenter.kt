@@ -1,8 +1,8 @@
 package com.sonkins.bikeindex.presentation.ui.bikes
 
 import com.sonkins.bikeindex.domain.interactor.bike.GetBikes
-import com.sonkins.bikeindex.domain.model.Bike
-import com.sonkins.bikeindex.presentation.mapper.BikeModelDataMapper
+import com.sonkins.bikeindex.domain.model.Bikes
+import com.sonkins.bikeindex.presentation.mapper.BikesModelDataMapper
 import com.sonkins.bikeindex.presentation.ui.base.BasePresenter
 import javax.inject.Inject
 
@@ -12,7 +12,7 @@ import javax.inject.Inject
  */
 open class BikesPresenter @Inject constructor(override val view: BikesContract.View,
                                               private val getBikesUseCase: GetBikes,
-                                              private val bikeModelDataMapper: BikeModelDataMapper)
+                                              private val bikesModelDataMapper: BikesModelDataMapper)
     : BasePresenter<BikesContract.View>(view), BikesContract.Presenter {
 
     override fun getBikes(page: Int) {
@@ -30,8 +30,8 @@ open class BikesPresenter @Inject constructor(override val view: BikesContract.V
         unsubscribeOnDestroy(getStolenBikes)
     }
 
-    private fun showBikes(bikes: List<Bike>, nextPage: Boolean) {
-        view.showBikes(bikeModelDataMapper.transform(bikes), nextPage)
+    private fun showBikes(bikes: Bikes, nextPage: Boolean) {
+        view.showBikes(bikesModelDataMapper.transform(bikes), nextPage)
     }
 
 }

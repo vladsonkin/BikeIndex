@@ -9,11 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sonkins.bikeindex.presentation.R
-import com.sonkins.bikeindex.presentation.model.BikeModel
+import com.sonkins.bikeindex.presentation.model.BikesModel
 import com.sonkins.bikeindex.presentation.router.Router
-import com.sonkins.bikeindex.presentation.ui.base.BaseActivity
 import com.sonkins.bikeindex.presentation.ui.base.BaseFragment
-import com.sonkins.bikeindex.presentation.ui.filter.FilterFragment
 import com.sonkins.bikeindex.presentation.util.ui.EndlessRecyclerOnScrollListener
 import kotlinx.android.synthetic.main.fragment_bikes.*
 import kotlinx.android.synthetic.main.view_progress.*
@@ -32,18 +30,21 @@ class BikesFragment : BaseFragment(), BikesContract.View, BikesAdapter.LoadMoreL
 
     private lateinit var endlessRecyclerOnScrollListener: EndlessRecyclerOnScrollListener
 
-    override fun showBikes(bikes: List<BikeModel>, nextPage: Boolean) {
+    override fun showBikes(bikesModel: BikesModel, nextPage: Boolean) {
 
-        if (nextPage) {
-            bikesAdapter.dismissLoading()
-            bikesAdapter.addNextPage(bikes)
-            bikesAdapter.setMore(true)
-        } else {
-            bikesAdapter.updateData(bikes)
-            endlessRecyclerOnScrollListener.resetState()
+        bikesModel.bikes?.let {
+            if (nextPage) {
+                bikesAdapter.dismissLoading()
+                bikesAdapter.addNextPage(it)
+                bikesAdapter.setMore(true)
+            } else {
+                bikesAdapter.updateData(it)
+                endlessRecyclerOnScrollListener.resetState()
+            }
+
+            Timber.i("success %s", it.toString())
         }
 
-        Timber.i("success %s", bikes.toString())
     }
 
     override fun showError(message: String) {
