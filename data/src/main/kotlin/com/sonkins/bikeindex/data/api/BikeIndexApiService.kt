@@ -1,8 +1,7 @@
 package com.sonkins.bikeindex.data.api
 
+import com.sonkins.bikeindex.domain.model.Bikes
 import io.reactivex.Observable
-import okhttp3.ResponseBody
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -19,6 +18,6 @@ interface BikeIndexApiService {
             @Query("location") location: String,
             @Query("distance") distance: String,
             @Query("stolenness") stolenness: String
-    ) : Observable<Response<ResponseBody>>
+    ) : Observable<Bikes>
 
 }

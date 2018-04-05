@@ -3,7 +3,7 @@ package com.sonkins.bikeindex.domain.interactor.bike
 import com.sonkins.bikeindex.domain.executor.PostExecutionThread
 import com.sonkins.bikeindex.domain.executor.ThreadExecutor
 import com.sonkins.bikeindex.domain.interactor.UseCase
-import com.sonkins.bikeindex.domain.model.Bike
+import com.sonkins.bikeindex.domain.model.Bikes
 import com.sonkins.bikeindex.domain.repository.BikeRepository
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -15,9 +15,9 @@ import javax.inject.Inject
 open class GetBikes @Inject constructor(val bikeRepository: BikeRepository,
                                         threadExecutor: ThreadExecutor,
                                         postExecutionThread: PostExecutionThread) :
-        UseCase<List<Bike>, GetBikes.Params>(threadExecutor, postExecutionThread) {
+        UseCase<Bikes, GetBikes.Params>(threadExecutor, postExecutionThread) {
 
-    override fun buildUseCaseObservable(params: Params): Observable<List<Bike>> {
+    override fun buildUseCaseObservable(params: Params): Observable<Bikes> {
         return bikeRepository.getBikes(
                 params.page,
                 10,

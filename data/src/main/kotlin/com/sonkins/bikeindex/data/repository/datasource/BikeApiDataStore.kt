@@ -1,9 +1,8 @@
 package com.sonkins.bikeindex.data.repository.datasource
 
 import com.sonkins.bikeindex.data.api.BikeIndexApiService
+import com.sonkins.bikeindex.domain.model.Bikes
 import io.reactivex.Observable
-import okhttp3.ResponseBody
-import retrofit2.Response
 import javax.inject.Inject
 
 /**
@@ -16,7 +15,7 @@ open class BikeApiDataStore @Inject constructor(private val bikeIndexApiService:
                  perPage: Int,
                  location: String,
                  distance: String,
-                 stolenness: String) : Observable<Response<ResponseBody>> {
+                 stolenness: String) : Observable<Bikes> {
         return bikeIndexApiService.getBikes(page, perPage, location, distance, stolenness)
     }
 
