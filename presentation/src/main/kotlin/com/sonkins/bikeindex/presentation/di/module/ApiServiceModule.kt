@@ -3,17 +3,21 @@ package com.sonkins.bikeindex.presentation.di.module
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.ihsanbal.logging.Level
+import com.ihsanbal.logging.LoggingInterceptor
 import com.sonkins.bikeindex.data.api.BikeIndexApiService
+import com.sonkins.bikeindex.presentation.BuildConfig
 import com.sonkins.bikeindex.presentation.di.ApplicationScope
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
+import okhttp3.internal.platform.Platform
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
+
 
 /**
  * Created by Vlad Sonkin
@@ -46,15 +50,20 @@ open class ApiServiceModule {
 
     @Provides
     @ApplicationScope
-    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
+    fun provideOkHttpClient(loggingInterceptor: LoggingInterceptor): OkHttpClient =
             OkHttpClient.Builder()
-                    .addInterceptor(httpLoggingInterceptor)
+                    .addInterceptor(loggingInterceptor)
                     .connectTimeout(30, TimeUnit.SECONDS)
                     .readTimeout(30, TimeUnit.SECONDS)
                     .build()
 
     @Provides
     @ApplicationScope
-    fun provideLoggingInterceptor() : HttpLoggingInterceptor =
-            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
+    fun provideLoggingInterceptor() : LoggingInterceptor =
+            LoggingInterceptor.Builder()
+                .loggable(BuildConfig.DEBUG)
+                .setLevel(Level.BASIC)
+                .log(Platform.INFO)
+                .tag("ServerLogging")
+                .build()
 }
