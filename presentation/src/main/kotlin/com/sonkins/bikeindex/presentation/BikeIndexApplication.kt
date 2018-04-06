@@ -3,7 +3,6 @@ package com.sonkins.bikeindex.presentation
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import com.sonkins.bikeindex.presentation.di.component.DaggerApplicationComponent
-import com.sonkins.bikeindex.presentation.util.logging.LinkingDebugTree
 import timber.log.Timber
 
 
@@ -23,6 +22,6 @@ class BikeIndexApplication : DaggerApplication() {
     }
 
     private fun setupTimber() {
-        Timber.plant(LinkingDebugTree())
+        Timber.plant(Timber.DebugTree())
     }
 }
