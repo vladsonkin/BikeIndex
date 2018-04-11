@@ -1,8 +1,8 @@
 package com.sonkins.bikeindex.presentation
 
+import com.sonkins.bikeindex.presentation.di.component.DaggerApplicationComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
-import com.sonkins.bikeindex.presentation.di.component.DaggerApplicationComponent
 import timber.log.Timber
 
 

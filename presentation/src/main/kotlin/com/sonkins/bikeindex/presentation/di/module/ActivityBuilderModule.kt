@@ -1,8 +1,10 @@
 package com.sonkins.bikeindex.presentation.di.module
 
 import com.sonkins.bikeindex.presentation.di.ActivityScope
-import com.sonkins.bikeindex.presentation.ui.BikeIndexActivity
-import com.sonkins.bikeindex.presentation.ui.BikeIndexActivityModule
+import com.sonkins.bikeindex.presentation.ui.filter.FilterActivity
+import com.sonkins.bikeindex.presentation.ui.filter.FilterActivityModule
+import com.sonkins.bikeindex.presentation.ui.main.MainActivity
+import com.sonkins.bikeindex.presentation.ui.main.MainActivityModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -14,7 +16,11 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBuilderModule {
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [BikeIndexActivityModule::class])
-    abstract fun bindMainActivity(): BikeIndexActivity
+    @ContributesAndroidInjector(modules = [MainActivityModule::class])
+    abstract fun bindMainActivity(): MainActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [FilterActivityModule::class])
+    abstract fun bindFilterActivity(): FilterActivity
 
 }

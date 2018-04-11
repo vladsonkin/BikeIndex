@@ -35,6 +35,30 @@ class FragmentController @Inject constructor() {
 
     private val states: MutableMap<String, Bundle> = mutableMapOf()
 
+    fun switchTab(fragmentManager: FragmentManager,
+                  fragment: Fragment,
+                  reuse: Boolean) {
+
+        val transaction = fragmentManager.beginTransaction()
+        val tag = fragment.tag ?: fragment.javaClass.canonicalName
+        val oldFrag = fragmentManager.findFragmentByTag(tag)
+
+        val fragmentPopped = fragmentManager.popBackStackImmediate(tag, 0)
+        if (!fragmentPopped) {
+            if (reuse) {
+                transaction
+                        .detach(oldFrag)
+                        .attach(oldFrag)
+                        .commit()
+            } else {
+                transaction
+                        .add(R.id.fragmentContainer, fragment, tag)
+                        .addToBackStack(tag)
+                        .commit()
+            }
+        }
+    }
+
     /**
      * Will set a fragment to a fragment container
      * @param fragmentManager

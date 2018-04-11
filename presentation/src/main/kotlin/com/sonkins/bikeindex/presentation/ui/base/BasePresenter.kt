@@ -27,7 +27,7 @@ abstract class BasePresenter<out T : MvpView>(open val view: T)
     }
 
     override fun showError(exception: Throwable) {
-        view.showError(exception.localizedMessage)
+        view.showError(exception.message!!)
     }
 
     override fun showLoading() {
