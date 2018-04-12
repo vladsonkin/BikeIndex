@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName
 * Created by Vlad Sonkin
 * on 15 March 2018.
 */
-
 data class Bike(
         @SerializedName("id") val id: Int,
 		@SerializedName("title") val title: String,

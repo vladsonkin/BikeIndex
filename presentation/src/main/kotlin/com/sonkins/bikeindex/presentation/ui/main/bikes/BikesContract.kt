@@ -1,4 +1,4 @@
-package com.sonkins.bikeindex.presentation.ui.bikes
+package com.sonkins.bikeindex.presentation.ui.main.bikes
 
 import com.sonkins.bikeindex.presentation.model.BikesModel
 import com.sonkins.bikeindex.presentation.ui.base.MvpPresenter
@@ -11,11 +11,13 @@ import com.sonkins.bikeindex.presentation.ui.base.MvpView
 interface BikesContract {
 
     interface View : MvpView {
-        fun showBikes(bikesModel: BikesModel, nextPage: Boolean)
+        fun showBikes(bikesModel: BikesModel, nextPage: Boolean, isMore: Boolean = true)
     }
 
     interface Presenter : MvpPresenter {
         fun getBikes(page: Int)
+
+        fun filterClick()
     }
 
 }

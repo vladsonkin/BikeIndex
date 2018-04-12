@@ -1,4 +1,4 @@
-package com.sonkins.bikeindex.presentation.ui.search
+package com.sonkins.bikeindex.presentation.ui.main.search
 
 import dagger.Module
 

@@ -57,6 +57,13 @@
 
     </LinearLayout>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Apply Filters"
+        android:layout_gravity="bottom"/>
+
 
 
 </android.support.design.widget.CoordinatorLayout>

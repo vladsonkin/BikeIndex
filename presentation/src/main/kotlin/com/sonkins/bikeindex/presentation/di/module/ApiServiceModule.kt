@@ -3,18 +3,16 @@ package com.sonkins.bikeindex.presentation.di.module
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.ihsanbal.logging.Level
-import com.ihsanbal.logging.LoggingInterceptor
 import com.sonkins.bikeindex.data.api.BikeIndexApiService
-import com.sonkins.bikeindex.presentation.BuildConfig
 import com.sonkins.bikeindex.presentation.di.ApplicationScope
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
-import okhttp3.internal.platform.Platform
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 
@@ -29,7 +27,7 @@ open class ApiServiceModule {
     @Provides
     @ApplicationScope
     @Named("client")
-    fun provideBikeService(okHttpClient: OkHttpClient, @Named("client") gson: Gson): BikeIndexApiService {
+    fun provideBikeService(okHttpClient: OkHttpClient, gson: Gson): BikeIndexApiService {
         val retrofit = Retrofit.Builder()
                 .baseUrl("https://bikeindex.org:443/api/v3/")
                 .client(okHttpClient)
@@ -41,7 +39,6 @@ open class ApiServiceModule {
 
     @Provides
     @ApplicationScope
-    @Named("client")
     fun provideGson(): Gson = GsonBuilder()
             .setLenient()
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
@@ -50,20 +47,20 @@ open class ApiServiceModule {
 
     @Provides
     @ApplicationScope
-    fun provideOkHttpClient(loggingInterceptor: LoggingInterceptor): OkHttpClient =
+    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
             OkHttpClient.Builder()
-                    .addInterceptor(loggingInterceptor)
+                    .addInterceptor(httpLoggingInterceptor)
                     .connectTimeout(30, TimeUnit.SECONDS)
                     .readTimeout(30, TimeUnit.SECONDS)
                     .build()
 
     @Provides
     @ApplicationScope
-    fun provideLoggingInterceptor() : LoggingInterceptor =
-            LoggingInterceptor.Builder()
-                .loggable(BuildConfig.DEBUG)
-                .setLevel(Level.BASIC)
-                .log(Platform.INFO)
-                .tag("ServerLogging")
-                .build()
+    fun provideLoggingInterceptor() : HttpLoggingInterceptor {
+        val logger = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
+            Timber.tag("OkHttp").i(it)
+        })
+        logger.level = HttpLoggingInterceptor.Level.BODY
+        return logger
+    }
 }

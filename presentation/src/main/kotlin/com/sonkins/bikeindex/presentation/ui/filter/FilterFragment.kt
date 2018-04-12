@@ -7,13 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sonkins.bikeindex.presentation.R
+import com.sonkins.bikeindex.presentation.router.Router
 import com.sonkins.bikeindex.presentation.ui.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_filter.*
+import javax.inject.Inject
 
 /**
  * Created by Vlad Sonkin
  * on 03 April 2018.
  */
 class FilterFragment : BaseFragment() {
+
+    @Inject lateinit var router: Router
 
     override fun showLoading() {
         TODO("not implemented")
@@ -38,6 +43,13 @@ class FilterFragment : BaseFragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        textViewFilterManufacturer.setOnClickListener {
+            router.showManufacturersFragment()
+        }
+
+    }
 
 }

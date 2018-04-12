@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.BikeIndexActivity"
+            android:name=".ui.main.MainActivity"
             android:theme="@style/splashScreenTheme">
 
             <intent-filter>
@@ -25,6 +25,8 @@
             </intent-filter>
 
         </activity>
+
+        <activity android:name=".ui.filter.FilterActivity" />
 
     </application>
 

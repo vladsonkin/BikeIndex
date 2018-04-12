@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 /**
  * Created by Vlad Sonkin
- * on 05 April 2018.
+ * on 12 April 2018.
  */
 @Parcelize
-class BikesModel (val bikes: List<BikeModel>?) : Parcelable
+class ManufacturersModel(val manufacturers: List<ManufactureModel>?) : Parcelable
