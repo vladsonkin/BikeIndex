@@ -11,7 +11,7 @@ import com.sonkins.bikeindex.presentation.ui.base.MvpView
 interface BikesContract {
 
     interface View : MvpView {
-        fun showBikes(bikesModel: BikesModel, nextPage: Boolean)
+        fun showBikes(bikesModel: BikesModel, nextPage: Boolean, isMore: Boolean = true)
     }
 
     interface Presenter : MvpPresenter {

@@ -2,6 +2,7 @@ package com.sonkins.bikeindex.data.repository.datasource
 
 import com.sonkins.bikeindex.data.api.BikeIndexApiService
 import com.sonkins.bikeindex.domain.model.Bikes
+import com.sonkins.bikeindex.domain.model.Manufacturers
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -15,8 +16,7 @@ open class BikeApiDataStore @Inject constructor(private val bikeIndexApiService:
                  perPage: Int,
                  location: String,
                  distance: String,
-                 stolenness: String) : Observable<Bikes> {
-        return bikeIndexApiService.getBikes(page, perPage, location, distance, stolenness)
-    }
+                 stolenness: String) = bikeIndexApiService.getBikes(page, perPage, location, distance, stolenness)
 
+    fun getManufacturers(page: Int, perPage: Int) = bikeIndexApiService.getManufacturers(page, perPage)
 }

@@ -12,9 +12,9 @@ import javax.inject.Inject
  * presentation layer.
  */
 class BikeModelDataMapper @Inject constructor(
-        val componentModelDataMapper: ComponentModelDataMapper,
-        val publicImageModelDataMapper: PublicImageModelDataMapper,
-        val stolenRecordModelDataMapper: StolenRecordModelDataMapper) {
+        private val componentModelDataMapper: ComponentModelDataMapper,
+        private val publicImageModelDataMapper: PublicImageModelDataMapper,
+        private val stolenRecordModelDataMapper: StolenRecordModelDataMapper) {
 
     fun transform(bike: Bike) = BikeModel(
             bike.id,

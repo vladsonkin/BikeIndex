@@ -1,10 +1,10 @@
 package com.sonkins.bikeindex.presentation.ui.main.bikes
 
 import com.sonkins.bikeindex.domain.interactor.bike.GetBikes
-import com.sonkins.bikeindex.domain.model.Bikes
 import com.sonkins.bikeindex.presentation.mapper.BikesModelDataMapper
 import com.sonkins.bikeindex.presentation.router.Router
 import com.sonkins.bikeindex.presentation.ui.base.BasePresenter
+import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
 /**
@@ -23,18 +23,19 @@ open class BikesPresenter @Inject constructor(override val view: BikesContract.V
 
         val getStolenBikes = getBikesUseCase.execute(
                 GetBikes.Params.forData(page))
-                .doOnSubscribe { if (!nextPage) showLoading() }
-                .doFinally { if (!nextPage) hideLoading() }
-                .subscribe(
-                        { bikes -> showBikes(bikes, nextPage) },
-                        this::showError
-                )
+                .map(bikesModelDataMapper::transform )
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe {
+                    if (!nextPage) showLoading()
+                }
+                .doFinally {
+                    if (!nextPage) hideLoading()
+                }
+                .subscribe({
+                    view.showBikes(it, nextPage)
+                }, this::showError)
 
         unsubscribeOnDestroy(getStolenBikes)
-    }
-
-    private fun showBikes(bikes: Bikes, nextPage: Boolean) {
-        view.showBikes(bikesModelDataMapper.transform(bikes), nextPage)
     }
 
     override fun filterClick() {

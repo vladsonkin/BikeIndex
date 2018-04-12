@@ -2,6 +2,7 @@ package com.sonkins.bikeindex.data.repository
 
 import com.sonkins.bikeindex.data.repository.datasource.BikeApiDataStore
 import com.sonkins.bikeindex.domain.model.Bikes
+import com.sonkins.bikeindex.domain.model.Manufacturers
 import com.sonkins.bikeindex.domain.repository.BikeRepository
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -17,7 +18,7 @@ class BikeDataRepository @Inject constructor(
                           perPage: Int,
                           location: String,
                           distance: String,
-                          stolenness: String): Observable<Bikes> {
-        return bikeApiDataStore.getBikes(page, perPage, location, distance, stolenness)
-    }
+                          stolenness: String) = bikeApiDataStore.getBikes(page, perPage, location, distance, stolenness)
+
+    override fun getManufacturers(page: Int, perPage: Int) = bikeApiDataStore.getManufacturers(page, perPage)
 }

@@ -1,7 +1,5 @@
 package com.sonkins.bikeindex.domain.interactor.bike
 
-import com.sonkins.bikeindex.domain.executor.PostExecutionThread
-import com.sonkins.bikeindex.domain.executor.ThreadExecutor
 import com.sonkins.bikeindex.domain.interactor.UseCase
 import com.sonkins.bikeindex.domain.model.Bikes
 import com.sonkins.bikeindex.domain.repository.BikeRepository
@@ -12,10 +10,8 @@ import javax.inject.Inject
 * Created by Vlad Sonkin
 * on 15 March 2018.
 */
-open class GetBikes @Inject constructor(val bikeRepository: BikeRepository,
-                                        threadExecutor: ThreadExecutor,
-                                        postExecutionThread: PostExecutionThread) :
-        UseCase<Bikes, GetBikes.Params>(threadExecutor, postExecutionThread) {
+open class GetBikes @Inject constructor(private val bikeRepository: BikeRepository)
+    : UseCase<Bikes, GetBikes.Params>() {
 
     override fun buildUseCaseObservable(params: Params): Observable<Bikes> {
         return bikeRepository.getBikes(

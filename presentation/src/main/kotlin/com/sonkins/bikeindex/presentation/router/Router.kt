@@ -3,6 +3,7 @@ package com.sonkins.bikeindex.presentation.router
 import com.sonkins.bikeindex.presentation.ui.base.BaseActivity
 import com.sonkins.bikeindex.presentation.ui.filter.FilterActivity
 import com.sonkins.bikeindex.presentation.ui.filter.FilterFragment
+import com.sonkins.bikeindex.presentation.ui.filter.manufacturers.ManufacturersFragment
 import com.sonkins.bikeindex.presentation.ui.main.bikes.BikesFragment
 import com.sonkins.bikeindex.presentation.ui.main.info.InfoFragment
 import com.sonkins.bikeindex.presentation.ui.main.search.SearchFragment
@@ -45,6 +46,15 @@ class Router @Inject constructor(
         fragmentController.setFragment(
                 fragmentManager = context.supportFragmentManager,
                 fragment = FilterFragment(),
+                withBackStack = true,
+                saveState = false
+        )
+    }
+
+    fun showManufacturersFragment() {
+        fragmentController.setFragment(
+                fragmentManager = context.supportFragmentManager,
+                fragment = ManufacturersFragment(),
                 withBackStack = true,
                 saveState = false
         )

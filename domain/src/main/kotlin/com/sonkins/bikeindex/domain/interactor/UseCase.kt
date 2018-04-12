@@ -1,7 +1,5 @@
 package com.sonkins.bikeindex.domain.interactor
 
-import com.sonkins.bikeindex.domain.executor.PostExecutionThread
-import com.sonkins.bikeindex.domain.executor.ThreadExecutor
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 
@@ -11,9 +9,7 @@ import io.reactivex.schedulers.Schedulers
  *
  * Abstract class for a UseCase that returns an instance of a [Observable].
  */
-abstract class UseCase<T, in Params> constructor(
-        private val threadExecutor: ThreadExecutor,
-        private val postExecutionThread: PostExecutionThread) {
+abstract class UseCase<T, in Params> {
 
     /**
      * Builds a [Observable] which will be used when the current [UseCase] is executed.
@@ -25,8 +21,7 @@ abstract class UseCase<T, in Params> constructor(
      */
     open fun execute(params: Params): Observable<T> {
         return this.buildUseCaseObservable(params)
-                .subscribeOn(Schedulers.from(threadExecutor))
-                .observeOn(postExecutionThread.scheduler)
+                .subscribeOn(Schedulers.io())
     }
 
 }
