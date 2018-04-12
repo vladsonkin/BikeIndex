@@ -14,6 +14,8 @@ class Router @Inject constructor(
         private val fragmentController: FragmentController,
         private val context: BaseActivity) {
 
+    // Switch bottom navigation tabs
+
     fun switchBikesTab(reuse: Boolean = false) {
         fragmentController.switchTab(
                 fragmentManager = context.supportFragmentManager,
@@ -38,9 +40,13 @@ class Router @Inject constructor(
         )
     }
 
+    // Start activity
+
     fun startFilterActivity() {
         FilterActivity.start(context)
     }
+
+    // Show fragments
 
     fun showFilterFragment() {
         fragmentController.setFragment(
