@@ -1,6 +1,7 @@
 package com.sonkins.bikeindex.domain.repository
 
 import com.sonkins.bikeindex.domain.model.Bikes
+import com.sonkins.bikeindex.domain.model.Colors
 import com.sonkins.bikeindex.domain.model.Manufacturers
 import io.reactivex.Observable
 
@@ -9,8 +10,9 @@ import io.reactivex.Observable
 * on 15 March 2018.
 */
 interface BikeRepository {
-    fun getBikes(page: Int, perPage: Int, location: String, distance: String, stolenness: String)
-            : Observable<Bikes>
+    fun getBikes(page: Int, perPage: Int): Observable<Bikes>
 
-    fun getManufacturers(page: Int, perPage: Int) : Observable<Manufacturers>
+    fun getManufacturers(page: Int, perPage: Int): Observable<Manufacturers>
+
+    fun getColors(): Observable<Colors>
 }

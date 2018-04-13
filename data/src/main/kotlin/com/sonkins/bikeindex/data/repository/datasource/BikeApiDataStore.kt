@@ -12,11 +12,9 @@ import javax.inject.Inject
  */
 open class BikeApiDataStore @Inject constructor(private val bikeIndexApiService: BikeIndexApiService) {
 
-    fun getBikes(page: Int,
-                 perPage: Int,
-                 location: String,
-                 distance: String,
-                 stolenness: String) = bikeIndexApiService.getBikes(page, perPage, location, distance, stolenness)
+    fun getBikes(page: Int, perPage: Int) = bikeIndexApiService.getBikes(page, perPage)
 
     fun getManufacturers(page: Int, perPage: Int) = bikeIndexApiService.getManufacturers(page, perPage)
+
+    fun getColors() = bikeIndexApiService.getColors()
 }

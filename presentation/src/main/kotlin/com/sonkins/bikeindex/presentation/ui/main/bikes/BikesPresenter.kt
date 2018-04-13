@@ -1,8 +1,11 @@
 package com.sonkins.bikeindex.presentation.ui.main.bikes
 
+import android.support.v4.app.Fragment
 import com.sonkins.bikeindex.domain.interactor.bike.GetBikes
+import com.sonkins.bikeindex.domain.model.Filter
 import com.sonkins.bikeindex.presentation.mapper.BikesModelDataMapper
 import com.sonkins.bikeindex.presentation.router.Router
+import com.sonkins.bikeindex.presentation.ui.base.BasePaginationAdapter
 import com.sonkins.bikeindex.presentation.ui.base.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
@@ -12,17 +15,27 @@ import javax.inject.Inject
  * on 17 March 2018.
  */
 open class BikesPresenter @Inject constructor(override val view: BikesContract.View)
-    : BasePresenter<BikesContract.View>(view), BikesContract.Presenter {
+    : BasePresenter<BikesContract.View>(view), BikesContract.Presenter, BasePaginationAdapter.LoadMoreListener  {
+
+    private lateinit var filter: Filter
+
+    override fun loadMore(page: Int) {
+        filter.page = page
+        loadBikes(filter)
+    }
 
     @Inject lateinit var router: Router
     @Inject lateinit var getBikesUseCase: GetBikes
     @Inject lateinit var bikesModelDataMapper: BikesModelDataMapper
 
-    override fun getBikes(page: Int) {
-        val nextPage = page > 1
+    override fun loadBikes(filter: Filter) {
+
+        this.filter = filter
+
+        val nextPage = this.filter.page > 1
 
         val getStolenBikes = getBikesUseCase.execute(
-                GetBikes.Params.forData(page))
+                GetBikes.Params.forFilter(this.filter))
                 .map(bikesModelDataMapper::transform )
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe {
@@ -38,8 +51,8 @@ open class BikesPresenter @Inject constructor(override val view: BikesContract.V
         unsubscribeOnDestroy(getStolenBikes)
     }
 
-    override fun filterClick() {
-        router.startFilterActivity()
+    override fun filterClick(fragment: Fragment, requestCode: Int) {
+        router.startFilterActivity(fragment, requestCode, filter)
     }
 
 }

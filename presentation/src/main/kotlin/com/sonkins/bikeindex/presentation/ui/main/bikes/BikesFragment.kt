@@ -5,13 +5,11 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import com.sonkins.bikeindex.domain.model.Filter
 import com.sonkins.bikeindex.presentation.R
 import com.sonkins.bikeindex.presentation.model.BikesModel
 import com.sonkins.bikeindex.presentation.ui.base.BaseFragment
-import com.sonkins.bikeindex.presentation.ui.base.BasePaginationAdapter
 import com.sonkins.bikeindex.presentation.util.ui.EndlessRecyclerOnScrollListener
 import kotlinx.android.synthetic.main.fragment_bikes.*
 import kotlinx.android.synthetic.main.view_progress.*
@@ -22,10 +20,14 @@ import javax.inject.Inject
  * Created by Vlad Sonkin
  * on 17 March 2018.
  */
-class BikesFragment : BaseFragment(), BikesContract.View, BasePaginationAdapter.LoadMoreListener {
+class BikesFragment : BaseFragment(), BikesContract.View {
 
     @Inject lateinit var bikesPresenter: BikesPresenter
     @Inject lateinit var bikesAdapter: BikesAdapter
+
+    companion object {
+        const val FILTER_REQUEST_CODE = 1
+    }
 
     private lateinit var endlessRecyclerOnScrollListener: EndlessRecyclerOnScrollListener
 
@@ -57,6 +59,23 @@ class BikesFragment : BaseFragment(), BikesContract.View, BasePaginationAdapter.
         progressBarGlobal?.visibility = View.GONE
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.bikes_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.menu_filter -> bikesPresenter.filterClick(this, FILTER_REQUEST_CODE)
+        }
+        return true
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_bikes, container, false)
@@ -71,13 +90,9 @@ class BikesFragment : BaseFragment(), BikesContract.View, BasePaginationAdapter.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        buttonFilter.setOnClickListener {
-            bikesPresenter.filterClick()
-        }
-
         recyclerViewBikes.layoutManager = LinearLayoutManager(context)
 
-        bikesAdapter.setListener(this)
+        bikesAdapter.setListener(bikesPresenter)
 
         recyclerViewBikes.adapter = bikesAdapter
 
@@ -93,11 +108,7 @@ class BikesFragment : BaseFragment(), BikesContract.View, BasePaginationAdapter.
 
         recyclerViewBikes.addOnScrollListener(endlessRecyclerOnScrollListener)
 
-        bikesPresenter.getBikes(1)
+        bikesPresenter.loadBikes()
 
-    }
-
-    override fun loadMore(page: Int) {
-        bikesPresenter.getBikes(page)
     }
 }
