@@ -1,24 +1,29 @@
 package com.sonkins.bikeindex.presentation.ui.filter
 
-import android.content.Context
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import com.sonkins.bikeindex.domain.model.Filter
 import com.sonkins.bikeindex.presentation.R
 import com.sonkins.bikeindex.presentation.router.Router
 import com.sonkins.bikeindex.presentation.ui.base.BaseActivity
+import io.reactivex.annotations.NonNull
 import javax.inject.Inject
 
 /**
  * Created by Vlad Sonkin
  * on 11 April 2018.
  */
-class FilterActivity : BaseActivity() {
+class FilterActivity : BaseActivity(), FilterFragment.ApplyFilterListener {
 
     companion object {
 
-        fun start(context: Context) {
-            val intent = Intent(context, FilterActivity::class.java)
-            context.startActivity(intent)
+        fun startForResult(@NonNull fragment: Fragment, requestCode: Int, filter: Filter) {
+            val intent = Intent(fragment.context, FilterActivity::class.java)
+            intent.putExtra("FILTER", filter)
+
+            fragment.startActivityForResult(intent, requestCode)
         }
     }
 
@@ -31,6 +36,11 @@ class FilterActivity : BaseActivity() {
         if (savedInstanceState == null) {
             router.showFilterFragment()
         }
+    }
+
+    override fun applyFilter() {
+        setResult(Activity.RESULT_OK)
+        finish()
     }
 
 }

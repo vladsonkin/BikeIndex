@@ -1,5 +1,7 @@
 package com.sonkins.bikeindex.presentation.ui.main.bikes
 
+import android.support.v4.app.Fragment
+import com.sonkins.bikeindex.domain.model.Filter
 import com.sonkins.bikeindex.presentation.model.BikesModel
 import com.sonkins.bikeindex.presentation.ui.base.MvpPresenter
 import com.sonkins.bikeindex.presentation.ui.base.MvpView
@@ -15,9 +17,9 @@ interface BikesContract {
     }
 
     interface Presenter : MvpPresenter {
-        fun getBikes(page: Int)
+        fun loadBikes(filter: Filter = Filter())
 
-        fun filterClick()
+        fun filterClick(fragment: Fragment, requestCode: Int)
     }
 
 }

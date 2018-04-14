@@ -20,6 +20,8 @@
         android:layout_height="@dimen/bottom_navigation_height"
         android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
+        app:itemIconTint="@drawable/selector_bottom_navigation"
+        app:itemTextColor="@drawable/selector_bottom_navigation"
         app:menu="@menu/bottom_navigation" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -22,6 +22,7 @@ abstract class UseCase<T, in Params> {
     open fun execute(params: Params): Observable<T> {
         return this.buildUseCaseObservable(params)
                 .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.computation())
     }
 
 }

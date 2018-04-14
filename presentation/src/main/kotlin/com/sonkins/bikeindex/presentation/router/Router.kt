@@ -1,8 +1,11 @@
 package com.sonkins.bikeindex.presentation.router
 
+import android.support.v4.app.Fragment
+import com.sonkins.bikeindex.domain.model.Filter
 import com.sonkins.bikeindex.presentation.ui.base.BaseActivity
 import com.sonkins.bikeindex.presentation.ui.filter.FilterActivity
 import com.sonkins.bikeindex.presentation.ui.filter.FilterFragment
+import com.sonkins.bikeindex.presentation.ui.filter.colors.ColorsFragment
 import com.sonkins.bikeindex.presentation.ui.filter.manufacturers.ManufacturersFragment
 import com.sonkins.bikeindex.presentation.ui.main.bikes.BikesFragment
 import com.sonkins.bikeindex.presentation.ui.main.info.InfoFragment
@@ -42,8 +45,8 @@ class Router @Inject constructor(
 
     // Start activity
 
-    fun startFilterActivity() {
-        FilterActivity.start(context)
+    fun startFilterActivity(fragment: Fragment, requestCode: Int, filter: Filter) {
+        FilterActivity.startForResult(fragment, requestCode, filter)
     }
 
     // Show fragments
@@ -61,6 +64,15 @@ class Router @Inject constructor(
         fragmentController.setFragment(
                 fragmentManager = context.supportFragmentManager,
                 fragment = ManufacturersFragment(),
+                withBackStack = true,
+                saveState = false
+        )
+    }
+
+    fun showColorsFragment() {
+        fragmentController.setFragment(
+                fragmentManager = context.supportFragmentManager,
+                fragment = ColorsFragment(),
                 withBackStack = true,
                 saveState = false
         )

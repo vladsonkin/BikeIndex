@@ -1,6 +1,7 @@
 package com.sonkins.bikeindex.data.api
 
 import com.sonkins.bikeindex.domain.model.Bikes
+import com.sonkins.bikeindex.domain.model.Colors
 import com.sonkins.bikeindex.domain.model.Manufacturers
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -15,16 +16,16 @@ interface BikeIndexApiService {
     @GET("search")
     fun getBikes(
             @Query("page") page: Int,
-            @Query("per_page") perPage: Int,
-            @Query("location") location: String,
-            @Query("distance") distance: String,
-            @Query("stolenness") stolenness: String
+            @Query("per_page") perPage: Int
     ) : Observable<Bikes>
 
     @GET("manufacturers")
     fun getManufacturers(
             @Query("page") page: Int,
             @Query("per_page") perPage: Int
-    ) : Observable<Manufacturers>
+    ): Observable<Manufacturers>
+
+    @GET("selections/colors")
+    fun getColors(): Observable<Colors>
 
 }

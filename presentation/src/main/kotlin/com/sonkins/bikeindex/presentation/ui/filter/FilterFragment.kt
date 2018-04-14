@@ -1,5 +1,6 @@
 package com.sonkins.bikeindex.presentation.ui.filter
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -20,6 +21,8 @@ class FilterFragment : BaseFragment() {
 
     @Inject lateinit var router: Router
 
+    lateinit var applyFilterListener: ApplyFilterListener
+
     override fun showLoading() {
         TODO("not implemented")
     }
@@ -30,6 +33,16 @@ class FilterFragment : BaseFragment() {
 
     override fun showError(message: String) {
         TODO("not implemented")
+    }
+
+    override fun onAttach(context: Context?) {
+        if (context is ApplyFilterListener) {
+            applyFilterListener = context
+        } else {
+            throw IllegalStateException("Activity must implement ApplyFilterListener")
+        }
+
+        super.onAttach(context)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -50,6 +63,18 @@ class FilterFragment : BaseFragment() {
             router.showManufacturersFragment()
         }
 
+        textViewFilterColor.setOnClickListener {
+            router.showColorsFragment()
+        }
+
+        buttonApplyFilters.setOnClickListener {
+            applyFilterListener.applyFilter()
+        }
+
+    }
+
+    interface ApplyFilterListener {
+        fun applyFilter()
     }
 
 }
