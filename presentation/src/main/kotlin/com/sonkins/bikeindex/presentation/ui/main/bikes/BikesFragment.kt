@@ -81,7 +81,6 @@ class BikesFragment : BaseFragment(), BikesContract.View {
         val view = inflater.inflate(R.layout.fragment_bikes, container, false)
 
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-        toolbar.setTitle(R.string.title_bikes)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
         return view

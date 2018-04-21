@@ -3,11 +3,10 @@ package com.sonkins.bikeindex.presentation.ui.main.info
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.sonkins.bikeindex.presentation.R
 import com.sonkins.bikeindex.presentation.ui.base.BaseFragment
+
 
 /**
  * Created by Vlad Sonkin
@@ -27,11 +26,20 @@ class InfoFragment : BaseFragment() {
         TODO("not implemented")
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu?.clear()
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_info, container, false)
 
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-        toolbar.setTitle(R.string.title_info)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
         return view
