@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.sonkins.bikeindex.presentation.R
 import com.sonkins.bikeindex.presentation.model.BikeModel
 import com.sonkins.bikeindex.presentation.ui.base.BasePaginationAdapter
@@ -40,7 +41,13 @@ class BikesAdapter @Inject constructor () : BasePaginationAdapter<BikeModel>() {
 
         fun bindItem(bike: BikeModel?) {
             itemView.textViewBikeName.text = bike?.title
-            Glide.with(itemView).load(bike?.thumb).into(itemView.imageViewBike)
+            itemView.textViewBikeSerial.text = bike?.serial
+            Glide.with(itemView)
+                    .load(bike?.thumb)
+                    .apply(RequestOptions()
+                            .placeholder(R.drawable.placeholder_bike)
+                            .error(R.drawable.placeholder_bike))
+                    .into(itemView.imageViewBike)
         }
 
     }

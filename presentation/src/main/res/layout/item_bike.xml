@@ -1,34 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:foreground="?android:attr/selectableItemBackground"
+    android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
-    android:focusable="true"
-    android:layout_margin="8dp">
+    android:focusable="true">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/imageViewBike"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_margin="16dp"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/textViewBikeName"
+        android:layout_toRightOf="@id/imageViewBike"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        style="@style/Title"
+        android:ellipsize="end"
+        android:maxLines="1"
+        tools:text="Super Cool Bike" />
 
-        <ImageView
-            android:id="@+id/imageViewBike"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:scaleType="centerCrop"/>
+    <TextView
+        android:id="@+id/textViewBikeSerialTitle"
+        android:layout_toRightOf="@id/imageViewBike"
+        android:layout_below="@id/textViewBikeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Base.TextAppearance.AppCompat.Body2"
+        android:text="Serial: " />
 
-        <TextView
-            android:id="@+id/textViewBikeName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="16dp"
-            tools:text="Super Cool Bike" />
+    <TextView
+        android:id="@+id/textViewBikeSerial"
+        android:layout_toRightOf="@id/textViewBikeSerialTitle"
+        android:layout_below="@id/textViewBikeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        tools:text="2314 314 2" />
 
-    </LinearLayout>
+    <View
+        android:layout_below="@id/imageViewBike"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
 
-</android.support.v7.widget.CardView>
+</RelativeLayout>
