@@ -1,5 +1,6 @@
 package com.sonkins.bikeindex.domain.model
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 /**
@@ -14,4 +15,4 @@ data class Manufacture(
 		@SerializedName("image") val image: String?,
 		@SerializedName("description") val description: String?,
 		@SerializedName("slug") val slug: String?
-)
+) : Serializable

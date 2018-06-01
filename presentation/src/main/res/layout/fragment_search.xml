@@ -14,15 +14,92 @@
             android:id="@+id/toolbar"
             app:theme="@style/ThemeToolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+            android:layout_height="?attr/actionBarSize">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageViewSearch"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="12dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/bg_ripple_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/ic_search_white_24dp" />
+
+                <EditText
+                    android:id="@+id/editSearch"
+                    android:layout_toLeftOf="@id/imageViewSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/SearchEditText"
+                    android:background="@null"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:hint="Type serial number here"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:padding="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"/>
+
+            </RelativeLayout>
+
+
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/CheckboxEditText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/find_close_serials"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
 
     </android.support.design.widget.AppBarLayout>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewBikes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <include layout="@layout/view_progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
     <TextView
+        android:id="@+id/textViewMessage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:gravity="center"
-        android:text="Search"/>
+        android:text="@string/init_search"
+        android:lineSpacingExtra="8dp"
+        style="@style/Base.TextAppearance.AppCompat.Body1"/>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -1,5 +1,7 @@
 package com.sonkins.bikeindex.presentation.ui.filter.manufacturers
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -9,6 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sonkins.bikeindex.presentation.R
+import com.sonkins.bikeindex.presentation.model.FilterModel
+import com.sonkins.bikeindex.presentation.model.ManufactureModel
 import com.sonkins.bikeindex.presentation.model.ManufacturersModel
 import com.sonkins.bikeindex.presentation.ui.base.BaseFragment
 import com.sonkins.bikeindex.presentation.ui.base.BasePaginationAdapter
@@ -22,12 +26,27 @@ import javax.inject.Inject
  * Created by Vlad Sonkin
  * on 12 April 2018.
  */
-class ManufacturersFragment : BaseFragment(), ManufacturersContract.View, BasePaginationAdapter.LoadMoreListener {
+class ManufacturersFragment : BaseFragment(), ManufacturersContract.View,
+        BasePaginationAdapter.LoadMoreListener, ManufacturersAdapter.ManufactureClickListener {
 
     @Inject lateinit var manufacturersPresenter: ManufacturersPresenter
     @Inject lateinit var manufacturersAdapter: ManufacturersAdapter
 
     private lateinit var endlessRecyclerOnScrollListener: EndlessRecyclerOnScrollListener
+    private lateinit var filterModel: FilterModel
+
+    companion object {
+
+        const val ARG_FILTER = "arg_filter"
+
+        fun newInstance(filterModel: FilterModel): ManufacturersFragment {
+            val args = Bundle()
+            args.putParcelable(ARG_FILTER, filterModel)
+            val fragment = ManufacturersFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
 
     override fun showError(message: String) {
         Timber.i("error %s", message)
@@ -63,6 +82,8 @@ class ManufacturersFragment : BaseFragment(), ManufacturersContract.View, BasePa
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        filterModel = arguments?.getParcelable(ARG_FILTER)!!
+
         return view
     }
 
@@ -71,7 +92,8 @@ class ManufacturersFragment : BaseFragment(), ManufacturersContract.View, BasePa
 
         recyclerViewManufacturers.layoutManager = LinearLayoutManager(context)
 
-        manufacturersAdapter.setListener(this)
+        manufacturersAdapter.setClickListener(this)
+        manufacturersAdapter.setLoadMoreListener(this)
 
         recyclerViewManufacturers.adapter = manufacturersAdapter
 
@@ -91,5 +113,14 @@ class ManufacturersFragment : BaseFragment(), ManufacturersContract.View, BasePa
 
     override fun loadMore(page: Int) {
         manufacturersPresenter.getManufacturers(page)
+    }
+
+    override fun manufactureClick(manufactureModel: ManufactureModel) {
+        filterModel.manufacture = manufactureModel
+
+        val intent = Intent(context, ManufacturersFragment::class.java)
+        intent.putExtra(ARG_FILTER, filterModel)
+        activity?.onBackPressed()
+        targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
     }
 }

@@ -10,8 +10,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 class BikeModel (
         val id: Int,
-        val title: String,
-        val serial: String,
+        val title: String?,
+        val serial: String?,
         val manufacturerName: String?,
         val frameModel: String?,
         val year: Int?,

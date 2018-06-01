@@ -1,9 +1,7 @@
-package com.sonkins.bikeindex.presentation.ui.main.bikes
+package com.sonkins.bikeindex.presentation.ui.main.search
 
 import android.support.v4.app.Fragment
 import com.sonkins.bikeindex.domain.interactor.bike.GetBikes
-import com.sonkins.bikeindex.domain.model.Color
-import com.sonkins.bikeindex.domain.model.Filter
 import com.sonkins.bikeindex.presentation.mapper.BikesModelDataMapper
 import com.sonkins.bikeindex.presentation.mapper.FilterMapper
 import com.sonkins.bikeindex.presentation.model.FilterModel
@@ -15,10 +13,11 @@ import javax.inject.Inject
 
 /**
  * Created by Vlad Sonkin
- * on 17 March 2018.
+ * on 02 May 2018.
  */
-open class BikesPresenter @Inject constructor(override val view: BikesContract.View)
-    : BasePresenter<BikesContract.View>(view), BikesContract.Presenter, BasePaginationAdapter.LoadMoreListener  {
+class SearchPresenter @Inject constructor(override val view: SearchContract.View)
+    : BasePresenter<SearchContract.View>(view), SearchContract.Presenter,
+        BasePaginationAdapter.LoadMoreListener  {
 
     private lateinit var filterModel: FilterModel
 
@@ -53,10 +52,6 @@ open class BikesPresenter @Inject constructor(override val view: BikesContract.V
                 }, this::showError)
 
         unsubscribeOnDestroy(getStolenBikes)
-    }
-
-    override fun filterClick(fragment: Fragment, requestCode: Int) {
-        router.startFilterActivity(fragment, requestCode, filterModel)
     }
 
 }

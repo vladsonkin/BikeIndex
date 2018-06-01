@@ -1,7 +1,5 @@
-package com.sonkins.bikeindex.presentation.ui.main.bikes
+package com.sonkins.bikeindex.presentation.ui.main.search
 
-import android.support.v4.app.Fragment
-import com.sonkins.bikeindex.domain.model.Filter
 import com.sonkins.bikeindex.presentation.model.BikesModel
 import com.sonkins.bikeindex.presentation.model.FilterModel
 import com.sonkins.bikeindex.presentation.ui.base.MvpPresenter
@@ -9,9 +7,9 @@ import com.sonkins.bikeindex.presentation.ui.base.MvpView
 
 /**
  * Created by Vlad Sonkin
- * on 17 March 2018.
+ * on 02 May 2018.
  */
-interface BikesContract {
+interface SearchContract {
 
     interface View : MvpView {
         fun showBikes(bikesModel: BikesModel, nextPage: Boolean, isMore: Boolean = true)
@@ -19,8 +17,6 @@ interface BikesContract {
 
     interface Presenter : MvpPresenter {
         fun loadBikes(filterModel: FilterModel = FilterModel())
-
-        fun filterClick(fragment: Fragment, requestCode: Int)
     }
 
 }

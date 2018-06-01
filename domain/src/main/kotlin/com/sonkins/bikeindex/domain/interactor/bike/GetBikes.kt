@@ -16,6 +16,16 @@ open class GetBikes @Inject constructor(private val bikeRepository: BikeReposito
 
     override fun buildUseCaseObservable(params: Params): Observable<Bikes> {
         return bikeRepository.getBikes(
+                params.filter.manufacture?.name,
+                params.filter.color?.slug,
+                when (params.filter.type) {
+                    "All" -> "all"
+                    "Stolen" -> "stolen"
+                    "Not stolen" -> "non"
+                    else -> {
+                        "all"
+                    }
+                },
                 params.filter.page,
                 params.filter.perPage)
     }

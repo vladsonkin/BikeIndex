@@ -16,10 +16,26 @@ import javax.inject.Inject
  */
 class ManufacturersAdapter @Inject constructor() : BasePaginationAdapter<ManufactureModel>()  {
 
+    private lateinit var manufactureClickListener: ManufactureClickListener
+
+    fun setClickListener(manufactureClickListener: ManufactureClickListener) {
+        this.manufactureClickListener = manufactureClickListener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == VIEW_TYPE_ITEM) {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.item_manufacturer, parent, false)
-            ManufacturerViewHolder(view)
+
+            val holder = ManufacturerViewHolder(view)
+
+            holder.itemView.setOnClickListener {
+                data[holder.adapterPosition]?.let {
+                    manufactureClickListener.manufactureClick(it)
+                }
+            }
+
+            holder
+
         } else {
             super.onCreateViewHolder(parent, viewType)
         }
@@ -37,5 +53,9 @@ class ManufacturersAdapter @Inject constructor() : BasePaginationAdapter<Manufac
             itemView.textViewManufacturerName.text = manufacture?.name
         }
 
+    }
+
+    interface ManufactureClickListener {
+        fun manufactureClick(manufactureModel: ManufactureModel)
     }
 }

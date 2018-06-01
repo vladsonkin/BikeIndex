@@ -20,7 +20,7 @@ abstract class BasePaginationAdapter<T> : RecyclerView.Adapter<RecyclerView.View
     private var isMoreLoading = true
     private lateinit var loadMoreListener: LoadMoreListener
 
-    fun setListener(loadMoreListener: LoadMoreListener) {
+    fun setLoadMoreListener(loadMoreListener: LoadMoreListener) {
         this.loadMoreListener = loadMoreListener
     }
 
