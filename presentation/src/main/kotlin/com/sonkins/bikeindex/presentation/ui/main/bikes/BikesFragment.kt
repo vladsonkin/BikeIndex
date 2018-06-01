@@ -1,14 +1,16 @@
 package com.sonkins.bikeindex.presentation.ui.main.bikes
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.*
-import com.sonkins.bikeindex.domain.model.Filter
 import com.sonkins.bikeindex.presentation.R
 import com.sonkins.bikeindex.presentation.model.BikesModel
+import com.sonkins.bikeindex.presentation.model.FilterModel
 import com.sonkins.bikeindex.presentation.ui.base.BaseFragment
 import com.sonkins.bikeindex.presentation.util.ui.EndlessRecyclerOnScrollListener
 import kotlinx.android.synthetic.main.fragment_bikes.*
@@ -27,6 +29,7 @@ class BikesFragment : BaseFragment(), BikesContract.View {
 
     companion object {
         const val FILTER_REQUEST_CODE = 1
+        const val ARG_FILTER = "arg_filter"
     }
 
     private lateinit var endlessRecyclerOnScrollListener: EndlessRecyclerOnScrollListener
@@ -91,7 +94,7 @@ class BikesFragment : BaseFragment(), BikesContract.View {
 
         recyclerViewBikes.layoutManager = LinearLayoutManager(context)
 
-        bikesAdapter.setListener(bikesPresenter)
+        bikesAdapter.setLoadMoreListener(bikesPresenter)
 
         recyclerViewBikes.adapter = bikesAdapter
 
@@ -109,5 +112,16 @@ class BikesFragment : BaseFragment(), BikesContract.View {
 
         bikesPresenter.loadBikes()
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == FILTER_REQUEST_CODE && resultCode == RESULT_OK) {
+            val filterModel = data?.getParcelableExtra<FilterModel>(ARG_FILTER)!!
+            filterModel.page = 1
+
+            bikesPresenter.loadBikes(filterModel)
+        }
     }
 }

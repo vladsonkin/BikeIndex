@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/selectableItemBackground"
+    android:background="@drawable/bg_ripple_primary"
     android:clickable="true"
     android:focusable="true">
 
@@ -20,10 +20,9 @@
         android:layout_toRightOf="@id/imageViewBike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        style="@style/Title"
+        style="@style/TitleBlue"
         android:ellipsize="end"
         android:maxLines="1"
         tools:text="Super Cool Bike" />
@@ -32,6 +31,7 @@
         android:id="@+id/textViewBikeSerialTitle"
         android:layout_toRightOf="@id/imageViewBike"
         android:layout_below="@id/textViewBikeName"
+        android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Base.TextAppearance.AppCompat.Body2"
@@ -41,10 +41,60 @@
         android:id="@+id/textViewBikeSerial"
         android:layout_toRightOf="@id/textViewBikeSerialTitle"
         android:layout_below="@id/textViewBikeName"
+        android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         style="@style/Base.TextAppearance.AppCompat.Body1"
         tools:text="2314 314 2" />
+
+    <TextView
+        android:id="@+id/textViewBikeManufacturerTitle"
+        android:layout_toRightOf="@id/imageViewBike"
+        android:layout_below="@id/textViewBikeSerialTitle"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Base.TextAppearance.AppCompat.Body2"
+        android:text="Manufacturer: " />
+
+    <TextView
+        android:id="@+id/textViewBikeManufacturer"
+        android:layout_toRightOf="@id/textViewBikeManufacturerTitle"
+        android:layout_below="@id/textViewBikeSerialTitle"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        tools:text="24seven" />
+
+    <TextView
+        android:id="@+id/textViewBikeColorTitle"
+        android:layout_toRightOf="@id/imageViewBike"
+        android:layout_below="@id/textViewBikeManufacturerTitle"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Base.TextAppearance.AppCompat.Body2"
+        android:text="Color: " />
+
+    <TextView
+        android:id="@+id/textViewBikeColor"
+        android:layout_toRightOf="@id/textViewBikeColorTitle"
+        android:layout_below="@id/textViewBikeManufacturerTitle"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        tools:text="Black" />
 
     <View
         android:layout_below="@id/imageViewBike"

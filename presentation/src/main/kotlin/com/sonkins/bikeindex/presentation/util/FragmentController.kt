@@ -77,7 +77,9 @@ class FragmentController @Inject constructor() {
             clearBackStack: Boolean = false,
             stackTag: String? = null,
             reuse: Boolean = false,
-            existed: Boolean = false
+            existed: Boolean = false,
+            targetFragment: Fragment? = null,
+            requestCode: Int? = null
     ) {
 
         val transaction = fragmentManager.beginTransaction()
@@ -98,6 +100,11 @@ class FragmentController @Inject constructor() {
                 fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                 transaction.replace(R.id.fragmentContainer, fragment, tag)
             } else {
+
+                if (targetFragment != null && requestCode != null) {
+                    fragment.setTargetFragment(targetFragment, requestCode)
+                }
+
                 val oldFrag = fragmentManager.primaryNavigationFragment
                 if (oldFrag != null) {
                     if (saveState) {

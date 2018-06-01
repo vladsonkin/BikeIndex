@@ -9,6 +9,7 @@ import java.io.Serializable
 data class Filter(
         var color: Color? = null,
         var manufacture: Manufacture? = null,
-        var page: Int = 1,
-        var perPage: Int = 10
+        var type: String,
+        var page: Int,
+        var perPage: Int
 ) : Serializable

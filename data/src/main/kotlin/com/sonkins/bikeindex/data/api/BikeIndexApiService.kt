@@ -15,6 +15,9 @@ interface BikeIndexApiService {
 
     @GET("search")
     fun getBikes(
+            @Query("manufacturer") manufacturer: String?,
+            @Query("colors[]") color: String?,
+            @Query("stolenness") type: String?,
             @Query("page") page: Int,
             @Query("per_page") perPage: Int
     ) : Observable<Bikes>

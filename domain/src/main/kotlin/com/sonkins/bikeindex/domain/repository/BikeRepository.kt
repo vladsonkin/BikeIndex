@@ -10,7 +10,8 @@ import io.reactivex.Observable
 * on 15 March 2018.
 */
 interface BikeRepository {
-    fun getBikes(page: Int, perPage: Int): Observable<Bikes>
+    fun getBikes(manufacturer: String?, color: String?, type: String, page: Int, perPage: Int)
+            : Observable<Bikes>
 
     fun getManufacturers(page: Int, perPage: Int): Observable<Manufacturers>
 

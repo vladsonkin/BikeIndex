@@ -7,4 +7,8 @@
     <string name="filter">Filter</string>
     <string name="manufacturers">Manufacturers</string>
     <string name="colors">Colors</string>
+    <string name="type">Type</string>
+
+    <string name="init_search">Enter the serial number \nand we will search for the bicycle!</string>
+    <string name="find_close_serials">Find close serial numbers</string>
 </resources>

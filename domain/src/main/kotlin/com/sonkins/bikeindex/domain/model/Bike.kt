@@ -8,8 +8,8 @@ import com.google.gson.annotations.SerializedName
 */
 data class Bike(
         @SerializedName("id") val id: Int,
-		@SerializedName("title") val title: String,
-		@SerializedName("serial") val serial: String,
+		@SerializedName("title") val title: String?,
+		@SerializedName("serial") val serial: String?,
 		@SerializedName("manufacturer_name") val manufacturerName: String?,
 		@SerializedName("frame_model") val frameModel: String?,
 		@SerializedName("year") val year: Int?,

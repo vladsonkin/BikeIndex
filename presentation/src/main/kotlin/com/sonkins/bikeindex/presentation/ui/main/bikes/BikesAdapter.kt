@@ -40,8 +40,10 @@ class BikesAdapter @Inject constructor () : BasePaginationAdapter<BikeModel>() {
     class BikeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindItem(bike: BikeModel?) {
-            itemView.textViewBikeName.text = bike?.title
-            itemView.textViewBikeSerial.text = bike?.serial
+            itemView.textViewBikeName.text = bike?.title ?: "Unknown"
+            itemView.textViewBikeSerial.text = bike?.serial ?: "Unknown"
+            itemView.textViewBikeManufacturer.text = bike?.manufacturerName ?: "Unknown"
+            itemView.textViewBikeColor.text = bike?.frameColors?.joinToString() ?: "Unknown"
             Glide.with(itemView)
                     .load(bike?.thumb)
                     .apply(RequestOptions()
