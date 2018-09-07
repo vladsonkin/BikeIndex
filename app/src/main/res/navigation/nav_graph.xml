@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/bikesFragment">
+
+    <fragment
+        android:id="@+id/bikesFragment"
+        android:name="com.sonkins.bikeindex.features.bikes.BikesFragment"
+        android:label="BikesFragment"
+        tools:layout="@layout/fragment_bikes">
+        <action
+            android:id="@+id/action_bikesFragment_to_filterFragment"
+            app:destination="@id/filterFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@anim/left_out"
+            app:popEnterAnim="@anim/left_in"
+            app:popExitAnim="@anim/right_out" />
+        <action
+            android:id="@+id/action_bikesFragment_to_bikeFragment"
+            app:destination="@id/bikeFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@anim/left_out"
+            app:popEnterAnim="@anim/left_in"
+            app:popExitAnim="@anim/right_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/filterFragment"
+        android:name="com.sonkins.bikeindex.features.bikes.filter.FilterFragment"
+        android:label="FilterFragment"
+        tools:layout="@layout/fragment_filter">
+        <argument android:name="filterModel" />
+        <action
+            android:id="@+id/action_filterFragment_to_colorFragment"
+            app:destination="@id/colorFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@anim/left_out"
+            app:popEnterAnim="@anim/left_in"
+            app:popExitAnim="@anim/right_out" />
+        <action
+            android:id="@+id/action_filterFragment_to_manufacturerFragment"
+            app:destination="@id/manufacturerFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@anim/left_out"
+            app:popEnterAnim="@anim/left_in"
+            app:popExitAnim="@anim/right_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/colorFragment"
+        android:name="com.sonkins.bikeindex.features.bikes.filter.colors.ColorsFragment"
+        android:label="ColorsFragment"
+        tools:layout="@layout/fragment_colors" />
+
+    <fragment
+        android:id="@+id/manufacturerFragment"
+        android:name="com.sonkins.bikeindex.features.bikes.filter.manufacturers.ManufacturersFragment"
+        android:label="ManufacturersFragment"
+        tools:layout="@layout/fragment_manufacturers" />
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.sonkins.bikeindex.features.favorites.FavoritesFragment"
+        android:label="FavoritesFragment"
+        tools:layout="@layout/fragment_favorites">
+        <action
+            android:id="@+id/action_favoritesFragment_to_bikeFragment"
+            app:destination="@id/bikeFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@anim/left_out"
+            app:popEnterAnim="@anim/left_in"
+            app:popExitAnim="@anim/right_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.sonkins.bikeindex.features.about.AboutFragment"
+        android:label="AboutFragment"
+        tools:layout="@layout/fragment_about" />
+
+    <fragment
+        android:id="@+id/bikeFragment"
+        android:name="com.sonkins.bikeindex.features.bike.BikeFragment"
+        android:label="BikeFragment"
+        tools:layout="@layout/fragment_bike">
+        <argument
+            android:name="bikeId"
+            app:argType="string" />
+        <deepLink app:uri="bikeindex.org/bikes/{bikeId}" />
+    </fragment>
+
+</navigation>

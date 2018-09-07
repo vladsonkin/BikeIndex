@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Bike Index</string>
+    <string name="title_bikes">Bikes</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_about">About</string>
+
+    <string name="filter">Filter</string>
+    <string name="search">Search</string>
+    <string name="manufacturers">Manufacturers</string>
+    <string name="colors">Colors</string>
+    <string name="type">Type</string>
+    <string name="apply">Apply</string>
+
+    <string name="init_search">Enter the serial number \nand we will search for the bike!</string>
+    <string name="empty_favorites">Once you favorite a Bike \nyou will see it here.</string>
+    <string name="find_close_serials">Find close serial numbers</string>
+    <string name="connection_error">Please make sure your device is connected \nto the Internet and then try again.
+    </string>
+    <string name="server_error">Something went wrong at our end. \nDon\'t worry, it\'s not you - it\'s us. \nSorry about
+        that.
+    </string>
+    <string name="nothing_found_filters">We didn\'t found any bikes for that filter. \nTry to search with other one.
+    </string>
+    <string name="about_description">View all bikes around the world, \nfilter them and find any bike. \nIf the bike is stolen, you can contact \nthe owner and save the bike.
+    </string>
+    <string name="about_title">Be a Bike Saver</string>
+    <string name="stolen_location">Stolen location</string>
+    <string name="description_of_incident">Description of incident</string>
+    <string name="know_something_about_this_bike">Know something about this bike?</string>
+    <string name="contact_the_owner">Contact the owner</string>
+    <string name="description">Description</string>
+    <string name="serial_number">Serial number</string>
+    <string name="manufacturer">Manufacturer</string>
+    <string name="color">Color</string>
+    <string name="year">Year</string>
+    <string name="bike_photo">Bike photo</string>
+    <string name="filters">Filters</string>
+    <string name="clear_all">Clear all</string>
+    <string name="type_all">All</string>
+    <string name="type_stolen">Stolen</string>
+    <string name="type_not_stolen">Not stolen</string>
+    <string name="share">share</string>
+    <string name="explore">explore</string>
+    <string name="empty_favorites_title">No Favorites Yet</string>
+    <string name="connection_error_title">No Internet Connection</string>
+    <string name="try_again">Try again</string>
+    <string name="nothing_found_title">Nothing Found</string>
+    <string name="change_filter">Change Filter</string>
+    <string name="server_error_title">Something Went Wrong</string>
+    <string name="favorite">Favorite</string>
+
+    <plurals name="bikes_found_count">
+        <item quantity="one">%d bike found</item>
+        <item quantity="other">%d bikes found</item>
+    </plurals>
+
+    <plurals name="bikes_count">
+        <item quantity="one">%d bike</item>
+        <item quantity="other">%d bikes</item>
+    </plurals>
+    <string name="share_title">Share bike with</string>
+    <string name="share_text">Check out this bike! \nhttps://bikeindex.org/bikes/%d</string>
+    <string name="bike_link">https://bikeindex.org/bikes/%d</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="reload">Reload</string>
+    <string name="no_app_found_contact_owner">No app found for contact the owner</string>
+    <string name="contact_owner_title">Contact the bike owner with</string>
+    <string name="visit_site_link">https://bikeindex.org</string>
+    <string name="visit_site">Visit website</string>
+    <string name="more_features_website">You can find more features \non our website bikeindex.org</string>
+    <string name="added_to_favorites">Added to favorites</string>
+    <string name="removed_from_favorites">Removed from favorites</string>
+</resources>
