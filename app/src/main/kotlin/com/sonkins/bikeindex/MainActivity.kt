@@ -20,9 +20,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.crashlytics.android.Crashlytics
 import com.sonkins.bikeindex.core.extension.hideKeyboard
-import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_layout.*
 
 class MainActivity : AppCompatActivity() {

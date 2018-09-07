@@ -1,10 +1,20 @@
-*.iml
-.gradle
-/app/fabric.properties
-gragle.properties
+# bilds
+/app/build
+/app/release
+
+# Configuration files (sdk path, etc)
+gradle.properties
 /local.properties
+/app/fabric.properties
+
+# Hide IDE files but keep code styles
+*.iml
 /.idea
+!.idea/codeStyles/*
+
+# OSX files
 .DS_Store
+
+.gradle
 /build
 /captures
-.externalNativeBuild

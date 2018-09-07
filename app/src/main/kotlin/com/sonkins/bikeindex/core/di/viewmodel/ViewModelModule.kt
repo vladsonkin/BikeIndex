@@ -63,5 +63,4 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(ManufacturersViewModel::class)
     fun bindManufacturerViewModel(manufacturersViewModel: ManufacturersViewModel): ViewModel
-
 }
