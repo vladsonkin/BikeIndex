@@ -2,6 +2,6 @@
 <resources>
     <!-- support for foreground image view for Android KitKat -->
     <declare-styleable name="ForegroundImageView">
-        <attr name="android:foreground"/>
+        <attr name="android:foreground" />
     </declare-styleable>
 </resources>

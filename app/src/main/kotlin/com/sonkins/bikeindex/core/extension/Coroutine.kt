@@ -16,8 +16,13 @@
 
 package com.sonkins.bikeindex.core.extension
 
-import kotlinx.coroutines.experimental.*
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.CoroutineScope
+import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.launch
 
 fun launchAsync(block: suspend CoroutineScope.() -> Unit): Job {
     return launch(UI) { block() }

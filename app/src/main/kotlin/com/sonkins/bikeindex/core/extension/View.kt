@@ -29,7 +29,6 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.sonkins.bikeindex.core.platform.ForegroundImageView
 
 fun View.visible() {
     visibility = View.VISIBLE
