@@ -3,7 +3,6 @@
 /app/release
 
 # Configuration files (sdk path, etc)
-gradle.properties
 /local.properties
 /app/fabric.properties
 
