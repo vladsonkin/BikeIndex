@@ -1,0 +1,11 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
+    <!-- The background colorModel, preferably the same as your normal theme -->
+    <item android:drawable="@color/white" />
+    <!-- Your product logo - 144dp colorModel version of your app icon -->
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/logo_bike_index" />
+    </item>
+</layer-list>

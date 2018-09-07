@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bottom_navigation_height">56dp</dimen>
+    <dimen name="detail_backdrop_height">288dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="margin_top_icons">32dp</dimen>
+</resources>

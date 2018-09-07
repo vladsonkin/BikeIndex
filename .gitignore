@@ -1,5 +1,7 @@
 *.iml
 .gradle
+/app/fabric.properties
+gragle.properties
 /local.properties
 /.idea
 .DS_Store

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="8dp"
+    tools:ignore="ContentDescription,RtlSymmetry">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_ripple_blue"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/imageViewBike"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="@color/white"
+            android:scaleType="center"
+            android:contentDescription="@string/bike_photo" />
+
+        <TextView
+            android:id="@+id/textViewBikeName"
+            style="@style/Title.Inverse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black12"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingLeft="16dp"
+            android:paddingTop="4dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewBike"
+            tools:text="Super Cool Bike" />
+
+        <TextView
+            android:id="@+id/textViewStolenInfo"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingBottom="4dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textColor="@color/red"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@id/textViewBikeSerialTitle"
+            app:layout_constraintTop_toBottomOf="@id/imageViewBike"
+            tools:text="Stolen 4 september 2018 in Moscow Russia " />
+
+        <ImageView
+            android:id="@+id/imageViewSerial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_serial_blue_16"
+            android:paddingStart="16dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            app:layout_constraintTop_toBottomOf="@id/textViewStolenInfo"
+            app:layout_goneMarginTop="8dp" />
+
+        <TextView
+            android:id="@+id/textViewBikeSerialTitle"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="@string/serial_number"
+            android:paddingEnd="8dp"
+            android:gravity="center"
+            android:textColor="@color/darkGray"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewSerial"
+            app:layout_constraintLeft_toRightOf="@id/imageViewSerial"
+            app:layout_constraintTop_toTopOf="@id/imageViewSerial"
+            app:layout_goneMarginTop="8dp" />
+
+        <TextView
+            android:id="@+id/textViewBikeSerial"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewSerial"
+            app:layout_constraintLeft_toRightOf="@id/textViewBikeSerialTitle"
+            app:layout_constraintTop_toTopOf="@id/imageViewSerial"
+            app:layout_goneMarginTop="8dp"
+            tools:text="2314 314 2" />
+
+        <ImageView
+            android:id="@+id/imageViewManufacturer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_manufacturer_blue_16"
+            android:paddingStart="16dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            app:layout_constraintTop_toBottomOf="@id/imageViewSerial" />
+
+        <TextView
+            android:id="@+id/textViewBikeManufacturerTitle"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="@string/manufacturer"
+            android:paddingEnd="8dp"
+            android:gravity="center"
+            android:textColor="@color/darkGray"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewManufacturer"
+            app:layout_constraintLeft_toRightOf="@id/imageViewManufacturer"
+            app:layout_constraintTop_toTopOf="@id/imageViewManufacturer" />
+
+        <TextView
+            android:id="@+id/textViewBikeManufacturer"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewManufacturer"
+            app:layout_constraintLeft_toRightOf="@id/textViewBikeManufacturerTitle"
+            app:layout_constraintTop_toTopOf="@id/imageViewManufacturer"
+            tools:text="24seven" />
+
+        <ImageView
+            android:id="@+id/imageViewColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_color_blue_16"
+            android:paddingStart="16dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            app:layout_constraintTop_toBottomOf="@id/imageViewManufacturer" />
+
+        <TextView
+            android:id="@+id/textViewBikeColorTitle"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/color"
+            android:paddingEnd="8dp"
+            android:textColor="@color/darkGray"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewColor"
+            app:layout_constraintLeft_toRightOf="@id/imageViewColor"
+            app:layout_constraintTop_toTopOf="@id/imageViewColor" />
+
+        <TextView
+            android:id="@+id/textViewBikeColor"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewColor"
+            app:layout_constraintLeft_toRightOf="@id/textViewBikeColorTitle"
+            app:layout_constraintTop_toTopOf="@id/imageViewColor"
+            tools:text="Black" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/gray"
+            app:layout_constraintTop_toBottomOf="@id/textViewBikeColorTitle" />
+
+        <Button
+            android:id="@+id/btnShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_ripple_blue"
+            android:text="@string/share"
+            app:layout_constraintTop_toBottomOf="@id/divider" />
+
+        <Button
+            android:id="@+id/btnExplore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_ripple_blue"
+            android:text="@string/explore"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintLeft_toRightOf="@id/btnShare"
+            app:layout_constraintTop_toBottomOf="@id/divider" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
