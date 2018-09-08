@@ -1,6 +1,6 @@
 <h1 align="center" style="text-align: center; padding-bottom: 20px;">
   <br>
-  <a href="http://www.bikeindex.org"><img src="app/src/main/ic_launcher-web.png" alt="Bike Index" width="220"/></a>
+  <a href="http://www.bikeindex.org"><img src="ic_launcher-web.png" alt="Bike Index" width="220"/></a>
   <br>
   Bike Index
   <br>
@@ -23,6 +23,10 @@
   <a href="#build-process">Build process</a> •
   <a href="#contribute">Contribute</a> •
   <a href="#license">License</a>
+</p>
+
+<p align="center">
+  <img src="screenshots.jpg">
 </p>
 
 ## Features
