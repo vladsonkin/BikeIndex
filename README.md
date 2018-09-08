@@ -6,7 +6,13 @@
   <br>
 </h1>
 
-<h4 align="center">View all bikes around the world, filter them and find any bike. If the bike is stolen, you can contact the owner and save the bike.</h4>
+<h4 align="center">View all bikes around the world, filter them and find any bike. <br>If the bike is stolen, you can contact the owner and save the bike.</h4>
+
+<p align="center">
+  <a href="https://play.google.com/store/apps/details?id=com.sonkins.bikeindex">
+    <img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="Get it on Google Play" width="220"/>
+  </a>
+</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/release-v1.0-orange.svg">
