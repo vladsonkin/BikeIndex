@@ -19,9 +19,9 @@
 
 <p align="center">
   <a href="#features">Features</a> •
-  <a href="#contribute">Contribute</a> •
-  <a href="#build-process">Build process</a> •
   <a href="#technology-stack">Technology stack</a> •
+  <a href="#build-process">Build process</a> •
+  <a href="#contribute">Contribute</a> •
   <a href="#license">License</a>
 </p>
 
@@ -36,19 +36,6 @@ A few of the things you can do with Bike Index:
 * Add bike to your favorites
 * Contact the owner if bike is stolen
 
-## Contribute
-
-If you notice any bugs in the app, see some code that can be improved, or have features you would like to be added, please [file an issue](https://github.com/vladsonkin/bikeindex/issues/new).
-
-If you want to open a PR that fixes a bug or adds a feature, then I can't thank you enough! It is definitely appreciated if an issue has been created before-hand so it can be discussed first.
-
-## Build Process
-
-**Android Studio 3.2 required**
-
-* Clone or download the repo
-* Import project and build
-
 ## Technology stack
 
 Technology stack used in Bike Index
@@ -62,6 +49,19 @@ Technology stack used in Bike Index
 * [Retrofit](https://square.github.io/retrofit/)
 * [Glide](https://github.com/bumptech/glide)
 * [LeakCanary](https://github.com/square/leakcanary)
+
+## Build Process
+
+**Android Studio 3.2 required**
+
+* Clone or download the repo
+* Import project and build
+
+## Contribute
+
+If you notice any bugs in the app, see some code that can be improved, or have features you would like to be added, please [file an issue](https://github.com/vladsonkin/bikeindex/issues/new).
+
+If you want to open a PR that fixes a bug or adds a feature, then I can't thank you enough! It is definitely appreciated if an issue has been created before-hand so it can be discussed first.
 
 ## Licence
 
