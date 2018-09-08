@@ -1,6 +1,6 @@
 <h1 align="center" style="text-align: center; padding-bottom: 20px;">
   <br>
-  <a href="http://www.bikeindex.org"><img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="Bike Index"/></a>
+  <a href="http://www.bikeindex.org"><img src="app/src/main/ic_launcher-web.png" alt="Bike Index" width="220"/></a>
   <br>
   Bike Index
   <br>
