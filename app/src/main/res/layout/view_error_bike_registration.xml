@@ -2,9 +2,10 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layoutEmptyFavorites"
+    android:id="@+id/layoutBikeRegistrationError"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/liteGray"
     android:fillViewport="true"
     tools:ignore="ContentDescription">
 
@@ -13,41 +14,53 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageViewEmptyFavorites"
+            android:id="@+id/imageViewBikeRegistrationError"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_person_happy_220"
             android:layout_marginTop="@dimen/margin_top_icons"
-            app:layout_constraintBottom_toTopOf="@id/textViewEmptyFavoritesTitle"
+            android:src="@drawable/ic_person_sad_220"
+            app:layout_constraintBottom_toTopOf="@id/textViewBikeRegistrationErrorTitle"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textViewEmptyFavoritesTitle"
+            android:id="@+id/textViewBikeRegistrationErrorTitle"
             style="@style/Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/empty_favorites_title"
-            app:layout_constraintBottom_toTopOf="@id/textViewEmptyFavoritesDescription"
+            android:text="@string/error_bike_register_title"
+            app:layout_constraintBottom_toTopOf="@id/textViewBikeRegistrationErrorDescription"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageViewEmptyFavorites" />
+            app:layout_constraintTop_toBottomOf="@id/imageViewBikeRegistrationError" />
 
         <TextView
-            android:id="@+id/textViewEmptyFavoritesDescription"
+            android:id="@+id/textViewBikeRegistrationErrorDescription"
             style="@style/Body1.Grey"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:paddingBottom="8dp"
             android:gravity="center"
-            android:text="@string/empty_favorites"
+            android:text="@string/error_bike_register_description"
+            app:layout_constraintBottom_toTopOf="@id/buttonRegisterOnWebsite"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewEmptyFavoritesTitle" />
+            app:layout_constraintTop_toBottomOf="@id/textViewBikeRegistrationErrorTitle" />
+
+        <Button
+            android:id="@+id/buttonRegisterOnWebsite"
+            style="@style/Button.BlueText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/register_bike_website"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewBikeRegistrationErrorDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
+

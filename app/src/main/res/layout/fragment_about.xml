@@ -35,7 +35,7 @@
                 android:id="@+id/imageViewAbout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_about_220"
+                android:src="@drawable/ic_person_hero_220"
                 android:layout_marginTop="@dimen/margin_top_icons"
                 app:layout_constraintBottom_toTopOf="@id/textViewAboutTitle"
                 app:layout_constraintLeft_toLeftOf="parent"

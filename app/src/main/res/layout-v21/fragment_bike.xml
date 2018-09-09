@@ -449,6 +449,13 @@
         android:visibility="gone" />
 
     <include
+        layout="@layout/view_error_bike_registration"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:visibility="gone" />
+
+    <include
         layout="@layout/view_error_connection"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

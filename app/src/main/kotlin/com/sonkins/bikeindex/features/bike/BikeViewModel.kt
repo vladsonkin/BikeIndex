@@ -39,10 +39,15 @@ class BikeViewModel @Inject constructor(
     val favoriteEvent: LiveData<Event<DataState<Boolean>>>
         get() = _favoriteEvent
 
-    fun loadBike(id: Int) {
+    fun loadBike(id: String) {
         launchAsync {
             try {
-                val bikeModel = asyncAwait { BikeModel(getBikeUseCase.run(id)) }
+                // Throw exception if someone is trying to register a new bike in website and our deeplink fires
+                if (id == "new") {
+                    throw BikeRegistrationErrorException("We can't register a bike yet")
+                }
+
+                val bikeModel = asyncAwait { BikeModel(getBikeUseCase.run(id.toInt())) }
                 _bikeDataStateEvent.value = Event(DataState.Success(bikeModel))
             } catch (exception: Exception) {
                 _bikeDataStateEvent.value = Event(DataState.Error(exception, obtainCurrentData()))
