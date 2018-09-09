@@ -40,6 +40,7 @@ import com.sonkins.bikeindex.core.extension.visible
 import com.sonkins.bikeindex.core.platform.BaseFragment
 import com.sonkins.bikeindex.core.platform.DataState
 import kotlinx.android.synthetic.main.fragment_bike.*
+import kotlinx.android.synthetic.main.view_error_bike_registration.*
 import kotlinx.android.synthetic.main.view_error_connection.*
 import kotlinx.android.synthetic.main.view_error_server.*
 import kotlinx.android.synthetic.main.view_progress.*
@@ -104,7 +105,8 @@ class BikeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         initializeView()
 
-        with(BikeFragmentArgs.fromBundle(arguments).bikeId.toInt()) {
+        with(BikeFragmentArgs.fromBundle(arguments).bikeId) {
+            buttonRegisterOnWebsite.setOnClickListener { forceOpenInBrowser(getString(R.string.bike_registration_link)) }
             buttonConnectionTryAgain.setOnClickListener { loadBike(this) }
             buttonServerTryAgain.setOnClickListener { loadBike(this) }
 
@@ -119,7 +121,7 @@ class BikeFragment : BaseFragment() {
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    private fun loadBike(bikeId: Int) {
+    private fun loadBike(bikeId: String) {
         showProgress()
         bikeViewModel.loadBike(bikeId)
     }
@@ -164,6 +166,7 @@ class BikeFragment : BaseFragment() {
     private fun handleError(exception: Exception) {
         when (exception) {
             is ConnectionException -> layoutConnectionError.visible()
+            is BikeRegistrationErrorException -> layoutBikeRegistrationError.visible()
             else -> layoutServerError.visible()
         }
 
@@ -239,6 +242,7 @@ class BikeFragment : BaseFragment() {
     }
 
     private fun hideErrors() {
+        layoutBikeRegistrationError.invisible()
         layoutConnectionError.invisible()
         layoutServerError.invisible()
     }

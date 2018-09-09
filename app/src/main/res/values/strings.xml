@@ -71,4 +71,8 @@
     <string name="more_features_website">You can find more features \non our website bikeindex.org</string>
     <string name="added_to_favorites">Added to favorites</string>
     <string name="removed_from_favorites">Removed from favorites</string>
+    <string name="error_bike_register_title">We can\'t register a bike yet</string>
+    <string name="error_bike_register_description">We are working and we will add this feature \nin the new version of the application. \nIn the meantime, you can register \na new bike through the website.</string>
+    <string name="register_bike_website">Register a bike on the website</string>
+    <string name="bike_registration_link">https://bikeindex.org/bikes/new</string>
 </resources>
