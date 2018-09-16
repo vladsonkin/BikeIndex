@@ -17,40 +17,41 @@
 package com.sonkins.bikeindex.features.bikes.filter.colors
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.crashlytics.android.Crashlytics
 import com.sonkins.bikeindex.R
 import com.sonkins.bikeindex.core.exception.ConnectionException
 import com.sonkins.bikeindex.core.extension.activityViewModel
-import com.sonkins.bikeindex.core.extension.invisible
+import com.sonkins.bikeindex.core.extension.gone
 import com.sonkins.bikeindex.core.extension.navigateUp
 import com.sonkins.bikeindex.core.extension.observe
 import com.sonkins.bikeindex.core.extension.viewModel
 import com.sonkins.bikeindex.core.extension.visible
-import com.sonkins.bikeindex.core.platform.BaseFragment
 import com.sonkins.bikeindex.core.platform.DataState
 import com.sonkins.bikeindex.features.bikes.filter.FilterViewModel
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_colors.*
 import kotlinx.android.synthetic.main.view_error_connection.*
 import kotlinx.android.synthetic.main.view_error_server.*
 import kotlinx.android.synthetic.main.view_progress.*
 import javax.inject.Inject
 
-class ColorsFragment : BaseFragment() {
-
+class ColorsFragment : DaggerFragment() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject
     lateinit var colorsAdapter: ColorsAdapter
 
     private lateinit var colorsViewModel: ColorsViewModel
     private lateinit var filterViewModel: FilterViewModel
 
-    override fun layoutId() = R.layout.fragment_colors
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appComponent.inject(this)
 
         colorsViewModel = viewModel(viewModelFactory) {
             observe(colorsDataState) {
@@ -59,6 +60,10 @@ class ColorsFragment : BaseFragment() {
         }
 
         filterViewModel = activityViewModel(viewModelFactory) {}
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_colors, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -120,12 +125,12 @@ class ColorsFragment : BaseFragment() {
     }
 
     private fun hideProgress() {
-        progressBarGlobal.invisible()
+        progressBarGlobal.gone()
         hideErrors()
     }
 
     private fun hideErrors() {
-        layoutServerError.invisible()
-        layoutConnectionError.invisible()
+        layoutServerError.gone()
+        layoutConnectionError.gone()
     }
 }

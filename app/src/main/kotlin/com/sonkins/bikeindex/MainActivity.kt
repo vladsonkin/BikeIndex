@@ -17,13 +17,13 @@
 package com.sonkins.bikeindex
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.sonkins.bikeindex.core.extension.hideKeyboard
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_layout.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)

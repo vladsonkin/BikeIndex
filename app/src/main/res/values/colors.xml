@@ -13,8 +13,7 @@
     <color name="darkGray">#707070</color>
     <color name="black">#000000</color>
     <color name="yellow">#ffea00</color>
-    <color name="red">#FF4040</color>
-    <color name="redRipple">#42FF4040</color>
+    <color name="red">#c2185b</color>
     <color name="blue">#3498DB</color>
     <color name="blueDark">#246a99</color>
     <color name="blueRipple">#423498DB</color>

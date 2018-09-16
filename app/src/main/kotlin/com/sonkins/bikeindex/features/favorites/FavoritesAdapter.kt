@@ -22,8 +22,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sonkins.bikeindex.R
+import com.sonkins.bikeindex.core.extension.gone
 import com.sonkins.bikeindex.core.extension.inflate
-import com.sonkins.bikeindex.core.extension.invisible
 import com.sonkins.bikeindex.core.extension.loadFromUrl
 import com.sonkins.bikeindex.core.extension.visible
 import kotlinx.android.synthetic.main.item_bike.view.*
@@ -76,7 +76,7 @@ class FavoritesAdapter @Inject constructor() :
             bikeModel.stolenInfo?.let {
                 itemView.textViewStolenInfo.visible()
                 itemView.textViewStolenInfo.text = it
-            } ?: itemView.textViewStolenInfo.invisible()
+            } ?: itemView.textViewStolenInfo.gone()
 
             itemView.textViewBikeName.text = bikeModel.title
             itemView.textViewBikeSerial.text = bikeModel.serial

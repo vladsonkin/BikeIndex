@@ -16,7 +16,7 @@
 
 package com.sonkins.bikeindex.features.favorites
 
-import com.sonkins.bikeindex.core.db.BikeIndexDatabase
+import com.sonkins.bikeindex.core.db.FavoriteBikeDao
 import javax.inject.Inject
 
 interface FavoritesRepository {
@@ -31,9 +31,9 @@ interface FavoritesRepository {
 
         override fun getFavoriteBikesCount() = databaseDataStore.getFavoriteBikesCount()
 
-        class DatabaseDataStore @Inject constructor(private val bikeIndexDatabase: BikeIndexDatabase) {
-            fun getFavoriteBikes() = bikeIndexDatabase.favoriteBikeDao().getFavorites()
-            fun getFavoriteBikesCount() = bikeIndexDatabase.favoriteBikeDao().getFavoritesCount()
+        class DatabaseDataStore @Inject constructor(private val favoriteBikeDao: FavoriteBikeDao) {
+            fun getFavoriteBikes() = favoriteBikeDao.getFavorites()
+            fun getFavoriteBikesCount() = favoriteBikeDao.getFavoritesCount()
         }
     }
 }

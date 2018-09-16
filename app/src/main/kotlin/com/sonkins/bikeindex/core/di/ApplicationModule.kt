@@ -17,14 +17,13 @@
 package com.sonkins.bikeindex.core.di
 
 import android.content.Context
+import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
-import com.sonkins.bikeindex.AndroidApplication
+import com.sonkins.bikeindex.BikeIndexApplication
 import com.sonkins.bikeindex.BuildConfig
 import com.sonkins.bikeindex.core.db.BikeIndexDatabase
-import com.sonkins.bikeindex.features.bike.BikeRepository
-import com.sonkins.bikeindex.features.bikes.BikesRepository
-import com.sonkins.bikeindex.features.bikes.filter.FilterRepository
-import com.sonkins.bikeindex.features.favorites.FavoritesRepository
+import com.sonkins.bikeindex.core.db.FavoriteBikeDao
+import com.sonkins.bikeindex.core.di.viewmodel.ViewModelFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -34,16 +33,25 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-class ApplicationModule(private val application: AndroidApplication) {
+class ApplicationModule {
+
+    @Provides
+    fun provideViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory = factory
 
     @Provides
     @Singleton
-    fun provideApplicationContext(): Context = application
+    fun provideApplicationContext(app: BikeIndexApplication): Context = app
 
     @Provides
     @Singleton
     fun provideBikeIndexDatabase(context: Context): BikeIndexDatabase {
         return Room.databaseBuilder(context, BikeIndexDatabase::class.java, BikeIndexDatabase.DB_NAME).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFavoriteBikeDao(db: BikeIndexDatabase): FavoriteBikeDao {
+        return db.favoriteBikeDao()
     }
 
     @Provides
@@ -64,22 +72,4 @@ class ApplicationModule(private val application: AndroidApplication) {
         }
         return okHttpClientBuilder.build()
     }
-
-    @Provides
-    @Singleton
-    fun provideBikesRepository(bikesRepository: BikesRepository.BikesDataRepository): BikesRepository = bikesRepository
-
-    @Provides
-    @Singleton
-    fun provideBikeRepository(bikeRepository: BikeRepository.BikeDataRepository): BikeRepository = bikeRepository
-
-    @Provides
-    @Singleton
-    fun provideFilterRepository(filterRepository: FilterRepository.FilterDataRepository): FilterRepository =
-        filterRepository
-
-    @Provides
-    @Singleton
-    fun provideFavoritesRepository(favoritesRepository: FavoritesRepository.FavoritesDataRepository): FavoritesRepository =
-        favoritesRepository
 }

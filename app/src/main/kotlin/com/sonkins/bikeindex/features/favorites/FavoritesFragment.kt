@@ -18,42 +18,47 @@ package com.sonkins.bikeindex.features.favorites
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.crashlytics.android.Crashlytics
 import com.sonkins.bikeindex.R
-import com.sonkins.bikeindex.core.extension.invisible
+import com.sonkins.bikeindex.core.extension.gone
 import com.sonkins.bikeindex.core.extension.navigate
 import com.sonkins.bikeindex.core.extension.observe
 import com.sonkins.bikeindex.core.extension.viewModel
 import com.sonkins.bikeindex.core.extension.visible
-import com.sonkins.bikeindex.core.platform.BaseFragment
 import com.sonkins.bikeindex.core.platform.DataState
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import kotlinx.android.synthetic.main.view_empty_favorites.*
 import kotlinx.android.synthetic.main.view_error_server.*
 import kotlinx.android.synthetic.main.view_progress.*
 import javax.inject.Inject
 
-class FavoritesFragment : BaseFragment() {
-
+class FavoritesFragment : DaggerFragment() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject
     lateinit var favoritesAdapter: FavoritesAdapter
 
     private lateinit var favoritesViewModel: FavoritesViewModel
 
-    override fun layoutId() = R.layout.fragment_favorites
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appComponent.inject(this)
 
         favoritesViewModel = viewModel(viewModelFactory) {
             observe(favoritesDataState) {
                 handleDataState(it)
             }
         }
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_favorites, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -117,13 +122,13 @@ class FavoritesFragment : BaseFragment() {
     }
 
     private fun hideProgress() {
-        progressBarGlobal.invisible()
-        toolbarSubtitle.invisible()
+        progressBarGlobal.gone()
+        toolbarSubtitle.gone()
         hideErrors()
     }
 
     private fun hideErrors() {
-        layoutEmptyFavorites.invisible()
-        layoutServerError.invisible()
+        layoutEmptyFavorites.gone()
+        layoutServerError.gone()
     }
 }

@@ -16,30 +16,23 @@
 
 package com.sonkins.bikeindex.core.di
 
-import com.sonkins.bikeindex.AndroidApplication
-import com.sonkins.bikeindex.MainActivity
-import com.sonkins.bikeindex.core.di.viewmodel.ViewModelModule
-import com.sonkins.bikeindex.features.about.AboutFragment
-import com.sonkins.bikeindex.features.bike.BikeFragment
-import com.sonkins.bikeindex.features.bikes.BikesFragment
-import com.sonkins.bikeindex.features.bikes.filter.FilterFragment
-import com.sonkins.bikeindex.features.bikes.filter.colors.ColorsFragment
-import com.sonkins.bikeindex.features.bikes.filter.manufacturers.ManufacturersFragment
-import com.sonkins.bikeindex.features.favorites.FavoritesFragment
+import com.sonkins.bikeindex.BikeIndexApplication
+import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjector
+import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [ApplicationModule::class, ViewModelModule::class])
-interface ApplicationComponent {
-    fun inject(application: AndroidApplication)
-    fun inject(mainActivity: MainActivity)
+@Component(modules = [ApplicationModule::class, ActivityBuilderModule::class, AndroidSupportInjectionModule::class])
+interface ApplicationComponent : AndroidInjector<BikeIndexApplication> {
+    override fun inject(instance: BikeIndexApplication)
 
-    fun inject(bikesFragment: BikesFragment)
-    fun inject(filterFragment: FilterFragment)
-    fun inject(colorsFragment: ColorsFragment)
-    fun inject(manufacturersFragment: ManufacturersFragment)
-    fun inject(aboutFragment: AboutFragment)
-    fun inject(bikeFragment: BikeFragment)
-    fun inject(favoritesFragment: FavoritesFragment)
+    @Component.Builder
+    interface Builder {
+        @BindsInstance
+        fun application(application: BikeIndexApplication): Builder
+
+        fun build(): ApplicationComponent
+    }
 }

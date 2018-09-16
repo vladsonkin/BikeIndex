@@ -19,9 +19,12 @@ package com.sonkins.bikeindex.features.bikes
 import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.crashlytics.android.Crashlytics
@@ -29,19 +32,19 @@ import com.sonkins.bikeindex.R
 import com.sonkins.bikeindex.core.exception.ConnectionException
 import com.sonkins.bikeindex.core.extension.action
 import com.sonkins.bikeindex.core.extension.activityViewModel
-import com.sonkins.bikeindex.core.extension.invisible
+import com.sonkins.bikeindex.core.extension.gone
 import com.sonkins.bikeindex.core.extension.launchAsync
 import com.sonkins.bikeindex.core.extension.navigate
 import com.sonkins.bikeindex.core.extension.observe
 import com.sonkins.bikeindex.core.extension.snack
 import com.sonkins.bikeindex.core.extension.viewModel
 import com.sonkins.bikeindex.core.extension.visible
-import com.sonkins.bikeindex.core.platform.BaseFragment
 import com.sonkins.bikeindex.core.platform.DataState
 import com.sonkins.bikeindex.core.platform.EndlessOnScrollListener
 import com.sonkins.bikeindex.core.platform.Event
 import com.sonkins.bikeindex.features.bikes.filter.FilterModel
 import com.sonkins.bikeindex.features.bikes.filter.FilterViewModel
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_bikes.*
 import kotlinx.android.synthetic.main.view_error_connection.*
 import kotlinx.android.synthetic.main.view_error_nothing_found.*
@@ -52,8 +55,9 @@ import q.rorbin.badgeview.Badge
 import q.rorbin.badgeview.QBadgeView
 import javax.inject.Inject
 
-class BikesFragment : BaseFragment() {
-
+class BikesFragment : DaggerFragment() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject
     lateinit var bikesAdapter: BikesAdapter
 
@@ -62,11 +66,8 @@ class BikesFragment : BaseFragment() {
     private lateinit var endlessOnScrollListener: EndlessOnScrollListener
     private var filterBadge: Badge? = null
 
-    override fun layoutId() = R.layout.fragment_bikes
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appComponent.inject(this)
 
         bikesViewModel = viewModel(viewModelFactory) {
             observe(navigateToFilterEvent, ::navigateToFilter)
@@ -80,6 +81,10 @@ class BikesFragment : BaseFragment() {
                 }
             }
         }
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_bikes, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -221,8 +226,9 @@ class BikesFragment : BaseFragment() {
                 .setBadgeBackgroundColor(ContextCompat.getColor(requireContext(), R.color.yellow))
                 .bindTarget(imageBtnFilter)
                 .setOnDragStateChangedListener { dragState, _, _ ->
-                    if (Badge.OnDragStateChangedListener.STATE_SUCCEED == dragState) {
-                        loadBikes(FilterModel.empty(), true)
+                    when (dragState) {
+                        Badge.OnDragStateChangedListener.STATE_SUCCEED -> loadBikes(FilterModel.empty(), true)
+                        Badge.OnDragStateChangedListener.STATE_CANCELED -> bikesViewModel.filterClick()
                     }
                 }
         } else {
@@ -237,14 +243,14 @@ class BikesFragment : BaseFragment() {
 
     private fun hideProgress() {
         swipeRefreshLayout.isRefreshing = false
-        progressBarGlobal.invisible()
-        toolbarSubtitle.invisible()
+        progressBarGlobal.gone()
+        toolbarSubtitle.gone()
         hideErrors()
     }
 
     private fun hideErrors() {
-        layoutConnectionError.invisible()
-        layoutServerError.invisible()
-        layoutNothingFoundFilter.invisible()
+        layoutConnectionError.gone()
+        layoutServerError.gone()
+        layoutNothingFoundFilter.gone()
     }
 }

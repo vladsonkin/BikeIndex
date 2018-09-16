@@ -19,19 +19,18 @@ package com.sonkins.bikeindex.features.about
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.sonkins.bikeindex.R
-import com.sonkins.bikeindex.core.platform.BaseFragment
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_about.*
 
-class AboutFragment : BaseFragment() {
+class AboutFragment : DaggerFragment() {
 
-    override fun layoutId() = R.layout.fragment_about
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        appComponent.inject(this)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_about, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -16,32 +16,28 @@
 
 package com.sonkins.bikeindex
 
-import android.app.Application
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
-import com.sonkins.bikeindex.core.di.ApplicationComponent
-import com.sonkins.bikeindex.core.di.ApplicationModule
 import com.sonkins.bikeindex.core.di.DaggerApplicationComponent
 import com.squareup.leakcanary.LeakCanary
+import dagger.android.AndroidInjector
+import dagger.android.support.DaggerApplication
 import io.fabric.sdk.android.Fabric
 
-class AndroidApplication : Application() {
+class BikeIndexApplication : DaggerApplication() {
 
-    val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
-        DaggerApplicationComponent
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerApplicationComponent
             .builder()
-            .applicationModule(ApplicationModule(this))
+            .application(this)
             .build()
     }
 
     override fun onCreate() {
         super.onCreate()
-        injectMembers()
         initializeLeakDetection()
         initializeFabric()
     }
-
-    private fun injectMembers() = appComponent.inject(this)
 
     private fun initializeLeakDetection() {
         if (BuildConfig.DEBUG) LeakCanary.install(this)
