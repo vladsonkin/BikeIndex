@@ -20,41 +20,44 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.ViewModelProvider
 import com.crashlytics.android.Crashlytics
 import com.google.android.material.snackbar.Snackbar
 import com.sonkins.bikeindex.R
 import com.sonkins.bikeindex.core.exception.ConnectionException
-import com.sonkins.bikeindex.core.extension.invisible
+import com.sonkins.bikeindex.core.extension.gone
 import com.sonkins.bikeindex.core.extension.loadFromUrl
 import com.sonkins.bikeindex.core.extension.observe
 import com.sonkins.bikeindex.core.extension.snack
 import com.sonkins.bikeindex.core.extension.viewModel
 import com.sonkins.bikeindex.core.extension.visible
-import com.sonkins.bikeindex.core.platform.BaseFragment
 import com.sonkins.bikeindex.core.platform.DataState
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_bike.*
 import kotlinx.android.synthetic.main.view_error_bike_registration.*
 import kotlinx.android.synthetic.main.view_error_connection.*
 import kotlinx.android.synthetic.main.view_error_server.*
 import kotlinx.android.synthetic.main.view_progress.*
+import javax.inject.Inject
 
-class BikeFragment : BaseFragment() {
+class BikeFragment : DaggerFragment() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var bikeViewModel: BikeViewModel
     private var favoriteMenuItem: MenuItem? = null
 
-    override fun layoutId() = R.layout.fragment_bike
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appComponent.inject(this)
         setHasOptionsMenu(true)
 
         bikeViewModel = viewModel(viewModelFactory) {
@@ -99,6 +102,10 @@ class BikeFragment : BaseFragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_bike, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -152,7 +159,7 @@ class BikeFragment : BaseFragment() {
             textViewStolenDescription.text = bikeModel.theftDescription
             btnContactOwner.setOnClickListener { forceOpenInBrowser(getString(R.string.bike_link, bikeModel.id)) }
         } else {
-            layoutStolen.invisible()
+            layoutStolen.gone()
         }
 
         textViewDescription.text = bikeModel.description
@@ -187,9 +194,9 @@ class BikeFragment : BaseFragment() {
     private fun updateFavoriteMenuItemColor(item: MenuItem?, isFavorite: Boolean) {
         item?.let {
             if (isFavorite) {
-                it.icon = ResourcesCompat.getDrawable(resources, R.drawable.ic_favorite_burgundy_full_24, null)
+                it.icon = ResourcesCompat.getDrawable(resources, R.drawable.ic_favorite_red_full_24, null)
             } else {
-                it.icon = ResourcesCompat.getDrawable(resources, R.drawable.ic_favorite_burgundy_24, null)
+                it.icon = ResourcesCompat.getDrawable(resources, R.drawable.ic_favorite_red_24, null)
             }
         }
     }
@@ -230,20 +237,20 @@ class BikeFragment : BaseFragment() {
     }
 
     private fun showProgress() {
-        appbar.invisible()
-        layoutBike.invisible()
+        appbar.gone()
+        layoutBike.gone()
         hideErrors()
         progressBarGlobal.visible()
     }
 
     private fun hideProgress() {
-        progressBarGlobal.invisible()
+        progressBarGlobal.gone()
         hideErrors()
     }
 
     private fun hideErrors() {
-        layoutBikeRegistrationError.invisible()
-        layoutConnectionError.invisible()
-        layoutServerError.invisible()
+        layoutBikeRegistrationError.gone()
+        layoutConnectionError.gone()
+        layoutServerError.gone()
     }
 }

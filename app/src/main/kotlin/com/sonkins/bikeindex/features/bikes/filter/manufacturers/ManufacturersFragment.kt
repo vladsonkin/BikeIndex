@@ -17,8 +17,11 @@
 package com.sonkins.bikeindex.features.bikes.filter.manufacturers
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.crashlytics.android.Crashlytics
@@ -26,17 +29,17 @@ import com.sonkins.bikeindex.R
 import com.sonkins.bikeindex.core.exception.ConnectionException
 import com.sonkins.bikeindex.core.extension.action
 import com.sonkins.bikeindex.core.extension.activityViewModel
-import com.sonkins.bikeindex.core.extension.invisible
+import com.sonkins.bikeindex.core.extension.gone
 import com.sonkins.bikeindex.core.extension.launchAsync
 import com.sonkins.bikeindex.core.extension.navigateUp
 import com.sonkins.bikeindex.core.extension.observe
 import com.sonkins.bikeindex.core.extension.snack
 import com.sonkins.bikeindex.core.extension.viewModel
 import com.sonkins.bikeindex.core.extension.visible
-import com.sonkins.bikeindex.core.platform.BaseFragment
 import com.sonkins.bikeindex.core.platform.DataState
 import com.sonkins.bikeindex.core.platform.EndlessOnScrollListener
 import com.sonkins.bikeindex.features.bikes.filter.FilterViewModel
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_manufacturers.*
 import kotlinx.android.synthetic.main.view_error_connection.*
 import kotlinx.android.synthetic.main.view_error_server.*
@@ -44,8 +47,9 @@ import kotlinx.android.synthetic.main.view_progress.*
 import kotlinx.coroutines.experimental.delay
 import javax.inject.Inject
 
-class ManufacturersFragment : BaseFragment() {
-
+class ManufacturersFragment : DaggerFragment() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject
     lateinit var manufacturersAdapter: ManufacturersAdapter
 
@@ -53,11 +57,8 @@ class ManufacturersFragment : BaseFragment() {
     private lateinit var filterViewModel: FilterViewModel
     private lateinit var endlessOnScrollListener: EndlessOnScrollListener
 
-    override fun layoutId() = R.layout.fragment_manufacturers
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appComponent.inject(this)
 
         manufacturersViewModel = viewModel(viewModelFactory) {
             observe(manufacturersDataState) {
@@ -66,6 +67,10 @@ class ManufacturersFragment : BaseFragment() {
         }
 
         filterViewModel = activityViewModel(viewModelFactory) {}
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_manufacturers, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -178,12 +183,12 @@ class ManufacturersFragment : BaseFragment() {
     }
 
     private fun hideProgress() {
-        progressBarGlobal.invisible()
+        progressBarGlobal.gone()
         hideErrors()
     }
 
     private fun hideErrors() {
-        layoutServerError.invisible()
-        layoutConnectionError.invisible()
+        layoutServerError.gone()
+        layoutConnectionError.gone()
     }
 }

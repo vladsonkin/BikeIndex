@@ -29,9 +29,9 @@
                 android:id="@+id/backdrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/bike_photo"
                 android:foreground="@drawable/bg_top_gradient"
                 android:scaleType="center"
-                android:contentDescription="@string/bike_photo"
                 app:layout_collapseMode="parallax" />
 
             <androidx.appcompat.widget.Toolbar
@@ -53,7 +53,7 @@
         android:layout_marginBottom="?attr/actionBarSize"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -64,8 +64,8 @@
                 style="@style/Body1.Grey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
                 tools:text="Registered 8 June 2017" />
 
             <TextView
@@ -76,19 +76,22 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="16dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewRegistered"
                 tools:text="Test bike" />
 
             <View
-                android:id="@+id/viewStolenDivider"
+                android:id="@+id/viewInfoDivider"
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
                 android:layout_marginTop="24dp"
-                android:background="@color/gray" />
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@id/textViewBikeName" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layoutStolen"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@id/viewInfoDivider">
 
                 <TextView
                     android:id="@+id/textViewStolenTitle"
@@ -98,119 +101,110 @@
                     android:paddingLeft="16dp"
                     android:paddingTop="24dp"
                     android:paddingRight="16dp"
+                    android:paddingBottom="16dp"
                     tools:text="Stolen 3 august 2018" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/stolenLocation"
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:id="@+id/imageViewLocation"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@id/textViewStolenTitle">
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:src="@drawable/ic_location_red_24"
+                    app:layout_constraintTop_toBottomOf="@id/textViewStolenTitle" />
 
-                    <ImageView
-                        android:id="@+id/imageViewLocation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingEnd="16dp"
-                        android:src="@drawable/ic_location_red_24" />
-
-                    <TextView
-                        android:id="@+id/textViewStolenLocationTitle"
-                        style="@style/Body1.Grey"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:text="@string/stolen_location"
-                        app:layout_constraintLeft_toRightOf="@id/imageViewLocation" />
-
-                    <TextView
-                        android:id="@+id/textViewStolenLocation"
-                        style="@style/Body1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintLeft_toRightOf="@id/imageViewLocation"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/textViewStolenLocationTitle"
-                        tools:text="Moscow, Russia" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginStart="40dp"
-                        android:layout_marginTop="16dp"
-                        android:background="@color/gray"
-                        app:layout_constraintTop_toBottomOf="@id/textViewStolenLocation" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/stolenDescription"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/textViewStolenLocationTitle"
+                    style="@style/Body1.Grey"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/stolen_location"
+                    app:layout_constraintLeft_toRightOf="@id/imageViewLocation"
+                    app:layout_constraintTop_toBottomOf="@id/textViewStolenTitle" />
+
+                <TextView
+                    android:id="@+id/textViewStolenLocation"
+                    style="@style/Body1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintLeft_toRightOf="@id/imageViewLocation"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textViewStolenLocationTitle"
+                    tools:text="Moscow, Russia" />
+
+                <View
+                    android:id="@+id/viewStolenLocationDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="56dp"
                     android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@id/stolenLocation">
+                    android:background="@color/gray"
+                    app:layout_constraintTop_toBottomOf="@id/textViewStolenLocation" />
 
-                    <ImageView
-                        android:id="@+id/imageViewStolenDescription"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingEnd="16dp"
-                        android:src="@drawable/ic_description_red_24" />
+                <ImageView
+                    android:id="@+id/imageViewStolenDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="16dp"
+                    android:src="@drawable/ic_description_red_24"
+                    app:layout_constraintTop_toBottomOf="@id/viewStolenLocationDivider" />
 
-                    <TextView
-                        android:id="@+id/textViewStolenDescriptionTitle"
-                        style="@style/Body1.Grey"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:text="@string/description_of_incident"
-                        app:layout_constraintLeft_toRightOf="@id/imageViewStolenDescription" />
+                <TextView
+                    android:id="@+id/textViewStolenDescriptionTitle"
+                    style="@style/Body1.Grey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:paddingTop="16dp"
+                    android:text="@string/description_of_incident"
+                    app:layout_constraintLeft_toRightOf="@id/imageViewStolenDescription"
+                    app:layout_constraintTop_toBottomOf="@id/viewStolenLocationDivider" />
 
-                    <TextView
-                        android:id="@+id/textViewStolenDescription"
-                        style="@style/Body1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintLeft_toRightOf="@id/imageViewStolenDescription"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/textViewStolenDescriptionTitle"
-                        tools:text="Locked bike in front of Walmart with a patrolling private security. After shopping I noticed that my bike was gone and my lock was on the floor with a clean cut." />
+                <TextView
+                    android:id="@+id/textViewStolenDescription"
+                    style="@style/Body1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintLeft_toRightOf="@id/imageViewStolenDescription"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textViewStolenDescriptionTitle"
+                    tools:text="Locked bike in front of Walmart with a patrolling private security. After shopping I noticed that my bike was gone and my lock was on the floor with a clean cut." />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginStart="40dp"
-                        android:layout_marginTop="16dp"
-                        android:background="@color/gray"
-                        app:layout_constraintTop_toBottomOf="@id/textViewStolenDescription" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <View
+                    android:id="@+id/viewStolenDescriptionDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="56dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/gray"
+                    app:layout_constraintTop_toBottomOf="@id/textViewStolenDescription" />
 
                 <TextView
                     android:id="@+id/textViewContactTitle"
                     style="@style/Subhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="56dp"
                     android:layout_marginTop="16dp"
+                    android:paddingStart="56dp"
                     android:paddingEnd="16dp"
                     android:text="@string/know_something_about_this_bike"
-                    app:layout_constraintTop_toBottomOf="@id/stolenDescription" />
+                    app:layout_constraintTop_toBottomOf="@id/viewStolenDescriptionDivider" />
 
                 <Button
                     android:id="@+id/btnContactOwner"
                     style="@style/Button.BlueText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingStart="56dp"
-                    android:gravity="start|center_vertical"
                     android:layout_marginTop="4dp"
+                    android:gravity="start|center_vertical"
+                    android:paddingStart="56dp"
                     android:paddingEnd="16dp"
                     android:text="@string/contact_the_owner"
                     app:layout_constraintTop_toBottomOf="@id/textViewContactTitle" />
@@ -224,221 +218,215 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/imageViewDescription"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginRight="16dp">
+                android:paddingStart="16dp"
+                android:paddingTop="24dp"
+                android:paddingEnd="16dp"
+                android:src="@drawable/ic_description_blue_24"
+                app:layout_constraintTop_toBottomOf="@id/layoutStolen" />
 
-                <ImageView
-                    android:id="@+id/imageViewDescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="16dp"
-                    android:src="@drawable/ic_description_blue_24" />
+            <TextView
+                android:id="@+id/textViewDescriptionTitle"
+                style="@style/Body1.Grey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="24dp"
+                android:text="@string/description"
+                app:layout_constraintLeft_toRightOf="@id/imageViewDescription"
+                app:layout_constraintTop_toBottomOf="@id/layoutStolen" />
 
-                <TextView
-                    android:id="@+id/textViewDescriptionTitle"
-                    style="@style/Body1.Grey"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/description"
-                    app:layout_constraintLeft_toRightOf="@id/imageViewDescription" />
-
-                <TextView
-                    android:id="@+id/textViewDescription"
-                    style="@style/Body1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    app:layout_constraintLeft_toRightOf="@id/imageViewDescription"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewDescriptionTitle"
-                    tools:text="Some interesting bike description that can have multiple rown tail head and other interesting bike content" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textViewDescription"
+                style="@style/Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintLeft_toRightOf="@id/imageViewDescription"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewDescriptionTitle"
+                tools:text="Some interesting bike description that can have multiple rown tail head and other interesting bike content" />
 
             <View
+                android:id="@+id/viewDescriptionDivider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="56dp"
                 android:layout_marginTop="16dp"
-                android:background="@color/gray" />
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@id/textViewDescription" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/imageViewSerial"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="16dp">
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp"
+                android:src="@drawable/ic_serial_blue_24"
+                app:layout_constraintTop_toBottomOf="@id/viewDescriptionDivider" />
 
-                <ImageView
-                    android:id="@+id/imageViewSerial"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="16dp"
-                    android:src="@drawable/ic_serial_blue_24" />
+            <TextView
+                android:id="@+id/textViewSerialTitle"
+                style="@style/Body1.Grey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:text="@string/serial_number"
+                app:layout_constraintLeft_toRightOf="@id/imageViewSerial"
+                app:layout_constraintTop_toBottomOf="@id/viewDescriptionDivider" />
 
-                <TextView
-                    android:id="@+id/textViewSerialTitle"
-                    style="@style/Body1.Grey"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/serial_number"
-                    app:layout_constraintLeft_toRightOf="@id/imageViewSerial" />
-
-                <TextView
-                    android:id="@+id/textViewSerial"
-                    style="@style/Body1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    app:layout_constraintLeft_toRightOf="@id/imageViewSerial"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewSerialTitle"
-                    tools:text="82349344" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textViewSerial"
+                style="@style/Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintLeft_toRightOf="@id/imageViewSerial"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewSerialTitle"
+                tools:text="82349344" />
 
             <View
+                android:id="@+id/viewSerialDivider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="56dp"
                 android:layout_marginTop="16dp"
-                android:background="@color/gray" />
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@id/textViewSerial" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/imageViewManufacturer"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="16dp">
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp"
+                android:src="@drawable/ic_manufacturer_blue_24"
+                app:layout_constraintTop_toBottomOf="@id/viewSerialDivider" />
 
-                <ImageView
-                    android:id="@+id/imageViewManufacturer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="16dp"
-                    android:src="@drawable/ic_manufacturer_blue_24" />
+            <TextView
+                android:id="@+id/textViewManufacturerTitle"
+                style="@style/Body1.Grey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:text="@string/manufacturer"
+                app:layout_constraintLeft_toRightOf="@id/imageViewManufacturer"
+                app:layout_constraintTop_toBottomOf="@id/viewSerialDivider" />
 
-                <TextView
-                    android:id="@+id/textViewManufacturerTitle"
-                    style="@style/Body1.Grey"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/manufacturer"
-                    app:layout_constraintLeft_toRightOf="@id/imageViewManufacturer" />
-
-                <TextView
-                    android:id="@+id/textViewManufacturer"
-                    style="@style/Body1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    app:layout_constraintLeft_toRightOf="@id/imageViewManufacturer"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewManufacturerTitle"
-                    tools:text="Airborne" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textViewManufacturer"
+                style="@style/Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintLeft_toRightOf="@id/imageViewManufacturer"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewManufacturerTitle"
+                tools:text="Airborne" />
 
             <View
+                android:id="@+id/viewManufacturerDivider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="56dp"
                 android:layout_marginTop="16dp"
-                android:background="@color/gray" />
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@id/textViewManufacturer" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/imageViewColor"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="16dp">
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp"
+                android:src="@drawable/ic_color_blue_24"
+                app:layout_constraintTop_toBottomOf="@+id/viewManufacturerDivider" />
 
-                <ImageView
-                    android:id="@+id/imageViewColor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="16dp"
-                    android:src="@drawable/ic_color_blue_24" />
+            <TextView
+                android:id="@+id/textViewColorTitle"
+                style="@style/Body1.Grey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:text="@string/color"
+                app:layout_constraintLeft_toRightOf="@id/imageViewColor"
+                app:layout_constraintTop_toBottomOf="@+id/viewManufacturerDivider" />
 
-                <TextView
-                    android:id="@+id/textViewColorTitle"
-                    style="@style/Body1.Grey"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/color"
-                    app:layout_constraintLeft_toRightOf="@id/imageViewColor" />
-
-                <TextView
-                    android:id="@+id/textViewColor"
-                    style="@style/Body1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    app:layout_constraintLeft_toRightOf="@id/imageViewColor"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewColorTitle"
-                    tools:text="Black, Yellow" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textViewColor"
+                style="@style/Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintLeft_toRightOf="@id/imageViewColor"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewColorTitle"
+                tools:text="Black, Yellow" />
 
             <View
+                android:id="@+id/viewColorDivider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="56dp"
                 android:layout_marginTop="16dp"
-                android:background="@color/gray" />
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@id/textViewColor" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/imageViewYear"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="16dp">
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp"
+                android:src="@drawable/ic_date_blue_24"
+                app:layout_constraintTop_toBottomOf="@id/viewColorDivider" />
 
-                <ImageView
-                    android:id="@+id/imageViewYear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="16dp"
-                    android:src="@drawable/ic_date_blue_24" />
+            <TextView
+                android:id="@+id/textViewYearTitle"
+                style="@style/Body1.Grey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:text="@string/year"
+                app:layout_constraintLeft_toRightOf="@id/imageViewYear"
+                app:layout_constraintTop_toBottomOf="@id/viewColorDivider" />
 
-                <TextView
-                    android:id="@+id/textViewYearTitle"
-                    style="@style/Body1.Grey"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/year"
-                    app:layout_constraintLeft_toRightOf="@id/imageViewYear" />
-
-                <TextView
-                    android:id="@+id/textViewYear"
-                    style="@style/Body1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    app:layout_constraintLeft_toRightOf="@id/imageViewYear"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewYearTitle"
-                    tools:text="2018" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textViewYear"
+                style="@style/Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintLeft_toRightOf="@id/imageViewYear"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewYearTitle"
+                tools:text="2018" />
 
             <TextView
                 android:id="@+id/textViewUpdated"
                 style="@style/Body1.Grey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="24dp"
+                android:paddingStart="16dp"
+                android:paddingTop="24dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="24dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewYear"
                 tools:text="Updated 10 June 2017" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 

@@ -16,7 +16,7 @@
 
 package com.sonkins.bikeindex.features.bike
 
-import com.sonkins.bikeindex.core.db.BikeIndexDatabase
+import com.sonkins.bikeindex.core.db.FavoriteBikeDao
 import com.sonkins.bikeindex.core.db.FavoriteBikeEntity
 import com.sonkins.bikeindex.core.exception.ServerException
 import com.sonkins.bikeindex.core.platform.BaseNetwork
@@ -44,14 +44,14 @@ interface BikeRepository {
 
         override fun removeFromFavorites(bike: Bike) = databaseDataStore.removeFromFavorites(FavoriteBikeEntity(bike))
 
-        class DatabaseDataStore @Inject constructor(private val bikeIndexDatabase: BikeIndexDatabase) {
+        class DatabaseDataStore @Inject constructor(private val favoriteBikeDao: FavoriteBikeDao) {
             fun addToFavorites(favoriteBikeEntity: FavoriteBikeEntity) =
-                bikeIndexDatabase.favoriteBikeDao().addToFavorites(favoriteBikeEntity)
+                favoriteBikeDao.addToFavorites(favoriteBikeEntity)
 
             fun removeFromFavorites(favoriteBikeEntity: FavoriteBikeEntity) =
-                bikeIndexDatabase.favoriteBikeDao().removeFromFavorites(favoriteBikeEntity)
+                favoriteBikeDao.removeFromFavorites(favoriteBikeEntity)
 
-            fun getFavorite(id: Int) = bikeIndexDatabase.favoriteBikeDao().getFavorite(id)
+            fun getFavorite(id: Int) = favoriteBikeDao.getFavorite(id)
         }
 
         class NetworkDataStore @Inject constructor(private val service: BikeService) : BaseNetwork() {

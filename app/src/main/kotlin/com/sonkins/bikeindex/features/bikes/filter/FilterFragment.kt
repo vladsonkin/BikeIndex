@@ -17,35 +17,38 @@
 package com.sonkins.bikeindex.features.bikes.filter
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.sonkins.bikeindex.R
 import com.sonkins.bikeindex.core.extension.activityViewModel
 import com.sonkins.bikeindex.core.extension.afterTextChanged
+import com.sonkins.bikeindex.core.extension.gone
 import com.sonkins.bikeindex.core.extension.hideKeyboard
-import com.sonkins.bikeindex.core.extension.invisible
 import com.sonkins.bikeindex.core.extension.navigate
 import com.sonkins.bikeindex.core.extension.navigateUp
 import com.sonkins.bikeindex.core.extension.observe
 import com.sonkins.bikeindex.core.extension.showKeyboard
 import com.sonkins.bikeindex.core.extension.visible
-import com.sonkins.bikeindex.core.platform.BaseFragment
 import com.sonkins.bikeindex.core.platform.Event
 import com.sonkins.bikeindex.features.bikes.filter.colors.ColorModel
 import com.sonkins.bikeindex.features.bikes.filter.manufacturers.ManufacturerModel
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_filter.*
+import javax.inject.Inject
 
-class FilterFragment : BaseFragment() {
-
+class FilterFragment : DaggerFragment() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var filterViewModel: FilterViewModel
     private var filterEventHasBeenHandled = false
 
     companion object {
         const val FILTER_EVENT_HANDLED = "filterEventHasBeenHandled"
     }
-
-    override fun layoutId() = R.layout.fragment_filter
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.run { putBoolean(FILTER_EVENT_HANDLED, filterEventHasBeenHandled) }
@@ -54,7 +57,6 @@ class FilterFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appComponent.inject(this)
 
         filterEventHasBeenHandled = savedInstanceState?.getBoolean(FILTER_EVENT_HANDLED) ?: false
 
@@ -64,6 +66,10 @@ class FilterFragment : BaseFragment() {
                 event?.getContentIfNotHandled { navigateUp() }
             }
         }
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_filter, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -157,12 +163,12 @@ class FilterFragment : BaseFragment() {
         showOrHideClearButton()
         renderSerial(filterModel.serial)
         renderColor(filterModel.colorModel)
-        renderManufacture(filterModel.manufacturerModel)
+        renderManufacturer(filterModel.manufacturerModel)
         renderType(filterModel.type)
     }
 
     private fun showOrHideClearButton() {
-        if (filterViewModel.hasActiveFilters()) btnClear.visible() else btnClear.invisible()
+        if (filterViewModel.hasActiveFilters()) btnClear.visible() else btnClear.gone()
     }
 
     private fun renderSerial(serial: String?) {
@@ -181,13 +187,13 @@ class FilterFragment : BaseFragment() {
         colorModel?.let {
             textViewColor.visible()
             textViewColor.text = it.name
-        } ?: textViewColor.invisible()
+        } ?: textViewColor.gone()
     }
 
-    private fun renderManufacture(manufacturerModel: ManufacturerModel?) {
+    private fun renderManufacturer(manufacturerModel: ManufacturerModel?) {
         manufacturerModel?.let {
             textViewManufacture.visible()
             textViewManufacture.text = it.name
-        } ?: textViewManufacture.invisible()
+        } ?: textViewManufacture.gone()
     }
 }
