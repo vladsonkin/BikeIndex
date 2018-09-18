@@ -26,7 +26,9 @@ import kotlinx.android.synthetic.main.activity_layout.*
 class MainActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Change splash screen theme to normal one
         setTheme(R.style.AppTheme)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_layout)
 
