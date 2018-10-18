@@ -67,7 +67,7 @@
     <style name="Body1" parent="TextAppearance.AppCompat.Body1" />
 
     <style name="Body1.Grey">
-        <item name="android:textColor">@color/darkGray</item>
+        <item name="android:textColor">@color/grayDark</item>
     </style>
 
     <style name="Body1.Blue">

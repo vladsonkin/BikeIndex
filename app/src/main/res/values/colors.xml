@@ -5,17 +5,22 @@
     <color name="colorAccent">@color/blue</color>
 
     <!-- color palette -->
-    <color name="white">#FFFFFF</color>
-    <color name="whiteRipple">#42FFFFFF</color>
-    <color name="liteGray">#FAFAFA</color>
-    <color name="gray">#EEEEEE</color>
-    <color name="black12">#44000000</color>
-    <color name="darkGray">#707070</color>
+    <color name="white">#ffffff</color>
+    <color name="whiteRipple">#42ffffff</color>
+
+    <color name="grayLite">#fafafa</color>
+    <color name="gray">#eeeeee</color>
+    <color name="grayDark">#707070</color>
+
+    <color name="blackTransparent">#44000000</color>
     <color name="black">#000000</color>
+
     <color name="yellow">#ffea00</color>
     <color name="red">#c2185b</color>
-    <color name="blue">#3498DB</color>
+
+    <color name="blue">#3498db</color>
     <color name="blueDark">#246a99</color>
-    <color name="blueRipple">#423498DB</color>
-    <color name="transparent">#00FFFFFF</color>
+    <color name="blueRipple">#423498db</color>
+
+    <color name="transparent">#00ffffff</color>
 </resources>

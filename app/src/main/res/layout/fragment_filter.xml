@@ -91,7 +91,7 @@
                     android:imeOptions="actionDone"
                     android:inputType="text"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/darkGray"
+                    android:textColorHint="@color/grayDark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/imageViewSerial"
                     app:layout_constraintRight_toRightOf="parent"
