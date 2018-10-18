@@ -33,6 +33,7 @@ class BikesViewModel @Inject constructor(private val getBikesUseCase: GetBikesUs
     private val _bikesDataState = MutableLiveData<DataState<BikesModel>>()
     val bikesDataState: LiveData<DataState<BikesModel>>
         get() = _bikesDataState
+    var currentBikeScreenPosition = 0
 
     private val _navigateToFilterEvent = MutableLiveData<Event<Bundle>>()
     val navigateToFilterEvent: LiveData<Event<Bundle>>

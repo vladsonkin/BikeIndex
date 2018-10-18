@@ -24,6 +24,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,7 +38,6 @@ import com.sonkins.bikeindex.core.extension.launchAsync
 import com.sonkins.bikeindex.core.extension.navigate
 import com.sonkins.bikeindex.core.extension.observe
 import com.sonkins.bikeindex.core.extension.snack
-import com.sonkins.bikeindex.core.extension.viewModel
 import com.sonkins.bikeindex.core.extension.visible
 import com.sonkins.bikeindex.core.platform.DataState
 import com.sonkins.bikeindex.core.platform.EndlessOnScrollListener
@@ -69,9 +69,9 @@ class BikesFragment : DaggerFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        bikesViewModel = viewModel(viewModelFactory) {
+        bikesViewModel = activityViewModel(viewModelFactory) {
             observe(navigateToFilterEvent, ::navigateToFilter)
-            observe(bikesDataState, ::handleDataState)
+            observe(bikesDataState) { handleDataState(it) }
         }
 
         filterViewModel = activityViewModel(viewModelFactory) {
@@ -93,7 +93,7 @@ class BikesFragment : DaggerFragment() {
 
         with(bikesViewModel.bikesDataState) {
             this.value?.let {
-                handleDataState(it)
+                handleDataState(it, true)
             } ?: loadBikes(FilterModel.empty(), false)
         }
     }
@@ -133,6 +133,20 @@ class BikesFragment : DaggerFragment() {
 
         recyclerViewBikes.adapter = bikesAdapter
         recyclerViewBikes.addOnScrollListener(endlessOnScrollListener)
+        recyclerViewBikes.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                showOrHideUpButton()
+            }
+        })
+
+        fabUp.setOnClickListener { recyclerViewBikes.smoothScrollToPosition(0) }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        bikesViewModel.currentBikeScreenPosition = getFirstVisibleBikePosition()
+        recyclerViewBikes.clearOnScrollListeners()
     }
 
     /**
@@ -149,18 +163,22 @@ class BikesFragment : DaggerFragment() {
         bikesViewModel.refreshBikes()
     }
 
-    private fun handleDataState(bikesDataState: DataState<BikesModel>?) {
+    private fun handleDataState(bikesDataState: DataState<BikesModel>?, cache: Boolean = false) {
         hideProgress()
 
         when (bikesDataState) {
-            is DataState.Success -> renderBikes(bikesDataState.data)
-            is DataState.Error -> handleError(bikesDataState.exception)
+            is DataState.Success -> renderBikes(bikesDataState.data, cache)
+            is DataState.Error -> handleError(bikesDataState.exception, cache)
         }
     }
 
-    private fun renderBikes(bikesModel: BikesModel) {
+    private fun renderBikes(bikesModel: BikesModel, usePrevPosition: Boolean = false) {
         showBikesFoundCount(bikesModel.total)
         bikesAdapter.updateData(bikesModel.bikeModels)
+
+        if (usePrevPosition) {
+            recyclerViewBikes.scrollToPosition(bikesViewModel.currentBikeScreenPosition)
+        }
 
         // If data was refreshed then scroll list to the top
         if (bikesViewModel.refresh) {
@@ -174,7 +192,7 @@ class BikesFragment : DaggerFragment() {
         }
     }
 
-    private fun handleError(exception: Exception) {
+    private fun handleError(exception: Exception, usePrevPosition: Boolean = false) {
         when (exception) {
             is NothingFoundException -> {
                 bikesAdapter.updateData(emptyList())
@@ -182,7 +200,7 @@ class BikesFragment : DaggerFragment() {
             }
             is ConnectionException -> {
                 bikesViewModel.obtainCurrentData()?.let { bikesModel ->
-                    renderBikes(bikesModel)
+                    renderBikes(bikesModel, usePrevPosition)
                     snack(R.string.no_internet_connection) {
                         action(R.string.reload) {
                             this.dismiss()
@@ -193,7 +211,7 @@ class BikesFragment : DaggerFragment() {
             }
             else -> {
                 bikesViewModel.obtainCurrentData()?.let { bikesModel ->
-                    renderBikes(bikesModel)
+                    renderBikes(bikesModel, usePrevPosition)
                     snack(R.string.something_went_wrong) {
                         action(R.string.reload) {
                             this.dismiss()
@@ -238,6 +256,7 @@ class BikesFragment : DaggerFragment() {
 
     private fun showProgress() {
         hideErrors()
+        fabUp.gone()
         progressBarGlobal.visible()
     }
 
@@ -253,4 +272,14 @@ class BikesFragment : DaggerFragment() {
         layoutServerError.gone()
         layoutNothingFoundFilter.gone()
     }
+
+    private fun showOrHideUpButton() {
+        launchAsync {
+            delay(50)
+            if (getFirstVisibleBikePosition() < 1 || progressBarGlobal.isVisible) fabUp.gone() else fabUp.visible()
+        }
+    }
+
+    private fun getFirstVisibleBikePosition() =
+        (recyclerViewBikes.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
 }

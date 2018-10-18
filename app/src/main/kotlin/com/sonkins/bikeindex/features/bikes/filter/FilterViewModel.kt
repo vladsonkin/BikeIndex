@@ -38,7 +38,7 @@ class FilterViewModel @Inject constructor() : ViewModel() {
     val filterEvent: LiveData<Event<FilterModel>>
         get() = _filterEvent
 
-    private lateinit var filter: FilterModel
+    private var filter = FilterModel.empty()
 
     fun setColor(colorModel: ColorModel) {
         filter.colorModel = colorModel

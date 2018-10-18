@@ -52,8 +52,8 @@ class ColorsAdapter @Inject constructor() : ListAdapter<ColorModel, ColorsAdapte
     }
 
     class ColorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindItem(colorModel: ColorModel?) {
-            itemView.textViewColorName.text = colorModel?.name
+        fun bindItem(colorModel: ColorModel) {
+            itemView.textViewColorName.text = colorModel.name
         }
     }
 }
