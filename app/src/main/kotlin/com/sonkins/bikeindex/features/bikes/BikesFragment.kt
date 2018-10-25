@@ -280,6 +280,6 @@ class BikesFragment : DaggerFragment() {
         }
     }
 
-    private fun getFirstVisibleBikePosition() =
-        (recyclerViewBikes.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+    private fun getFirstVisibleBikePosition(): Int =
+        (recyclerViewBikes?.layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition() ?: 0
 }
