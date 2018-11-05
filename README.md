@@ -9,7 +9,7 @@
 <h4 align="center">View all bikes around the world, filter them and find any bike. <br>If the bike is stolen, you can contact the owner and save the bike.</h4>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/release-v1.2.1-orange.svg">
+  <img src="https://img.shields.io/badge/release-v1.2.2-orange.svg">
   <img src="https://img.shields.io/badge/size-3.5%20MB-blue.svg">
   <img src="https://img.shields.io/badge/rating-5.0%2F5.0-brightgreen.svg">
   <a href="https://bikeindex.org/support_bike_index">
