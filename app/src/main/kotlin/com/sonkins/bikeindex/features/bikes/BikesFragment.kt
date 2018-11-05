@@ -276,7 +276,7 @@ class BikesFragment : DaggerFragment() {
     private fun showOrHideUpButton() {
         launchAsync {
             delay(50)
-            if (getFirstVisibleBikePosition() < 1 || progressBarGlobal.isVisible) fabUp.gone() else fabUp.visible()
+            if (getFirstVisibleBikePosition() < 1 || progressBarGlobal.isVisible) fabUp?.gone() else fabUp?.visible()
         }
     }
 
