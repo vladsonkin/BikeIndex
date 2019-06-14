@@ -29,6 +29,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.crashlytics.android.Crashlytics
+import com.sonkins.bikeindex.MainActivity
 import com.sonkins.bikeindex.R
 import com.sonkins.bikeindex.core.exception.ConnectionException
 import com.sonkins.bikeindex.core.extension.action
@@ -100,6 +101,8 @@ class BikesFragment : DaggerFragment() {
 
     private fun initializeView() {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        toolbar.setPadding(0, (activity as MainActivity).getStatusBarHeight(), 0, 0)
+
         setFilterCountBadge(bikesViewModel.countActiveFilters())
         imageBtnFilter.setOnClickListener { bikesViewModel.filterClick() }
 

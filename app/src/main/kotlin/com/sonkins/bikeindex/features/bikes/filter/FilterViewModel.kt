@@ -59,6 +59,10 @@ class FilterViewModel @Inject constructor() : ViewModel() {
         filter.serial = serial
     }
 
+    fun setStolenLocation(stolenLocation: String) {
+        filter.stolenLocation = stolenLocation
+    }
+
     fun setFilter(filterModel: FilterModel) {
         this.filter = filterModel.copy()
         this._filterEvent.value = Event(filter)

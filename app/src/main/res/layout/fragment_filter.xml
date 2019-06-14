@@ -288,6 +288,64 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/locationType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="gone">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="56dp"
+                    android:background="@color/gray" />
+
+                <ImageView
+                    android:id="@+id/imageViewLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="24dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="24dp"
+                    android:src="@drawable/ic_location_blue_24" />
+
+                <ImageView
+                    android:id="@+id/imageViewLocationHelp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="24dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/ic_help_outline_grey_24dp" />
+
+                <EditText
+                    android:id="@+id/editStolenLocation"
+                    style="@style/Body1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@null"
+                    android:hint="@string/stolen_location"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grayDark"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/imageViewLocation"
+                    app:layout_constraintRight_toLeftOf="@id/imageViewLocationHelp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="Autofill" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

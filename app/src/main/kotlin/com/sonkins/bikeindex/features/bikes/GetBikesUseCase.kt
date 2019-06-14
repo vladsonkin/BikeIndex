@@ -27,15 +27,24 @@ class GetBikesUseCase @Inject constructor(private val bikesRepository: BikesRepo
         manufacturer: String?,
         color: String?,
         type: FilterModel.Type,
+        stolenLocation: String?,
         page: Int,
         perPage: Int
     ): Bikes {
         return asyncAwait {
+
+            // if the type is stolen and location is not empty, we need to change type to Proximity
+            var filterType = type
+            if (type == FilterModel.Type.STOLEN && !stolenLocation.isNullOrEmpty()) {
+                filterType = FilterModel.Type.PROXIMITY
+            }
+
             val bikes = bikesRepository.getBikes(
                 serial,
                 manufacturer,
                 color,
-                type.value,
+                filterType.value,
+                stolenLocation,
                 page,
                 perPage
             )

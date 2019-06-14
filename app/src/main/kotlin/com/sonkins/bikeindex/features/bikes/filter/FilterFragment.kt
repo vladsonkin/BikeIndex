@@ -21,18 +21,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.sonkins.bikeindex.MainActivity
 import com.sonkins.bikeindex.R
-import com.sonkins.bikeindex.core.extension.activityViewModel
-import com.sonkins.bikeindex.core.extension.afterTextChanged
-import com.sonkins.bikeindex.core.extension.gone
-import com.sonkins.bikeindex.core.extension.hideKeyboard
-import com.sonkins.bikeindex.core.extension.navigate
-import com.sonkins.bikeindex.core.extension.navigateUp
-import com.sonkins.bikeindex.core.extension.observe
-import com.sonkins.bikeindex.core.extension.showKeyboard
-import com.sonkins.bikeindex.core.extension.visible
+import com.sonkins.bikeindex.core.extension.*
 import com.sonkins.bikeindex.core.platform.Event
 import com.sonkins.bikeindex.features.bikes.filter.colors.ColorModel
 import com.sonkins.bikeindex.features.bikes.filter.manufacturers.ManufacturerModel
@@ -86,9 +80,11 @@ class FilterFragment : DaggerFragment() {
     private fun initializeView() {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setPadding(0, (activity as MainActivity).getStatusBarHeight(), 0, 0)
 
         btnClear.setOnClickListener {
             editSerial.clearFocus()
+            editStolenLocation.clearFocus()
             it.hideKeyboard()
             filterViewModel.clearFilter()
         }
@@ -137,15 +133,50 @@ class FilterFragment : DaggerFragment() {
             handled
         }
 
+        editStolenLocation.afterTextChanged {
+            filterViewModel.setStolenLocation(it.trim())
+
+            if (it.isNotEmpty() && radioGroupType.checkedRadioButtonId == R.id.typeStolen) {
+                btnClear.visible()
+            } else {
+                showOrHideClearButton()
+            }
+        }
+
+        editStolenLocation.setOnEditorActionListener { textView, actionId, _ ->
+            var handled = false
+
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
+                editStolenLocation.text?.toString()?.trim()?.let {
+                    filterViewModel.setStolenLocation(it)
+                }
+                editStolenLocation.clearFocus()
+                textView.hideKeyboard()
+                handled = true
+            }
+            handled
+        }
+
         radioGroupType.setOnCheckedChangeListener { radioGroup, checkedId ->
             editSerial.clearFocus()
             radioGroup.hideKeyboard()
             when (checkedId) {
-                R.id.typeAll -> filterViewModel.setType(FilterModel.Type.ALL)
-                R.id.typeStolen -> filterViewModel.setType(FilterModel.Type.STOLEN)
-                R.id.typeNotStolen -> filterViewModel.setType(FilterModel.Type.NOT_STOLEN)
+                R.id.typeAll -> {
+                    locationType.gone()
+                    filterViewModel.setType(FilterModel.Type.ALL)
+                }
+                R.id.typeStolen -> {
+                    locationType.visible()
+                    filterViewModel.setType(FilterModel.Type.STOLEN)
+                }
+                R.id.typeNotStolen -> {
+                    locationType.gone()
+                    filterViewModel.setType(FilterModel.Type.NOT_STOLEN)
+                }
             }
         }
+
+        imageViewLocationHelp.setOnClickListener { showStolenLocationHelp() }
     }
 
     private fun handleFilterEvent(filterEvent: Event<FilterModel>?) {
@@ -165,6 +196,7 @@ class FilterFragment : DaggerFragment() {
         renderColor(filterModel.colorModel)
         renderManufacturer(filterModel.manufacturerModel)
         renderType(filterModel.type)
+        renderStolenLocation(filterModel.stolenLocation)
     }
 
     private fun showOrHideClearButton() {
@@ -173,6 +205,10 @@ class FilterFragment : DaggerFragment() {
 
     private fun renderSerial(serial: String?) {
         editSerial.setText(serial)
+    }
+
+    private fun renderStolenLocation(stolenLocation: String?) {
+        editStolenLocation.setText(stolenLocation)
     }
 
     private fun renderType(type: FilterModel.Type) {
@@ -195,5 +231,15 @@ class FilterFragment : DaggerFragment() {
             textViewManufacture.visible()
             textViewManufacture.text = it.name
         } ?: textViewManufacture.gone()
+    }
+
+    private fun showStolenLocationHelp() {
+        val dialogBuilder = AlertDialog.Builder(requireContext())
+        dialogBuilder.setMessage(getString(R.string.stolen_location_description))
+                .setPositiveButton(getString(R.string.ok)) { dialog, _ -> dialog.dismiss() }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(getString(R.string.stolen_location_title))
+        alert.show()
     }
 }

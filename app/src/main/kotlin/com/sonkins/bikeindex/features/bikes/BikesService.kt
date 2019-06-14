@@ -29,7 +29,8 @@ class BikesService @Inject constructor(retrofit: Retrofit) : BikesApi {
         manufacturer: String?,
         color: String?,
         type: String?,
+        stolenLocation: String?,
         page: Int,
         perPage: Int
-    ) = bikesApi.getBikes(serial, manufacturer, color, type, page, perPage)
+    ) = bikesApi.getBikes(serial, manufacturer, color, type, stolenLocation, page, perPage)
 }

@@ -27,6 +27,7 @@ data class FilterModel(
     var colorModel: ColorModel?,
     var manufacturerModel: ManufacturerModel?,
     var type: Type,
+    var stolenLocation: String?,
     var page: Int,
     var perPage: Int
 ) : Parcelable {
@@ -37,6 +38,7 @@ data class FilterModel(
             null,
             null,
             Type.ALL,
+                null,
             1,
             25
         )
@@ -61,12 +63,17 @@ data class FilterModel(
             activeFilters++
         }
 
+        if (!stolenLocation.isNullOrEmpty() && type == Type.STOLEN) {
+            activeFilters++
+        }
+
         return activeFilters
     }
 
     enum class Type(val type: String, val value: String) {
         ALL("All", "all"),
         STOLEN("Stolen", "stolen"),
-        NOT_STOLEN("Not stolen", "non")
+        NOT_STOLEN("Not stolen", "non"),
+        PROXIMITY("Proximity", "proximity")
     }
 }

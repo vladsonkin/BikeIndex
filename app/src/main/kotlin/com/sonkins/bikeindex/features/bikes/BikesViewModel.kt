@@ -60,6 +60,7 @@ class BikesViewModel @Inject constructor(private val getBikesUseCase: GetBikesUs
                             filter.manufacturerModel?.name,
                             filter.colorModel?.name,
                             filter.type,
+                            filter.stolenLocation,
                             filter.page,
                             filter.perPage
                         )

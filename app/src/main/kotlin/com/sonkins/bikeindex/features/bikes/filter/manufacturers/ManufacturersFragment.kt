@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.crashlytics.android.Crashlytics
+import com.sonkins.bikeindex.MainActivity
 import com.sonkins.bikeindex.R
 import com.sonkins.bikeindex.core.exception.ConnectionException
 import com.sonkins.bikeindex.core.extension.action
@@ -87,6 +88,8 @@ class ManufacturersFragment : DaggerFragment() {
         toolbar.setTitle(R.string.manufacturers)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setPadding(0, (activity as MainActivity).getStatusBarHeight(), 0, 0)
+        toolbar.layoutParams.height += (activity as MainActivity).getStatusBarHeight()
 
         manufacturersAdapter.onManufacturerClick = {
             filterViewModel.setManufacturer(it)
