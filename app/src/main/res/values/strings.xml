@@ -75,4 +75,7 @@
     <string name="error_bike_register_description">We are working and we will add this feature \nin the new version of the application. \nIn the meantime, you can register \na new bike through the website.</string>
     <string name="register_bike_website">Register a bike on the website</string>
     <string name="bike_registration_link">https://bikeindex.org/bikes/new</string>
+    <string name="stolen_location_title">Stolen location</string>
+    <string name="stolen_location_description">Location can be an address, zipcode, city, or latitude,longitude. e.g. “Chicago”, “210 NW 11th Ave, Portland”, “60647”, or “45.521728,-122.67326”</string>
+    <string name="ok">Ok</string>
 </resources>

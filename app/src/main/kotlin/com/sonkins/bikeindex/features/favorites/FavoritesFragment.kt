@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.crashlytics.android.Crashlytics
+import com.sonkins.bikeindex.MainActivity
 import com.sonkins.bikeindex.R
 import com.sonkins.bikeindex.core.extension.gone
 import com.sonkins.bikeindex.core.extension.navigate
@@ -69,6 +70,7 @@ class FavoritesFragment : DaggerFragment() {
 
     private fun initializeView() {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        toolbar.setPadding(0, (activity as MainActivity).getStatusBarHeight(), 0, 0)
 
         favoritesAdapter.onFavoriteBikeClick = {
             navigate(FavoritesFragmentDirections.actionFavoritesFragmentToBikeFragment(it.id.toString()))

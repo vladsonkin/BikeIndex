@@ -23,6 +23,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import com.sonkins.bikeindex.MainActivity
 import com.sonkins.bikeindex.R
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_about.*
@@ -40,6 +41,8 @@ class AboutFragment : DaggerFragment() {
 
     private fun initializeView() {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        toolbar.setPadding(0, (activity as MainActivity).getStatusBarHeight(), 0, 0)
+        toolbar.layoutParams.height += (activity as MainActivity).getStatusBarHeight()
 
         buttonDonate.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)

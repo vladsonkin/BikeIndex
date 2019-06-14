@@ -21,7 +21,13 @@ import javax.inject.Inject
 
 interface BikesRepository {
 
-    fun getBikes(serial: String?, manufacturer: String?, color: String?, type: String?, page: Int, perPage: Int): Bikes
+    fun getBikes(serial: String?,
+                 manufacturer: String?,
+                 color: String?,
+                 type: String?,
+                 stolenLocation: String?,
+                 page: Int,
+                 perPage: Int): Bikes
 
     class BikesDataRepository @Inject constructor(private val networkDataStore: NetworkDataStore) : BikesRepository {
 
@@ -30,10 +36,11 @@ interface BikesRepository {
             manufacturer: String?,
             color: String?,
             type: String?,
+            stolenLocation: String?,
             page: Int,
             perPage: Int
         ): Bikes {
-            val (bikesResponse, headers) = networkDataStore.getBikes(serial, manufacturer, color, type, page, perPage)
+            val (bikesResponse, headers) = networkDataStore.getBikes(serial, manufacturer, color, type, stolenLocation, page, perPage)
             return bikesResponse?.toBikes(headers.get("Total")?.toInt() ?: 0) ?: Bikes.empty()
         }
 
@@ -43,9 +50,10 @@ interface BikesRepository {
                 manufacturer: String?,
                 color: String?,
                 type: String?,
+                stolenLocation: String?,
                 page: Int,
                 perPage: Int
-            ) = request(service.getBikes(serial, manufacturer, color, type, page, perPage))
+            ) = request(service.getBikes(serial, manufacturer, color, type, stolenLocation, page, perPage))
         }
     }
 }

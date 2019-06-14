@@ -28,6 +28,7 @@ internal interface BikesApi {
         @Query("manufacturer") manufacturer: String?,
         @Query("colors[]") color: String?,
         @Query("stolenness") type: String?,
+        @Query("location") stolenLocation: String?,
         @Query("page") page: Int,
         @Query("per_page") perPage: Int
     ): Call<BikesResponse>

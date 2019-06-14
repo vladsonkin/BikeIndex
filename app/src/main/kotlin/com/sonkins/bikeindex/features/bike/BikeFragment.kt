@@ -32,6 +32,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import com.crashlytics.android.Crashlytics
 import com.google.android.material.snackbar.Snackbar
+import com.sonkins.bikeindex.MainActivity
 import com.sonkins.bikeindex.R
 import com.sonkins.bikeindex.core.exception.ConnectionException
 import com.sonkins.bikeindex.core.extension.gone
@@ -126,6 +127,8 @@ class BikeFragment : DaggerFragment() {
     private fun initializeView() {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setPadding(0, (activity as MainActivity).getStatusBarHeight(), 0, 0)
+        toolbar.layoutParams.height += (activity as MainActivity).getStatusBarHeight()
     }
 
     private fun loadBike(bikeId: String) {
