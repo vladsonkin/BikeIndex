@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- support for foreground image view for Android KitKat -->
-    <declare-styleable name="ForegroundImageView">
-        <attr name="android:foreground" />
-    </declare-styleable>
-</resources>

@@ -10,7 +10,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId 'com.sonkins.bikeindex'
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 28
         versionName '1.2.2'
         versionCode 29
