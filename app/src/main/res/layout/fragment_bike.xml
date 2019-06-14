@@ -25,7 +25,7 @@
             app:expandedTitleTextAppearance="@style/Title.Transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <com.sonkins.bikeindex.core.platform.ForegroundImageView
+            <ImageView
                 android:id="@+id/backdrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -50,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="fill_vertical"
-        android:layout_marginBottom="?attr/actionBarSize"
+        android:layout_marginBottom="72dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
