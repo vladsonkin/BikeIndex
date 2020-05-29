@@ -26,10 +26,5 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Its safe to put fabric key here. Also fabric.properties doesn't work -->
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="37348a7e81afc7548e05448d33ee5c6a1d078021" />
     </application>
 </manifest>

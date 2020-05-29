@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "204666542046",
+    "firebase_url": "https://bike-index-app.firebaseio.com",
+    "project_id": "bike-index-app",
+    "storage_bucket": "bike-index-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:204666542046:android:fbb03bd3f608d8bf8e2f4f",
+        "android_client_info": {
+          "package_name": "com.sonkins.bikeindex.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "204666542046-7bsjiupfa77h24baofh7p2fi0i3f29ff.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdDy47QCzFBwu9NBdEDwyqfEitJ0sMbCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "204666542046-7bsjiupfa77h24baofh7p2fi0i3f29ff.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

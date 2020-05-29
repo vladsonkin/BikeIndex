@@ -4,7 +4,8 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'org.jetbrains.kotlin.android.extensions'
 apply plugin: 'androidx.navigation.safeargs'
-apply plugin: 'io.fabric'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion 28
@@ -69,6 +70,8 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.16' // 2.17 bug https://github.com/google/dagger/issues/1245
     implementation 'com.google.dagger:dagger-android:2.16' // 2.17 bug https://github.com/google/dagger/issues/1245
     implementation 'com.google.dagger:dagger-android-support:2.16' // 2.17 bug https://github.com/google/dagger/issues/1245
+    implementation 'com.google.firebase:firebase-analytics-ktx:17.4.2'
+    implementation 'com.google.firebase:firebase-crashlytics:17.0.0'
     implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha06'
     implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0-alpha06'
     implementation 'android.arch.persistence.room:runtime:1.1.1'
