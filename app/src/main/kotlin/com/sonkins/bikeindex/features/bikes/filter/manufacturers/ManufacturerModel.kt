@@ -22,10 +22,5 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class ManufacturerModel(
     val id: Int,
-    val name: String,
-    val companyUrl: String?,
-    val frameMaker: Boolean?,
-    val image: String?,
-    val description: String?,
-    val slug: String?
+    val name: String
 ) : Parcelable

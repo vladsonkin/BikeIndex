@@ -27,14 +27,9 @@ data class ManufacturersResponse(
 
     data class ManufacturerResponse(
         @SerializedName("id") private val id: Int,
-        @SerializedName("name") private val name: String,
-        @SerializedName("company_url") private val companyUrl: String?,
-        @SerializedName("frame_maker") private val frameMaker: Boolean?,
-        @SerializedName("image") private val image: String?,
-        @SerializedName("description") private val description: String?,
-        @SerializedName("slug") private val slug: String?
+        @SerializedName("name") private val name: String
     ) {
 
-        fun toManufacturer() = Manufacturer(id, name, companyUrl, frameMaker, image, description, slug)
+        fun toManufacturer() = Manufacturer(id, name)
     }
 }
