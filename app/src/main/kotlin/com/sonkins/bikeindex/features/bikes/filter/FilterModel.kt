@@ -37,7 +37,7 @@ data class FilterModel(
             null,
             null,
             null,
-            Type.ALL,
+            Type.STOLEN,
                 null,
             1,
             25
@@ -59,7 +59,7 @@ data class FilterModel(
             activeFilters++
         }
 
-        if (type == Type.STOLEN || type == Type.NOT_STOLEN) {
+        if (type == Type.ALL || type == Type.NOT_STOLEN) {
             activeFilters++
         }
 
@@ -71,9 +71,9 @@ data class FilterModel(
     }
 
     enum class Type(val type: String, val value: String) {
-        ALL("All", "all"),
         STOLEN("Stolen", "stolen"),
         NOT_STOLEN("Not stolen", "non"),
+        ALL("All", "all"),
         PROXIMITY("Proximity", "proximity")
     }
 }
