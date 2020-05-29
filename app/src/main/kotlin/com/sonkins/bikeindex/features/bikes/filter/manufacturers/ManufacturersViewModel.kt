@@ -47,15 +47,7 @@ class ManufacturersViewModel @Inject constructor(private val getManufacturersUse
             try {
                 val manufacturerModels = asyncAwait {
                     getManufacturersUseCase.run(page, perPage).map {
-                        ManufacturerModel(
-                            it.id,
-                            it.name,
-                            it.companyUrl,
-                            it.frameMaker,
-                            it.image,
-                            it.description,
-                            it.slug
-                        )
+                        ManufacturerModel(it.id, it.name)
                     }
                 }
 

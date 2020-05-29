@@ -18,10 +18,5 @@ package com.sonkins.bikeindex.features.bikes.filter.manufacturers
 
 data class Manufacturer(
     val id: Int,
-    val name: String,
-    val companyUrl: String?,
-    val frameMaker: Boolean?,
-    val image: String?,
-    val description: String?,
-    val slug: String?
+    val name: String
 )

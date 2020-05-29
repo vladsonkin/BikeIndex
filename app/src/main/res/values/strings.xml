@@ -48,6 +48,7 @@
     <string name="change_filter">Change Filter</string>
     <string name="server_error_title">Something Went Wrong</string>
     <string name="favorite">Favorite</string>
+    <string name="type_manufacturer">Type manufacturer</string>
 
     <plurals name="bikes_found_count">
         <item quantity="one">%d bike found</item>

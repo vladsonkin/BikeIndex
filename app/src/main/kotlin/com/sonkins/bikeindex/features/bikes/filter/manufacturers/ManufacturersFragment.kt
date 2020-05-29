@@ -20,6 +20,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,15 +29,7 @@ import com.crashlytics.android.Crashlytics
 import com.sonkins.bikeindex.MainActivity
 import com.sonkins.bikeindex.R
 import com.sonkins.bikeindex.core.exception.ConnectionException
-import com.sonkins.bikeindex.core.extension.action
-import com.sonkins.bikeindex.core.extension.activityViewModel
-import com.sonkins.bikeindex.core.extension.gone
-import com.sonkins.bikeindex.core.extension.launchAsync
-import com.sonkins.bikeindex.core.extension.navigateUp
-import com.sonkins.bikeindex.core.extension.observe
-import com.sonkins.bikeindex.core.extension.snack
-import com.sonkins.bikeindex.core.extension.viewModel
-import com.sonkins.bikeindex.core.extension.visible
+import com.sonkins.bikeindex.core.extension.*
 import com.sonkins.bikeindex.core.platform.DataState
 import com.sonkins.bikeindex.core.platform.EndlessOnScrollListener
 import com.sonkins.bikeindex.features.bikes.filter.FilterViewModel
@@ -85,11 +78,9 @@ class ManufacturersFragment : DaggerFragment() {
     }
 
     private fun initializeView() {
-        toolbar.setTitle(R.string.manufacturers)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setPadding(0, (activity as MainActivity).getStatusBarHeight(), 0, 0)
-        toolbar.layoutParams.height += (activity as MainActivity).getStatusBarHeight()
 
         manufacturersAdapter.onManufacturerClick = {
             filterViewModel.setManufacturer(it)
@@ -100,6 +91,33 @@ class ManufacturersFragment : DaggerFragment() {
 
         buttonConnectionTryAgain.setOnClickListener { refreshManufacturers() }
         buttonServerTryAgain.setOnClickListener { refreshManufacturers() }
+
+        manualInput.setOnClickListener {
+            editManufacturer.requestFocus()
+            editManufacturer.showKeyboard()
+        }
+        editManufacturer.afterTextChanged {
+            filterViewModel.setManufacturer(ManufacturerModel(MANUAL_MANUFACTURER_ID, it))
+        }
+        editManufacturer.setOnEditorActionListener { textView, actionId, _ ->
+            var handled = false
+
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
+                editManufacturer.text?.toString()?.trim()?.let {
+                    filterViewModel.setManufacturer(ManufacturerModel(MANUAL_MANUFACTURER_ID, it))
+                }
+                editManufacturer.clearFocus()
+                textView.hideKeyboard()
+                handled = true
+            }
+            handled
+        }
+
+        btnApply.setOnClickListener {
+            editManufacturer.clearFocus()
+            it.hideKeyboard()
+            navigateUp()
+        }
 
         recyclerViewManufacturers.layoutManager = LinearLayoutManager(context)
         endlessOnScrollListener =
@@ -193,5 +211,9 @@ class ManufacturersFragment : DaggerFragment() {
     private fun hideErrors() {
         layoutServerError.gone()
         layoutConnectionError.gone()
+    }
+
+    companion object {
+        private const val MANUAL_MANUFACTURER_ID = 999999
     }
 }
