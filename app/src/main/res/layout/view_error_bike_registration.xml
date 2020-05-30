@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_top_icons"
-            android:src="@drawable/ic_person_sad_220"
+            android:src="@drawable/ic_person_phone_220"
             app:layout_constraintBottom_toTopOf="@id/textViewBikeRegistrationErrorTitle"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

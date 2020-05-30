@@ -16,8 +16,7 @@
     <string name="find_close_serials">Find close serial numbers</string>
     <string name="connection_error">Please make sure your device is connected \nto the Internet and then try again.
     </string>
-    <string name="server_error">Something went wrong at our end. \nDon\'t worry, it\'s not you - it\'s us. \nSorry about
-        that.
+    <string name="server_error">Something went wrong at our end. \nPlease try again.
     </string>
     <string name="nothing_found_filters">We didn\'t found any bikes for that filter. \nTry to search with other one.
     </string>
@@ -69,11 +68,11 @@
     <string name="contact_owner_title">Contact the bike owner with</string>
     <string name="visit_site_link">https://bikeindex.org</string>
     <string name="visit_site">Visit website</string>
-    <string name="more_features_website">You can find more features \non our website bikeindex.org</string>
+    <string name="more_features_website">You can find more features \non main website bikeindex.org</string>
     <string name="added_to_favorites">Added to favorites</string>
     <string name="removed_from_favorites">Removed from favorites</string>
     <string name="error_bike_register_title">We can\'t register a bike yet</string>
-    <string name="error_bike_register_description">We are working and we will add this feature \nin the new version of the application. \nIn the meantime, you can register \na new bike through the website.</string>
+    <string name="error_bike_register_description">You can register a new bike\nthrough the website.</string>
     <string name="register_bike_website">Register a bike on the website</string>
     <string name="bike_registration_link">https://bikeindex.org/bikes/new</string>
     <string name="stolen_location_title">Stolen location</string>
