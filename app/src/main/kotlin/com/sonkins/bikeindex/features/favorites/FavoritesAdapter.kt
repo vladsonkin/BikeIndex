@@ -71,7 +71,7 @@ class FavoritesAdapter @Inject constructor() :
 
     class BikeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItem(bikeModel: FavoriteBikesModel.BikeModel) {
-            itemView.imageViewBike.loadFromUrl(bikeModel.largeImg, R.drawable.ic_bike_200)
+            itemView.imageViewBike.loadFromUrl(bikeModel.largeImg, R.drawable.ic_bike_list)
 
             bikeModel.stolenInfo?.let {
                 itemView.textViewStolenInfo.visible()

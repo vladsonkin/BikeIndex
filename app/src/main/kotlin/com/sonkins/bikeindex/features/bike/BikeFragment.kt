@@ -150,7 +150,7 @@ class BikeFragment : DaggerFragment() {
         layoutBike.visible()
 
         updateFavoriteMenuItemColor(favoriteMenuItem, bikeModel.isFavorite)
-        (backdrop as ImageView).loadFromUrl(bikeModel.largeImg, R.drawable.ic_bike_220)
+        (backdrop as ImageView).loadFromUrl(bikeModel.largeImg, R.drawable.ic_bike_details)
         collapsing_toolbar.title = bikeModel.title
         textViewBikeName.text = bikeModel.title
         textViewRegistered.text = bikeModel.createdInfo

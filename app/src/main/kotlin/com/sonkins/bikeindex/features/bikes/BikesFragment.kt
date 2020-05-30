@@ -243,8 +243,8 @@ class BikesFragment : DaggerFragment() {
                 .setBadgeGravity(Gravity.END or Gravity.TOP)
                 .setBadgeNumber(number)
                 .setBadgePadding(5f, true)
-                .setBadgeTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-                .setBadgeBackgroundColor(ContextCompat.getColor(requireContext(), R.color.yellow))
+                .setBadgeTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
+                .setBadgeBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
                 .bindTarget(imageBtnFilter)
                 .setOnDragStateChangedListener { dragState, _, _ ->
                     when (dragState) {

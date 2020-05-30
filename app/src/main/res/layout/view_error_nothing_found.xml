@@ -17,7 +17,7 @@
             android:id="@+id/imageViewNothingFound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_person_hands_sad_220"
+            android:src="@drawable/ic_person_phone_220"
             android:layout_marginTop="@dimen/margin_top_icons"
             app:layout_constraintBottom_toTopOf="@id/textViewNothingFoundTitle"
             app:layout_constraintLeft_toLeftOf="parent"

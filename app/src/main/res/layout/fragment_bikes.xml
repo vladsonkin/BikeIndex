@@ -72,6 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
+            android:paddingTop="4dp"
             android:paddingBottom="56dp" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -84,9 +85,9 @@
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/ic_arrow_up_black_24"
+        android:src="@drawable/ic_arrow_up_white_24"
         android:visibility="gone"
-        app:backgroundTint="@color/yellow" />
+        app:backgroundTint="@color/blue" />
 
     <include
         layout="@layout/view_progress"
